@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fundgridModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="fundgridEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="projects" EntityType="fundgridModel.project" />
+  </EntityContainer>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

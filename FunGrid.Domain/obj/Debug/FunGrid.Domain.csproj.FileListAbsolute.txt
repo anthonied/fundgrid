@@ -1,0 +1,5 @@
+C:\Develop\Fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.dll
+C:\Develop\Fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
+C:\Develop\Fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
+C:\Develop\Fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb
+C:\Develop\Fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.csprojResolveAssemblyReference.cache

@@ -1,0 +1,5 @@
+C:\Develop\Fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.dll
+C:\Develop\Fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.pdb
+C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.dll
+C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.pdb
+C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.csprojResolveAssemblyReference.cache

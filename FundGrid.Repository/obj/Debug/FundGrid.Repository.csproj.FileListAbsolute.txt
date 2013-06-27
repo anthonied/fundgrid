@@ -1,0 +1,12 @@
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.dll
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.pdb
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\FunGrid.Domain.dll
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\FunGrid.Domain.pdb
+C:\Develop\Fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.csprojResolveAssemblyReference.cache
+C:\Develop\Fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.dll
+C:\Develop\Fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.pdb
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.dll.config
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.dll
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.xml
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\Fundgrid.Data.dll
+C:\Develop\Fundgrid\FundGrid.Repository\bin\Debug\Fundgrid.Data.pdb
