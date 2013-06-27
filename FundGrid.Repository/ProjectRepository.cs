@@ -31,15 +31,35 @@ namespace FundGrid.Repository
         {
             using (var model = new fundgridEntities())
             {
-                var getProject = (from p in model.projects
-                                  where p.id == searchId
-                                  select new Project
-                                  {
-                                      Id = p.id,
-                                      Name = p.name,
-                                      Description = p.description
-                                  }).FirstOrDefault();
-                return getProject;
+                var selectedProject = (from p in model.projects
+                                      where p.id == searchId
+                                      select new Project
+                                      {
+                                          Id = p.id,
+                                          Name = p.name,
+                                          Description = p.description
+                                      }).FirstOrDefault();
+
+                selectedProject.Grid = (from g in model.grids
+                                           where g.project_id == searchId
+                                           select new Grid
+                                           {
+                                               Id = g.id,
+                                               DimensionColumns = g.dimension_column,
+                                               DimensionRows = g.dimension_rows,
+
+                                           }).FirstOrDefault();
+
+                selectedProject.Grid.GridItems = (from gi in model.grid_item
+                                                  where gi.grid_id == selectedProject.Grid.Id
+                                                  select new GridItem
+                                                  {
+                                                      Id = gi.id,
+                                                      Owner = gi.owner,
+                                                      Amount = gi.amount,
+                                                      Number = gi.number,
+                                                  }).ToList();
+                return selectedProject;
             }
         }
 

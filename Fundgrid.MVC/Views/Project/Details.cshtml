@@ -1,0 +1,27 @@
+﻿@model FunGrid.Domain.Project
+<script src="~/Scripts/knockout-2.2.1.js"></script>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<fieldset>
+    <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+    <table border="1">
+        <tr>
+               <th>Month</th>
+    <th>Savings</th>
+        </tr>
+
+    </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script>
+    var viewModel = @(Html.Raw(Json.Encode(Model)))
+</script>
