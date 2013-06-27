@@ -11,8 +11,7 @@
     <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
     <table border="1">
         <tr>
-               <th>Month</th>
-    <th>Savings</th>
+
         </tr>
 
     </table>
@@ -23,5 +22,6 @@
 </p>
 
 <script>
-    var viewModel = @(Html.Raw(Json.Encode(Model)))
+    var viewModel = @(Html.Raw(Json.Encode(Model)));
+
 </script>
