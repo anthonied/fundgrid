@@ -182,6 +182,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GridItemModel.cs" />
+    <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
@@ -345,6 +347,7 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

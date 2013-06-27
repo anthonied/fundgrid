@@ -6,3 +6,11 @@ C:\Develop\FundGrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
 C:\Develop\FundGrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
 C:\Develop\FundGrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb
 C:\Develop\Fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
+F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll.config
+F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll
+F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.pdb
+F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.dll
+F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
+F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\ResolveAssemblyReference.cache
+F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
+F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb

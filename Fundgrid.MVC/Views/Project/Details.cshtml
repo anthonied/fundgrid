@@ -1,0 +1,47 @@
+﻿<script src="../../Scripts/knockout-2.2.1.js" type="text/javascript"></script>
+@model FunGrid.Domain.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Project</legend>
+   
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div id="KO_DIV">
+    <textarea data-bind="text: Name"></textarea>
+</div>
+
+@Html.Raw(Model)
+
+<script type="text/javascript">
+    var projectModel = '@Html.Raw(Json.Encode(Model))';
+    
+    ProjectModel = function (projectModel)
+    {
+        var self = this;
+        self.Name = ko.observable(projectModel.Name);
+    }
+    ko.applyBindings(new ProjectModel(), document.getElementById("KO_DIV"))
+</script>
