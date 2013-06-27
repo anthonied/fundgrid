@@ -14,9 +14,16 @@ namespace Fundgrid.Data
     
     public partial class project
     {
+        public project()
+        {
+            this.grids = new HashSet<grid>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public byte[] image { get; set; }
+    
+        public virtual ICollection<grid> grids { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace Fundgrid.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<grid> grids { get; set; }
+        public DbSet<grid_item> grid_item { get; set; }
         public DbSet<project> projects { get; set; }
     }
 }
