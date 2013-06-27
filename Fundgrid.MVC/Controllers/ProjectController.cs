@@ -63,7 +63,6 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //Check how delete is called
         public ActionResult Delete(int id)
         {
             _repo.RemoveProject(id);
