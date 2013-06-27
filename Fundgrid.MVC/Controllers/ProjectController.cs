@@ -12,13 +12,13 @@ namespace Fundgrid.MVC.Controllers
     public class ProjectController : Controller
     {
 
-        private ProjectEntityRepository _repo = new ProjectEntityRepository();
+        private ProjectRepository _projectRepository = new ProjectRepository();
 
         public ActionResult Index()
         {
             var projectModels = new List<ProjectModel>();
 
-            var projects = _repo.GetAllProjects();
+            var projects = _projectRepository.GetAllProjects();
 
             projects.ForEach(project => projectModels.Add(new ProjectModel
             {
@@ -32,7 +32,7 @@ namespace Fundgrid.MVC.Controllers
        
         public ActionResult Edit(int id)
         {
-            var project = _repo.GetProjectById(id);
+            var project = _projectRepository.GetProjectById(id);
 
             var projectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
             return View(projectModel);
@@ -41,7 +41,7 @@ namespace Fundgrid.MVC.Controllers
         [HttpPost]
         public ActionResult Edit(int id, string name, string description)
         {
-            _repo.EditProject(id, name, description);
+            _projectRepository.EditProject(id, name, description);
             return RedirectToAction("Index");
         }
 
@@ -59,14 +59,33 @@ namespace Fundgrid.MVC.Controllers
                 Name = name,
                 Description = description
             };
-            _repo.CreateNewProject(project);
+            _projectRepository.CreateNewProject(project);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            _repo.RemoveProject(id);
+            _projectRepository.RemoveProject(id);
             return RedirectToAction("Index");
+        }
+
+        [AllowAnonymous]
+        public JsonResult CreateGrid()
+        {
+            var isEntryAdded = _projectRepository.CreateGridForProject(1, 5, 5);
+            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
+
+            return new JsonResult { Data = data };
+            
+        }
+
+        [AllowAnonymous]
+        public ActionResult BuyGridItem()
+        {
+            var isEntryAdded = _projectRepository.AssignItemToGrid(1, 1, "Phillip", 1000.50m);
+            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
+
+            return new JsonResult { Data = data };
         }
     }
 }

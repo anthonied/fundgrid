@@ -31,22 +31,18 @@
 				<div class="navbar navbar-inverse navbar-fixed-top" id="navBar">
 					<div class="navbar-inner">
 						<div class="container-fluid">
-							<a class="brand" href="#">MVC 4 Razor Application</a>
+							<a class="brand" href="#">Fund Grid</a>
 								<div class="">
 									<ul class="nav">
 										<li id="Home"><a  href="@Href("~/")">Home</a></li>
 										<li><a href="#AboutModal" role="button" data-toggle="modal" >About</a></li>
 										<li id="ContactUs"><a href="@Href("~/Home/Contact/")">Contact Us</a></li>
 										<li id="Dropdown" class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
 											<ul class="dropdown-menu pull-right">
-												<li><a href="#">Action</a></li>
-												<li><a href="#">Another action</a></li>
-												<li><a href="#">Something else here</a></li>
-												<li class="divider"></li>
-												<li class="nav-header">Nav header</li>
-												<li><a href="#">Separated link</a></li>
-												<li><a href="#">One more separated link</a></li>
+                                                <li class="divider"></li>
+												<li id="manageStudents"><a href="@Href("~/Project")"">Manage Projects</a></li>
+                                                <li class="divider"></li>
 											  </ul>
 										</li>
 									</ul>
@@ -67,20 +63,14 @@
 						<div class="well sidebar-nav">
 							<ul class="nav nav-list">
 								<li class="nav-header">Sidebar</li>
-								<li class="active"><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li class="nav-header">Sidebar</li>
+								<li id="manageStudents"><a href="@Href("~/Project")"">Manage Projects</a></li>
+								<li class="nav-header">Page Navigation</li>
 								<li id="sbHome"><a href="/.">Home</a></li>
 								<li><a href="#AboutModal" role="button" data-toggle="modal">About</a></li>
 								<li id="sbContactUs"><a href="@Href("~/Home/Contact")">Contact Us</a></li>
 								<li id="sbRegister"><a href="@Href("~/Account/Register")">Register</a></li>
 								<li id="sbLogin"><a href="@Href("~/Account/Login")">Login</a></li>
-								<li class="nav-header">Sidebar</li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
-								<li><a href="#">Link</a></li>
+
 							</ul>
 						</div> <!--/.well -->
 					</div> <!--/span-->

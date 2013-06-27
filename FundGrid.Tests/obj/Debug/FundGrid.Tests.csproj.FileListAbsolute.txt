@@ -3,3 +3,8 @@ C:\Develop\Fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.pdb
 C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.dll
 C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.pdb
 C:\Develop\Fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.csprojResolveAssemblyReference.cache
+C:\Development\Projects\fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.dll
+C:\Development\Projects\fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.pdb
+C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.csprojResolveAssemblyReference.cache
+C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.dll
+C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.pdb

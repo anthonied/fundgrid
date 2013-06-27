@@ -1,8 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="fundgridModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="fundgridEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="grids" EntityType="fundgridModel.grid" />
+    <EntitySet Name="grid_item" EntityType="fundgridModel.grid_item" />
     <EntitySet Name="projects" EntityType="fundgridModel.project" />
+    <EntitySet Name="sysdiagrams" EntityType="fundgridModel.sysdiagram" />
+    <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.FK_grid_item_grid">
+      <End Role="grid" EntitySet="grids" />
+      <End Role="grid_item" EntitySet="grid_item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grid_projects" Association="fundgridModel.FK_grid_projects">
+      <End Role="project" EntitySet="projects" />
+      <End Role="grid" EntitySet="grids" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="grid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="dimension_rows" />
+    <Property Type="Int32" Name="dimension_column" />
+    <Property Type="Int32" Name="project_id" />
+    <NavigationProperty Name="grid_item" Relationship="fundgridModel.FK_grid_item_grid" FromRole="grid" ToRole="grid_item" />
+    <NavigationProperty Name="project" Relationship="fundgridModel.FK_grid_projects" FromRole="grid" ToRole="project" />
+  </EntityType>
+  <EntityType Name="grid_item">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="number" />
+    <Property Type="String" Name="owner" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="amount" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="grid_id" />
+    <NavigationProperty Name="grid" Relationship="fundgridModel.FK_grid_item_grid" FromRole="grid_item" ToRole="grid" />
+  </EntityType>
   <EntityType Name="project">
     <Key>
       <PropertyRef Name="id" />
@@ -11,5 +46,40 @@
     <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="grids" Relationship="fundgridModel.FK_grid_projects" FromRole="project" ToRole="grid" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="principal_id" Nullable="false" />
+    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="version" />
+    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_grid_item_grid">
+    <End Type="fundgridModel.grid" Role="grid" Multiplicity="0..1" />
+    <End Type="fundgridModel.grid_item" Role="grid_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grid">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grid_item">
+        <PropertyRef Name="grid_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grid_projects">
+    <End Type="fundgridModel.project" Role="project" Multiplicity="0..1" />
+    <End Type="fundgridModel.grid" Role="grid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grid">
+        <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

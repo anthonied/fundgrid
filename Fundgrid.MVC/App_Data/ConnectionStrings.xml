@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <connectionStrings>
-    <add name="fundgridEntities" connectionString="metadata=res://*/fundgrid.csdl|res://*/fundgrid.ssdl|res://*/fundgrid.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=ELS-PC\SQLEXPRESS;initial catalog=fundgrid;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="fundgridEntities" connectionString="metadata=res://*/fundgrid.csdl|res://*/fundgrid.ssdl|res://*/fundgrid.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=fundgrid;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
 </connectionStrings>
