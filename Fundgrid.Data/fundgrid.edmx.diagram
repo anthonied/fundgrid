@@ -5,7 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="514b7c099d2a4ba99c8db973d0ef6c44" Name="Diagram1">
-        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="0.093930574177732012" PointY="26.226010796719237" />
+        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="2.875" PointY="1.625" />
+        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="5.875" PointY="3.125" />
+        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="fundgridModel.FK_grid_item_grid" />
+        <AssociationConnector Association="fundgridModel.FK_grid_projects" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
