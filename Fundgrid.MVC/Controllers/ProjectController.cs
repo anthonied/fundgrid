@@ -51,6 +51,12 @@ namespace Fundgrid.MVC.Controllers
             return View();
         }
 
+        public ActionResult Details(int id)
+        {
+            var project = _projectRepository.GetProjectById(id);
+            return View(project);
+        }
+
         [HttpPost]
         public ActionResult Create(string name, string description)
         {
