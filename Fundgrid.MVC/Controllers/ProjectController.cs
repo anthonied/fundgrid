@@ -75,15 +75,23 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
-        public JsonResult CreateGrid()
-        {
-            var isEntryAdded = _projectRepository.CreateGridForProject(1, 5, 5);
-            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
+        //[AllowAnonymous]
+        //public ActionResult CreateGrid()
+        //{
+        //    var isEntryAdded = _projectRepository.CreateGridForProject(1, 5, 5);
+        //    var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
 
-            return new JsonResult { Data = data };
+        //    return new JsonResult { Data = data };
             
+        //}
+
+        [HttpPost]
+        public ActionResult CreateGrid(int x, int y, int z)
+        {
+
+            return View();
         }
+
 
         [AllowAnonymous]
         public ActionResult BuyGridItem()
