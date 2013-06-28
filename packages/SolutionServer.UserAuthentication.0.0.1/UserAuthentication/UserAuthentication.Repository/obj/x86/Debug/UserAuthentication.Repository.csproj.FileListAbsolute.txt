@@ -1,0 +1,11 @@
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\UserAuthentication.Repository.dll
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\UserAuthentication.Repository.pdb
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\log4net.dll
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\Newtonsoft.Json.dll
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\UserAuthentication.dll
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\UserAuthentication.pdb
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\log4net.xml
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\bin\Debug\Newtonsoft.Json.xml
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\obj\x86\Debug\UserAuthentication.Repository.dll
+F:\SolutionServer\UserAuthentication\UserAuthentication.Repository\obj\x86\Debug\UserAuthentication.Repository.pdb

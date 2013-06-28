@@ -1,0 +1,11 @@
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\UserAuthenticationDomain.Tests.dll
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\UserAuthenticationDomain.Tests.pdb
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\nunit.framework.dll
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\UserAuthentication.dll
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\log4net.dll
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\UserAuthentication.pdb
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\nunit.framework.xml
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\bin\Debug\log4net.xml
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\obj\x86\Debug\UserAuthenticationDomain.Tests.dll
+F:\SolutionServer\UserAuthentication\UserAuthenticationDomain.Tests\obj\x86\Debug\UserAuthenticationDomain.Tests.pdb

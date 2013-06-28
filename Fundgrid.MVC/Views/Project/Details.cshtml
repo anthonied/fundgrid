@@ -1,60 +1,38 @@
 ﻿@model FunGrid.Domain.Project
 <script src="~/Scripts/knockout-2.2.1.js"></script>
+<script src="~/Scripts/jquery-1.9.1.js"></script>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Name)</h1>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
 
-<fieldset>
-    <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
-    <table border="1">
-        
-        <input id="GridRow" ="text" value="">
-        <button data-bind="click: CreateNewGrid">Create New Grid</button>
-        
-    </table>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <fieldset>
+        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+        <table>
+            <tr>
+                <th>Rows</th>
+                <td><input id="GridRows" type="text" ></td>
+            </tr>
+            <tr>
+                <th>Columns</th>
+                <td><input id="GridColumns" type="text" ></td>
+            </tr> 
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" onclick="CreateGrid()">Click Me!</button>
+                </td>
+            </tr>       
+        </table>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
-<script>
-    var viewModel = @(Html.Raw(Json.Encode(Model)));
 
-    ProjectViewModel = function()
-    {
-        var self = this;
-        self.Id = ko.observable(viewModel.Id);
-        self.Name = ko.observable(viewModel.Name);
-        self.Description = ko.observable(viewModel.Description);
-        self.Image = ko.observable(viewModel.Image);
-        self.GridRows = 5;
-        self.GridColumns = 5;
-        self.Grid = ko.observable();
-        CreateNewGrid = function()
-        {
-            alert("TEST" + " Rows: " + self.GridRows + " Columns: " + self.GridColumns);
-            var count = 0;
-            for (var i = 0; i < self.Grid.Row; i++)
-            {
-                for (var j = 0; j < self.Grid.Column; j++)
-                {
-                    alert("IN FOR")
-                    var gridItem = new GridItemViewModel();
-                    gridItem.Id = count;
-                    count++;
-                }
-            }
-            alert("Created " + count + " grid items");
-        };
-    };
-    var models = 
-    {
-        projectViewModel : new ProjectViewModel()
-    };
-    ko.applyBindings(models);
 
+<script id="CreateGrid">
+    $.post("/Project/CreateGrid/", { x: 1, y: 2, z: 3 }, function (response) { alert('What'); });
 </script>

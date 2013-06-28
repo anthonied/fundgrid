@@ -75,23 +75,30 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
-        public JsonResult CreateGrid()
+        [HttpPost]
+        public JsonResult UpdateGrid(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
-            var isEntryAdded = _projectRepository.CreateGridForProject(1, 5, 5);
-            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
-
-            return new JsonResult { Data = data };
-            
+            //TODO
+            var isEntryUpdated = _projectRepository.updateGridForProject(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+            var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
+            return new JsonResult {Data = data};
         }
 
         [AllowAnonymous]
+        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns)
+        {
+            var isEntryAdded = _projectRepository.CreateGridForProject(projectId, gridDimensionRows, gridDimensionColumns);
+            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
+            return new JsonResult { Data = data };
+        }
+
+        /*[AllowAnonymous]
         public ActionResult BuyGridItem()
         {
             var isEntryAdded = _projectRepository.AssignItemToGrid(1, 1, "Phillip", 1000.50m);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
 
             return new JsonResult { Data = data };
-        }
+        }*/
     }
 }

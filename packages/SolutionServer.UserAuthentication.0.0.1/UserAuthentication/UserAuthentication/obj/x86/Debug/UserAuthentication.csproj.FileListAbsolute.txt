@@ -1,0 +1,1 @@
+F:\SolutionServer\UserAuthentication\UserAuthentication\obj\x86\Debug\ResolveAssemblyReference.cache

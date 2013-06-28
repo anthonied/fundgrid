@@ -40,25 +40,30 @@ namespace FundGrid.Repository
                                           Description = p.description
                                       }).FirstOrDefault();
 
-                selectedProject.Grid = (from g in model.grids
-                                           where g.project_id == searchId
-                                           select new Grid
-                                           {
-                                               Id = g.id,
-                                               DimensionColumns = g.dimension_column,
-                                               DimensionRows = g.dimension_rows,
+                if (selectedProject.Grid != null)
+                {
+                    selectedProject.Grid = (from g in model.grids
+                                            where g.project_id == searchId
+                                            select new Grid
+                                            {
+                                                Id = g.id,
+                                                DimensionColumns = g.dimension_column,
+                                                DimensionRows = g.dimension_rows,
 
-                                           }).FirstOrDefault();
-
-                selectedProject.Grid.GridItems = (from gi in model.grid_item
-                                                  where gi.grid_id == selectedProject.Grid.Id
-                                                  select new GridItem
-                                                  {
-                                                      Id = gi.id,
-                                                      Owner = gi.owner,
-                                                      Amount = gi.amount,
-                                                      Number = gi.number,
-                                                  }).ToList();
+                                            }).FirstOrDefault();
+                    if (selectedProject.Grid.GridItems != null)
+                    {
+                        selectedProject.Grid.GridItems = (from gi in model.grid_item
+                                                          where gi.grid_id == selectedProject.Grid.Id
+                                                          select new GridItem
+                                                          {
+                                                              Id = gi.id,
+                                                              Owner = gi.owner,
+                                                              Amount = gi.amount,
+                                                              Number = gi.number,
+                                                          }).ToList();           
+                    }
+                }
                 return selectedProject;
             }
         }
@@ -121,7 +126,24 @@ namespace FundGrid.Repository
             return result > 0;
         }
 
-        public bool AssignItemToGrid(int gridId, int number, string owner, decimal paidAmount)
+        public bool updateGridForProject(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        {
+            using (var model = new fundgridEntities())
+            {
+                var selectedGridItem = (from gridItem in model.grid_item
+                                        where gridItem.grid.project_id == projectId
+                                        && gridItem.grid_id == gridId
+                                        && gridItem.number == gridItemNumber
+                                        select gridItem).FirstOrDefault();
+                selectedGridItem.owner = gridItemOwner;
+                selectedGridItem.amount = gridItemAmount;
+                if (model.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        /*public bool AssignItemToGrid(int gridId, int number, string owner, decimal paidAmount)
         {
             int result;
             using (var model = new fundgridEntities())
@@ -137,7 +159,7 @@ namespace FundGrid.Repository
                 result = model.SaveChanges();
             }
             return result > 0;
-        }
+        }*/
 
     }
 }

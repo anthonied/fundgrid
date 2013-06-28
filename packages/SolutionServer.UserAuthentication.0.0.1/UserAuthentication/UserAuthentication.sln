@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthentication.Domain", "UserAuthentication\UserAuthentication.Domain.csproj", "{33F01808-9E5A-4228-99DA-5F32600DC352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthentication.Repository", "UserAuthentication.Repository\UserAuthentication.Repository.csproj", "{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthenticationDomain.Tests", "UserAuthenticationDomain.Tests\UserAuthenticationDomain.Tests.csproj", "{6F33343D-EF4D-493E-BA52-7346B714414A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|x86.ActiveCfg = Debug|x86
+		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|x86.Build.0 = Debug|x86
+		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|x86.ActiveCfg = Release|x86
+		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|x86.Build.0 = Release|x86
+		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|x86.ActiveCfg = Debug|x86
+		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|x86.Build.0 = Debug|x86
+		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|x86.ActiveCfg = Release|x86
+		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|x86.Build.0 = Release|x86
+		{6F33343D-EF4D-493E-BA52-7346B714414A}.Debug|x86.ActiveCfg = Debug|x86
+		{6F33343D-EF4D-493E-BA52-7346B714414A}.Debug|x86.Build.0 = Debug|x86
+		{6F33343D-EF4D-493E-BA52-7346B714414A}.Release|x86.ActiveCfg = Release|x86
+		{6F33343D-EF4D-493E-BA52-7346B714414A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
