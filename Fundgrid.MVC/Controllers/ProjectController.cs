@@ -78,7 +78,6 @@ namespace Fundgrid.MVC.Controllers
         [HttpPost]
         public JsonResult UpdateGrid(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
-            //TODO
             var isEntryUpdated = _projectRepository.updateGridForProject(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
             var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
             return new JsonResult {Data = data};

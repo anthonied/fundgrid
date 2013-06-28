@@ -24,7 +24,27 @@
                 <td>
                      <input type="button" value="Create Grid" data-bind="click: CreateGrid" />
                 </td>
-            </tr>       
+            </tr> 
+            </table>
+
+            <table border="1">
+                @for (int i = 0; i < Model.Grid.DimensionRows; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < Model.Grid.DimensionColumns; j++)
+                        {
+                            <td width="150px">Model.Grid.GridItems[i]</td>
+                        }
+                     </tr>
+                } 
+            </table>
+        
+
+        <table data-bind="foreach: GridItemViewModel">
+            <tr>
+                <td data-bind="text: Amount"></td>
+                <td data-bind="text: Owner"></td>
+            </tr>
         </table>
     </fieldset>
     <p>
@@ -36,15 +56,38 @@
 <script>
     var viewModel = @(Html.Raw(Json.Encode(Model)));
 
+    GridItemViewModel = function()
+    {
+        var self = this;
+        self.Id = ko.observable();
+        self.Number = ko.observable();
+        self.Owner = ko.observable();
+        self.Amount = ko.observable();
+    }
+    var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
+    var gridItems = new Array(itemCount);
+
+    alert ("From DB: " + viewModel.Grid.GridItems[0].Number);
+    for(var i = 0; i < viewModel.Grid.GridItems.length; i++)
+    {
+        gridItems[viewModel.Grid.GridItems[i].Number - 1] = new GridItemViewModel
+                                                        {
+                                                            Id = viewModel.Grid.GridItems[i].id,
+                                                            Number = viewModel.Grid.GridItems[i].Number,
+                                                            Owner = viewModel.Grid.GridItems[i].Owner,
+                                                            Amount = viewModel.Grid.GridItems[i].Amount
+                                                        };
+        alert (gridItems[5]);
+    }
+    alert("After for");
     GridViewModel = function ()
     {
         this.row = ko.observable(0);
         this.column = ko.observable(0);
-
+        this.gridItems = ko.observableArray();
         CreateGrid = function ()
         {
-
-            $.post("/Project/CreateGrid", { x: viewModel.Id, y: this.row(), z: this.column() }, function (response) { alert('Grid successfully added'); });
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: this.row(), gridDimensionColumns: this.column() }, function (response) { alert('Grid successfully added'); });
         }
     }
 

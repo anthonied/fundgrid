@@ -1,0 +1,72 @@
+﻿@model FunGrid.Domain.Project
+<script src="~/Scripts/knockout-2.2.1.js"></script>
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+
+    <fieldset>
+        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+        <table>
+            <tr>
+                <th>Rows</th>
+<<<<<<< HEAD
+                <td><input id="GridRows" type="text" ></td>
+            </tr>
+            <tr>
+                <th>Columns</th>
+                <td><input id="GridColumns" type="text" ></td>
+=======
+                <td><input id="GridRows" type="text" data-bind="value: row"></td>
+            </tr>
+            <tr>
+                <th>Columns</th>
+                <td><input id="GridColumns" type="text" data-bind="value: column"></td>
+>>>>>>> origin/develop
+            </tr> 
+            <tr>
+                <td></td>
+                <td>
+<<<<<<< HEAD
+                    <button type="button" onclick="CreateGrid()">Click Me!</button>
+=======
+                     <input type="button" value="Create Grid" data-bind="click: CreateGrid" />
+>>>>>>> origin/develop
+                </td>
+            </tr>       
+        </table>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/develop
+
+
+<<<<<<< HEAD
+
+<script id="CreateGrid">
+    $.post("/Project/CreateGrid/", { x: 1, y: 2, z: 3 }, function (response) { alert('What'); });
+</script>
+=======
+    GridViewModel = function ()
+    {
+        this.row = ko.observable(0);
+        this.column = ko.observable(0);
+
+        CreateGrid = function ()
+        {
+
+            $.post("/Project/CreateGrid", { x: viewModel.Id, y: this.row(), z: this.column() }, function (response) { alert('Grid successfully added'); });
+        }
+    }
+
+    ko.applyBindings(new GridViewModel())
+</script>
+>>>>>>> origin/develop
