@@ -13,16 +13,16 @@
         <table>
             <tr>
                 <th>Rows</th>
-                <td><input id="GridRows" type="text" ></td>
+                <td><input id="GridRows" type="text" data-bind="value: row"></td>
             </tr>
             <tr>
                 <th>Columns</th>
-                <td><input id="GridColumns" type="text" ></td>
+                <td><input id="GridColumns" type="text" data-bind="value: column"></td>
             </tr> 
             <tr>
                 <td></td>
                 <td>
-                    <button type="button" onclick="CreateGrid()">Click Me!</button>
+                     <input type="button" value="Create Grid" data-bind="click: CreateGrid" />
                 </td>
             </tr>       
         </table>
@@ -33,6 +33,20 @@
 
 
 
-<script id="CreateGrid">
-    $.post("/Project/CreateGrid/", { x: 1, y: 2, z: 3 }, function (response) { alert('What'); });
+<script>
+    var viewModel = @(Html.Raw(Json.Encode(Model)));
+
+    GridViewModel = function ()
+    {
+        this.row = ko.observable(0);
+        this.column = ko.observable(0);
+
+        CreateGrid = function ()
+        {
+
+            $.post("/Project/CreateGrid", { x: viewModel.Id, y: this.row(), z: this.column() }, function (response) { alert('Grid successfully added'); });
+        }
+    }
+
+    ko.applyBindings(new GridViewModel())
 </script>
