@@ -29,19 +29,76 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-<div id="KO_DIV">
-    <textarea data-bind="text: Name"></textarea>
-</div>
+
+<p>Rows: <strong data-bind="text: GridRows"></strong></p>
+<p>Columns: <strong data-bind="text: GridColumns"></strong></p>
+
+<p>Rows: <input data-bind="value: GridRows" /></p>
+<p>Columns: <input data-bind="value: GridColumns" /></p>
+<button data-bind="click: CreateNewGrid">Create New Grid</button>
+
+<table border=1 data-bind="foreach: GridItems">
+    <tr>
+        <td data-bind="text: Id"></td>
+    </tr>
+</table>
 
 @Html.Raw(Model)
 
 <script type="text/javascript">
-    var projectModel = '@Html.Raw(Json.Encode(Model))';
-    
-    ProjectModel = function (projectModel)
+    var viewModel = @(Html.Raw(Json.Encode(Model)));
+    GridItemViewModel = function()
+    {
+        alert("GridItemItemViewModel");
+        var self = this;
+        self.Id = ko.observable();
+        self.MoneyValue = ko.observable();
+    }
+    GridViewModel = function()
     {
         var self = this;
-        self.Name = ko.observable(projectModel.Name);
+        self.Row = ko.observable(0);
+        self.Column = ko.observable(0);
+        self.GridItems = new Array();
     }
-    ko.applyBindings(new ProjectModel(), document.getElementById("KO_DIV"))
+    ProjectViewModel = function()
+    {
+        var self = this;
+        self.Id = ko.observable(viewModel.Id);
+        self.Name = ko.observable(viewModel.Name);
+        self.Description = ko.observable(viewModel.Description);
+        self.Image = ko.observable(viewModel.Image);
+        //GridItem = ko.observable();
+        GridRows = ko.observable();
+        GridColumns = ko.observable();
+        Grid = new GridViewModel();
+
+        CreateNewGrid = function()
+        {
+           alert ("TEST");
+           alert(" Rows: " + GridRows() + " Columns: " + GridColumns());
+           var count = 0;
+           for (var i = 0; i < GridRows(); i++)
+           {
+                for (var j = 0; j < GridColumns(); j++)
+                {
+                    //alert("Grid: " + Grid.GridItems)
+                    alert("IN FOR")
+                    var gridItem = new GridItemViewModel();
+                    Grid.GridItems.push(gridItem);
+                    gridItem.Id = count;
+                    count++;
+                    alert("FOR DONE")
+                }
+           }
+           alert("Created " + count + " grid items");
+        };
+    };
+    var models = 
+    {
+//        gridItemViewModel : new GridItemViewModel(),
+//        gridViewModel : new GridViewModel(),
+        projectViewModel : new ProjectViewModel()
+    };
+    ko.applyBindings(models);
 </script>
