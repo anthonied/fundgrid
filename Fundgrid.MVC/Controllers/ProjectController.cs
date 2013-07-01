@@ -44,7 +44,6 @@ namespace Fundgrid.MVC.Controllers
             _projectRepository.EditProject(id, name, description);
             return RedirectToAction("Index");
         }
-
         
         public ActionResult Create()
         {
@@ -75,29 +74,23 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public JsonResult UpdateGrid(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
-        {
-            var isEntryUpdated = _projectRepository.updateGridForProject(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
-            var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
-            return new JsonResult {Data = data};
-        }
 
         [AllowAnonymous]
         public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns)
         {
-            var isEntryAdded = _projectRepository.CreateGridForProject(projectId, gridDimensionRows, gridDimensionColumns);
+            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
             return new JsonResult { Data = data };
         }
 
-        /*[AllowAnonymous]
-        public ActionResult BuyGridItem()
+        [HttpPost]
+        public JsonResult AddGridItem(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
-            var isEntryAdded = _projectRepository.AssignItemToGrid(1, 1, "Phillip", 1000.50m);
-            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
-
+            var isEntryUpdated = _projectRepository.AddGridItem(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+            var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
             return new JsonResult { Data = data };
-        }*/
+        }
+        
+
     }
 }

@@ -49,6 +49,7 @@ namespace FundGrid.Repository
                                             DimensionRows = g.dimension_rows
                                         }).FirstOrDefault();
 
+                if (selectedProject.Grid == null) return selectedProject;
                 selectedProject.Grid.GridItems = (from gi in model.grid_item
                                                     where gi.grid_id == selectedProject.Grid.Id
                                                     select new GridItem
@@ -91,7 +92,6 @@ namespace FundGrid.Repository
             }
         }
 
-        //Check of remove werk
         public void RemoveProject(int removeId)
         {
             using (var model = new fundgridEntities())
@@ -104,7 +104,7 @@ namespace FundGrid.Repository
                 model.SaveChanges();
             }
         }
-        public bool CreateGridForProject(int projectId, int columns, int rows)
+        public bool CreateNewGrid(int projectId, int columns, int rows)
         {
             int result;
             using (var model = new fundgridEntities())
@@ -156,6 +156,24 @@ namespace FundGrid.Repository
             }
             return result > 0;
         }*/
+
+        public bool AddGridItem(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        {
+            using (var model = new fundgridEntities())
+            {
+                var selectedGridItem = (from gridItem in model.grid_item
+                                        where gridItem.grid.project_id == projectId
+                                        && gridItem.grid_id == gridId
+                                        && gridItem.number == gridItemNumber
+                                        select gridItem).FirstOrDefault();
+                selectedGridItem.owner = gridItemOwner;
+                selectedGridItem.amount = gridItemAmount;
+                if (model.SaveChanges() > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
     }
 }
