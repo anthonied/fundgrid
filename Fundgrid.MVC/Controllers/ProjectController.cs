@@ -44,7 +44,6 @@ namespace Fundgrid.MVC.Controllers
             _projectRepository.EditProject(id, name, description);
             return RedirectToAction("Index");
         }
-
         
         public ActionResult Create()
         {
@@ -75,31 +74,23 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //[AllowAnonymous]
-        //public ActionResult CreateGrid()
-        //{
-        //    var isEntryAdded = _projectRepository.CreateGridForProject(1, 5, 5);
-        //    var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
-
-        //    return new JsonResult { Data = data };
-            
-        //}
-
-        [HttpPost]
-        public ActionResult CreateGrid(int x, int y, int z)
-        {
-
-            return View();
-        }
-
 
         [AllowAnonymous]
-        public ActionResult BuyGridItem()
+        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns)
         {
-            var isEntryAdded = _projectRepository.AssignItemToGrid(1, 1, "Phillip", 1000.50m);
+            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
-
             return new JsonResult { Data = data };
         }
+
+        [HttpPost]
+        public JsonResult AddGridItem(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        {
+            var isEntryUpdated = _projectRepository.AddGridItem(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+            var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
+            return new JsonResult { Data = data };
+        }
+        
+
     }
 }
