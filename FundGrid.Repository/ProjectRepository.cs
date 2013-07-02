@@ -121,7 +121,7 @@ namespace FundGrid.Repository
             return result > 0;
         }
 
-        public bool AssignItemToGrid(int gridId, int number, string owner, decimal paidAmount)
+        public void AssignItemToGrid(int gridId, int number, string owner, decimal paidAmount)
         {
             int result;
             using (var model = new fundgridEntities())
@@ -136,26 +136,27 @@ namespace FundGrid.Repository
                 model.grid_item.Add(selectedGridItem);
                 result = model.SaveChanges();
             }
-            return result > 0;
         }
 
-        public bool AddGridItem(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
-        {
-            using (var model = new fundgridEntities())
-            {
-                var selectedGridItem = (from gridItem in model.grid_item
-                                        where gridItem.grid.project_id == projectId
-                                        && gridItem.grid_id == gridId
-                                        && gridItem.number == gridItemNumber
-                                        select gridItem).FirstOrDefault();
-                selectedGridItem.owner = gridItemOwner;
-                selectedGridItem.amount = gridItemAmount;
-                if (model.SaveChanges() > 0)
-                    return true;
-                else
-                    return false;
-            }
-        }
+        //public bool AddGridItem(int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        //{
+        //    using (var model = new fundgridEntities())
+        //    {
+        //        var selectedGridItem = new grid_item
+        //        {
+        //            amount = gridItemAmount,
+        //            number = gridItemNumber,
+        //            grid_id = gridId,
+        //            owner = gridItemOwner,
+        //        };
+
+        //        model.grid_item.Add(selectedGridItem);
+        //        if (model.SaveChanges() > 0)
+        //            return true;
+        //        else
+        //            return false;
+        //    }
+        //}
 
     }
 }

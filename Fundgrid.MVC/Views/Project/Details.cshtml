@@ -33,43 +33,21 @@
         }
         else
         {
-         @*<div></div>
-            <table border="1">*@
-              @*<tr>Bought GridItems: @Model.Grid.GridItems.Count Number: @Model.Grid.GridItems[0].Number</tr>*@
-              @*@for (int i = 0; i < Model.Grid.DimensionRows; i++)
-                {                  
-                    <tr style="height:50px">
-                        @for (int j = 0; j < Model.Grid.DimensionColumns; j++)
-                        {
-                            <td width="100px" align="center">@Html.ActionLink("Buy", "Details")</td>
-                        }
-                    </tr>                  
-                }
-            </table>
-                <p>
-                    @Html.ActionLink("Delete Grid", "Index")
-                </p>*@
+         
         }
 
         <br />
-          @*<table border="1" class="table">
-              <thead>
-                  <tr>
-                     <th>Number</th>
-                    <th>Owner</th>
-                    <th>Amount</th>
-                  </tr>
-              </thead>
-              <tbody data-bind="foreach: gridItems">
-                  <tr>
-                    <td data-bind="text: Number"></td>
-                    <td data-bind="text: Owner"></td>
-                    <td data-bind="text: Amount"></td>
-                  </tr>
-              </tbody>
-          </table>*@
 
-        <table border="1" class="table">
+        @*owner input text feild... sould return the owner name*@
+
+        <p>Owner Name:</p>
+        <input id="ownerInputTextbox" size="16" type="text"/>
+
+
+
+        
+
+        <table id="displayTabel" border="1" class="table">
               <thead>
                   <tr>
                      <th>Number</th>
@@ -79,16 +57,15 @@
               </thead>
               <tbody data-bind="foreach: gridItems">
                   <tr>                    
-                    <td data-bind="text: Number"></td>
+                    <td id="tableOwnerNumber" data-bind="text: Number"></td>
                     <td data-bind="text: Owner"></td>
-                    @*<td aria-valuetext=""></td>*@
                     <td data-bind="text: Amount"></td>
-                    <td><input type="button" value="Buy" data-bind="visible: IsAvailable == true, click: TestButton, text: Owner"/></td>
+                    <td><input id="buyButton" type="button" value="Buy" data-bind="visible: IsAvailable == true, click: BuyGridItem, index: Number, index: Amount"/></td>
                   </tr>
               </tbody>
           </table>
         <br />
-
+        <input type="button" value="test" data-bind="click: test"/>
         <p>@Html.ActionLink("Delete Grid", "Index")</p>
         <p>@Html.ActionLink("Back to List", "Index")</p>
     </fieldset>
@@ -106,10 +83,7 @@
         self.Amount = ko.observable();
         self.IsAvailable= ko.observable();
 
-        TestButton = function()
-        {            
-            alert("What?");
-        }
+        
     };
 
     var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
@@ -119,7 +93,6 @@
         this.row = ko.observable(0);
         this.column = ko.observable(0);
         this.gridItems = ko.observableArray();
-        //this.OwnerComputeble= ko.computed()
         
         for(var i = 0; i < itemCount; i++)
         {
@@ -136,32 +109,21 @@
                     model.Amount = viewModel.Grid.GridItems[j].Amount;
                     model.IsAvailable = viewModel.Grid.GridItems[j].IsAvailable;
                 }
-                else
-                {
-				
-                }
             };
 		
             this.gridItems.push(model);
+            
         }; 
 
-
-        
         CreateGrid = function ()
         {
-            alert("create grid");
             $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: this.row(), gridDimensionColumns: this.column() }, function (response) { alert('Grid successfully added'); });
         }
 
         BuyGridItem = function()
         {
-            alert("buy grid item");
-            //$.post("/Project/BuyGridItem/", { projectId: viewModel.Id, gridDimensionRows: this.row(), gridDimensionColumns: this.column() }, function (response) { alert('Grid successfully added'); });
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number , gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount}, function() {location.reload()});
         }
-        //ShowGrid = function ()
-        //{
-
-        //}
     };
     
     var models = 

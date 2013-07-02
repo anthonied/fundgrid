@@ -73,8 +73,7 @@ namespace Fundgrid.MVC.Controllers
             _projectRepository.RemoveProject(id);
             return RedirectToAction("Index");
         }
-
-
+        
         [AllowAnonymous]
         public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns)
         {
@@ -83,12 +82,19 @@ namespace Fundgrid.MVC.Controllers
             return new JsonResult { Data = data };
         }
 
+        //[HttpPost]
+        //public JsonResult AddGridItem(int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        //{
+        //    var isEntryUpdated = _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+        //    var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
+        //    return new JsonResult { Data = data };
+        //}
+
         [HttpPost]
-        public JsonResult AddGridItem(int projectId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        public ActionResult AddGridItem(int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
-            var isEntryUpdated = _projectRepository.AddGridItem(projectId, gridId, gridItemNumber, gridItemOwner, gridItemAmount);
-            var data = new { isOk = isEntryUpdated, errorMessage = "No entry was updated" };
-            return new JsonResult { Data = data };
+            _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+            return RedirectToAction("Index");
         }
         
 
