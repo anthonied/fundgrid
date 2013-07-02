@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1">
         <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="2.875" PointY="1.5" />
-        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="6.875" PointY="0.875" />
         <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="fundgridModel.sysdiagram" Width="1.5" PointX="11.946025460933347" PointY="19.445704081768962" />
         <AssociationConnector Association="fundgridModel.FK_grid_item_grid" />
