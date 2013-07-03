@@ -47,7 +47,7 @@ namespace FundGrid.Repository
                                                Id = g.id,
                                                DimensionColumns = g.dimension_column,
                                                DimensionRows = g.dimension_rows,
-
+                                               GridItemValue= g.item_value
                                            }).FirstOrDefault();
 
                 if (selectedProject.Grid == null) return selectedProject;
@@ -93,7 +93,7 @@ namespace FundGrid.Repository
         }
 
 
-        public bool CreateNewGrid(int projectId, int columns, int rows)
+        public bool CreateNewGrid(int projectId, int columns, int rows, decimal itemValue)
         {
             int result;
             using (var model = new fundgridEntities())
@@ -104,6 +104,7 @@ namespace FundGrid.Repository
                     project_id = projectId,
                     dimension_rows = rows,
                     dimension_column = columns,
+                    item_value = itemValue
                 };
                 model.grids.Add(selectedGrid);
                 result = model.SaveChanges();

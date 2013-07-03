@@ -11,5 +11,6 @@ namespace FunGrid.Domain
         public int? DimensionRows { get; set; }
         public int? DimensionColumns { get; set; }
         public List<GridItem> GridItems { get; set; }
+        public decimal? GridItemValue { get; set; }
     }
 }
