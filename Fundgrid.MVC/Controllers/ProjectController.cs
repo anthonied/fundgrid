@@ -88,5 +88,12 @@ namespace Fundgrid.MVC.Controllers
             _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult DeleteGrid(int gridId)
+        {
+            _projectRepository.RemoveGrid(gridId);
+            return RedirectToAction("Details");
+        }
     }
 }

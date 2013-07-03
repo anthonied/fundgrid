@@ -54,7 +54,7 @@
               </tbody>
           </table>
         }
-
+        <input type="button" value="Delete" data-bind="click: DeleteGrid" />
         <p>@Html.ActionLink("Back to List", "Index")</p>
     </fieldset>
     
@@ -113,6 +113,11 @@
         BuyGridItem = function()
         {
             $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number , gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount}, function() {location.reload()});
+        }
+
+        DeleteGrid = function()
+        {
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, window.location.reload());
         }
     };
     

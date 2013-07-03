@@ -92,18 +92,7 @@ namespace FundGrid.Repository
             }
         }
 
-        public void RemoveProject(int removeId)
-        {
-            using (var model = new fundgridEntities())
-            {
-                var removeProject = (from p in model.projects
-                                     where p.id == removeId
-                                     select p).FirstOrDefault();
 
-                model.projects.Remove(removeProject);
-                model.SaveChanges();
-            }
-        }
         public bool CreateNewGrid(int projectId, int columns, int rows)
         {
             int result;
@@ -139,25 +128,81 @@ namespace FundGrid.Repository
             }
         }
 
-        //public bool AddGridItem(int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
-        //{
-        //    using (var model = new fundgridEntities())
-        //    {
-        //        var selectedGridItem = new grid_item
-        //        {
-        //            amount = gridItemAmount,
-        //            number = gridItemNumber,
-        //            grid_id = gridId,
-        //            owner = gridItemOwner,
-        //        };
+        public void RemoveProject(int projectId)
+        {
+            var selectedProject = new project();
+            int gridId;
+            using (var model = new fundgridEntities())
+            {
+                selectedProject = (from p in model.projects
+                                   where p.id == projectId
+                                   select p).FirstOrDefault();
 
-        //        model.grid_item.Add(selectedGridItem);
-        //        if (model.SaveChanges() > 0)
-        //            return true;
-        //        else
-        //            return false;
-        //    }
-        //}
+                gridId = selectedProject.grids.Count > 0 ? selectedProject.grids.FirstOrDefault().id : 0;
+            }
 
+            if (gridId > 0)
+            {
+                removeGridItems(gridId);
+                removeGrid(gridId);
+            }
+            removeProject(projectId);
+        }
+
+        private void removeProject(int projectId)
+        {
+            using (var model = new fundgridEntities())
+            {
+                var selectedProject = (from p in model.projects
+                                       where p.id == projectId
+                                       select p).FirstOrDefault();
+
+                model.projects.Remove(selectedProject);
+                model.SaveChanges();
+            }
+        }
+
+        private void removeGrid(int gridId)
+        { 
+            using (var model = new fundgridEntities())
+            {
+                var removeGrid = (from g in model.grids
+                                  where g.id == gridId
+                                  select g).FirstOrDefault();
+                model.grids.Remove(removeGrid);
+                model.SaveChanges();
+            }
+        }
+
+        public void RemoveGrid(int gridId)
+        {
+            removeGridItems(gridId);
+
+            using (var model = new fundgridEntities())
+            {
+                var removeGrid = (from g in model.grids
+                                  where g.id == gridId
+                                  select g).FirstOrDefault();
+                model.grids.Remove(removeGrid);
+                model.SaveChanges();
+            }
+
+        }
+
+        private void removeGridItems(int gridId)
+        {
+            using (var model = new fundgridEntities())
+            {
+                var gridItems = (from gi in model.grid_item
+                                 where gi.grid_id == gridId
+                                 select gi).ToList();
+
+                foreach (var item in gridItems)
+                {
+                    model.grid_item.Remove(item);
+                    model.SaveChanges();
+                }
+            }
+        }
     }
 }
