@@ -20,7 +20,7 @@ namespace FundGrid.Repository
                                     Id = p.id,
                                     Name = p.name,
                                     Description = p.description,
-                                    Image = p.image
+                                    Image = p.image                                    
                                 }).ToList();
 
                 return projects;
@@ -111,6 +111,7 @@ namespace FundGrid.Repository
             {
                 var selectedGrid = new grid
                 {
+                    
                     project_id = projectId,
                     dimension_rows = rows,
                     dimension_column = columns,
