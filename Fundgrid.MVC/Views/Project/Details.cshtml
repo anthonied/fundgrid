@@ -2,6 +2,8 @@
 <script src="~/Scripts/knockout-2.2.1.js"></script>
 <script src="~/Scripts/jquery-1.9.1.js"></script>
 
+
+
 @{
     ViewBag.Title = "Details";
 }
@@ -10,11 +12,10 @@
 
     <fieldset>
         <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
-        
-        
+                
         @if (Model.Grid == null)
         {
-             <table>
+            <table>
             <tr>
                 <th>Rows</th>
                 <td><input id="GridRows" type="text" data-bind="value: row"></td>
@@ -25,83 +26,102 @@
             </tr> 
             <tr>
                 <td></td>
-                <td>
-                     <input type="button" value="Create Grid" data-bind="click: CreateGrid" />
-                </td>
+                <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
             </tr> 
-         </table>   
-        }
-        else
-        {
-         <div></div>
-            <table border="1">
-              <tr>Bought GridItems: @Model.Grid.GridItems.Count Number: @Model.Grid.GridItems[0].Number</tr>
-              @for (int i = 0; i < Model.Grid.DimensionRows; i++)
-                {                  
-                    <tr style="height:50px">
-                        @for (int j = 0; j < Model.Grid.DimensionColumns; j++)
-                        {
-                            <td width="100px" align="center">@Html.ActionLink("Buy", "Details")</td>
-                        }
-                    </tr>                  
-                }
             </table>
-                <p>
-                    @Html.ActionLink("Delete Grid", "Index")
-                </p>
-
         }
 
-        <table data-bind="foreach: GridItemViewModel">
-            <tr>
-                <td data-bind="text: Amount"></td>
-                <td data-bind="text: Owner"></td>
-            </tr>
-        </table>
+        @if (Model.Grid != null)
+        {
+         <p>Owner Name:</p>
+        <input id="ownerInputTextbox" size="16" type="text"/>
+
+        <table id="displayTabel" border="1" class="table">
+              <thead>
+                  <tr>
+                     <th>Number</th>
+                    <th>Owner</th>
+                    <th>Amount</th>
+                  </tr>
+              </thead>
+              <tbody data-bind="foreach: gridItems">
+                  <tr>                    
+                    <td id="tableOwnerNumber" data-bind="text: Number, visible: false"></td>
+                    <td data-bind="text: Owner"></td>
+                    <td data-bind="text: Amount"></td>
+                    <td><input id="buyButton" type="button" value="Buy" data-bind="visible: IsAvailable == true, click: BuyGridItem, index: Number, index: Amount"/></td>
+                  </tr>
+              </tbody>
+          </table>
+        }
+
+        <p>@Html.ActionLink("Back to List", "Index")</p>
     </fieldset>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    
 
 <script>
+    
     var viewModel = @(Html.Raw(Json.Encode(Model)));
     
-    //GridItemViewModel = function()
-    //{        
-    //    var self = this;
-    //    self.Id = ko.observable();
-    //    self.Number = ko.observable();
-    //    self.Owner = ko.observable();
-    //    self.Amount = ko.observable();
-    //}
-    //var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
-    //var gridItems = new Array(itemCount);
-
-    //for(var i = 0; i < viewModel.Grid.GridItems.length; i++)
-    //{
-    //    gridItems[viewModel.Grid.GridItems[i].Number - 1] = new GridItemViewModel
-    //    {
-    //        Id = viewModel.Grid.GridItems[i].id,
-    //        Number = viewModel.Grid.GridItems[i].Number,
-    //        Owner = viewModel.Grid.GridItems[i].Owner,
-    //        Amount = viewModel.Grid.GridItems[i].Amount
-    //    };
-    //}
+    GridItemViewModel = function()
+    {
+        var self = this;
+        self.Id = ko.observable();
+        self.Number = ko.observable();
+        self.Owner = ko.observable();
+        self.Amount = ko.observable();
+        self.IsAvailable= ko.observable();
+    };
+    
+    
+    
     GridViewModel = function ()
-    {       
+    {
+
         this.row = ko.observable(0);
         this.column = ko.observable(0);
         this.gridItems = ko.observableArray();
+        
+        if(viewModel.Grid != null)
+        {
+            var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
+            for(var i = 0; i < itemCount; i++)
+            {
+                var model = new GridItemViewModel();
+                model.Number = i + 1;
+                model.IsAvailable = true;
+                model.Amount = 100.00;
+        
+                for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
+                {
+                    if(model.Number == viewModel.Grid.GridItems[j].Number)
+                    {
+                        model.Owner = viewModel.Grid.GridItems[j].Owner;
+                        model.Amount = viewModel.Grid.GridItems[j].Amount;
+                        model.IsAvailable = viewModel.Grid.GridItems[j].IsAvailable;
+                    }
+                };
+                this.gridItems.push(model);
+            }; 
+        }
+        
         CreateGrid = function ()
         {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: this.row(), gridDimensionColumns: this.column() }, function (response) { alert('Grid successfully added'); });
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value }, function() {location.reload()});
         }
-        ShowGrid = function ()
+
+        BuyGridItem = function()
         {
-
-
-
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number , gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount}, function() {location.reload()});
         }
-    }
-    ko.applyBindings(new GridViewModel(),document.getElementById("CreateGrid"))
+    };
+    
+    var models = 
+        {
+            m1: new GridViewModel(),
+            m2: new GridItemViewModel()
+        };
+    ko.applyBindings(models.m1);
+    ko.applyBindings(models.m2);
+
 </script>

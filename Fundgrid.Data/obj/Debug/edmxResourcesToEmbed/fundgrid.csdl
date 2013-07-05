@@ -4,7 +4,6 @@
     <EntitySet Name="grids" EntityType="fundgridModel.grid" />
     <EntitySet Name="grid_item" EntityType="fundgridModel.grid_item" />
     <EntitySet Name="projects" EntityType="fundgridModel.project" />
-    <EntitySet Name="sysdiagrams" EntityType="fundgridModel.sysdiagram" />
     <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.FK_grid_item_grid">
       <End Role="grid" EntitySet="grids" />
       <End Role="grid_item" EntitySet="grid_item" />
@@ -34,7 +33,7 @@
     <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="Int32" Name="number" />
     <Property Type="String" Name="owner" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="amount" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="amount" Precision="18" Scale="2" />
     <Property Type="Int32" Name="grid_id" />
     <NavigationProperty Name="grid" Relationship="fundgridModel.FK_grid_item_grid" FromRole="grid_item" ToRole="grid" />
   </EntityType>
@@ -47,16 +46,6 @@
     <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="grids" Relationship="fundgridModel.FK_grid_projects" FromRole="project" ToRole="grid" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="principal_id" Nullable="false" />
-    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int32" Name="version" />
-    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_grid_item_grid">
     <End Type="fundgridModel.grid" Role="grid" Multiplicity="0..1" />
