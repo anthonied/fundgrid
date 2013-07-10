@@ -25,6 +25,10 @@
                 <td><input id="GridColumns" type="text" data-bind="value: column"></td>
             </tr> 
             <tr>
+                <th>Amount</th>
+                <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
+            </tr> 
+            <tr>
                 <td></td>
                 <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
             </tr> 
@@ -39,9 +43,9 @@
         <table id="displayTabel" border="1" class="table">
               <thead>
                   <tr>
-                     <th>Number</th>
                     <th>Owner</th>
                     <th>Amount</th>
+                    <th>Buy</th>
                   </tr>
               </thead>
               <tbody data-bind="foreach: gridItems">
@@ -54,14 +58,14 @@
               </tbody>
           </table>
         }
-
+        <input type="button" value="Delete" data-bind="click: DeleteGrid" />
         <p>@Html.ActionLink("Back to List", "Index")</p>
     </fieldset>
     
 
 <script>
     
-    var viewModel = @(Html.Raw(Json.Encode(Model)));
+    var viewModel = @(Html.Raw(Json.Encode(Model)))
     
     GridItemViewModel = function()
     {
@@ -70,28 +74,30 @@
         self.Number = ko.observable();
         self.Owner = ko.observable();
         self.Amount = ko.observable();
-        self.IsAvailable= ko.observable();
+        self.IsAvailable = ko.observable();
     };
-    
     
     
     GridViewModel = function ()
     {
+        var self = this;
+        self.row = ko.observable(0);
+        self.column = ko.observable(0);
+        self.gridItems = ko.observableArray();
+        self.gridvalue = ko.observable();
 
-        this.row = ko.observable(0);
-        this.column = ko.observable(0);
-        this.gridItems = ko.observableArray();
-        
         if(viewModel.Grid != null)
         {
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
+            var gia = viewModel.Grid.GridItemValue;
+
             for(var i = 0; i < itemCount; i++)
             {
                 var model = new GridItemViewModel();
                 model.Number = i + 1;
                 model.IsAvailable = true;
-                model.Amount = 100.00;
-        
+                
+                model.Amount = viewModel.Grid.GridItemValue;
                 for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
                 {
                     if(model.Number == viewModel.Grid.GridItems[j].Number)
@@ -107,12 +113,18 @@
         
         CreateGrid = function ()
         {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value }, function() {location.reload()});
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value }, function() {location.reload()});
         }
 
         BuyGridItem = function()
         {
             $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number , gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount}, function() {location.reload()});
+        }
+
+        DeleteGrid = function()
+        {
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id },window.location.reload());
+            
         }
     };
     

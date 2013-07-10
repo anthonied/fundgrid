@@ -75,9 +75,9 @@ namespace Fundgrid.MVC.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns)
+        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue)
         {
-            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns);
+            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
             return new JsonResult { Data = data };
         }
@@ -87,6 +87,13 @@ namespace Fundgrid.MVC.Controllers
         {
             _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteGrid(int gridId)
+        {
+            _projectRepository.RemoveGrid(gridId);
+            return RedirectToAction("Details");
         }
     }
 }
