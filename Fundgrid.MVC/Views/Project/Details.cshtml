@@ -38,45 +38,28 @@
             </tr> 
             </table>
         }
-
-        @*@if (Model.Grid != null)
-        {
-         <p>Owner Name:</p>
-        <input id="ownerInputTextbox" size="16" type="text"/>
-
-        <table id="displayTabel" border="1" class="table">
-              <thead>
-                  <tr>
-                    <th>Amount</th>
-                    <th>Buy</th>
-                  </tr>
-              </thead>
-              <tbody data-bind="foreach: gridItems">
-                  <tr>                    
-                    <td id="tableOwnerNumber" data-bind="text: Number, visible: false"></td>
-                    <td data-bind="text: Amount"></td>
-                    <td><input id="buyButton" type="button" value="Buy" data-bind="visible: IsAvailable == true, click: BuyGridItem, index: Number, index: Amount"/></td>
-                  </tr>
-              </tbody>
-          </table>
-        }*@
+    
         @if (Model.Grid != null)
         {
          <p>Owner Name:</p>
         <input id="ownerInputTextbox" size="16" type="text"/>
 
-        <table id="displayTabel" border="1" class="grid" >
-              @*<thead>
-                  <tr>
-                    <th>Amount</th>
-                    <th>Buy</th>
-                  </tr>
-              </thead>*@
+        <!--<table id="displayTabel" border="1" class="grid" >
+
               <tbody data-bind="foreach: gridItems">
                   
                   <tr>
-                    @*<td id="tableOwnerNumber" data-bind="text: Number, visible: false"></td>*@
                     <td data-bind="text: Amount"></td>
+                  </tr>
+              </tbody>
+          </table>-->
+
+        <table id="displayTabel2" border="1" class="grid" >
+
+              <tbody data-bind="foreach: gridItemsRows">
+                  
+                  <tr data-bind="foreach: gridItemColumns">
+                    <td data-bind="text:  $data, click: DoStuff, me:this"></td>
                   </tr>
               </tbody>
           </table>
@@ -112,13 +95,25 @@
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
         
-
         if(viewModel.Grid != null)
         {
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
             var ginitialvalue = viewModel.Grid.InitialValue;
             var gincrementvalue = viewModel.Grid.IncrementValue;
 
+            self.gridItemsRows = ko.observableArray();
+            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            {
+                var gridItemColumns = ko.observableArray();
+                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+                {
+                    //gridItemColumns.push(ginitialvalue + (gincrementvalue * i * viewModel.Grid.DimensionRows + j));
+                    gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
+                }
+                self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
+            }
+                
+                
             for(var i = 0; i < itemCount; i++)
             {
                 var model = new GridItemViewModel();
@@ -126,7 +121,6 @@
                 model.IsAvailable = true;
                 model.Amount = ginitialvalue + (gincrementvalue * (model.Number - 1));
 
-                //model.Amount = viewModel.Grid.GridItemAmount
                 for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
                 {
                     if(model.Number == viewModel.Grid.GridItems[j].Number)
@@ -138,7 +132,10 @@
                 this.gridItems.push(model);
             }; 
         }
-        
+        DoStuff = function (me)
+        {
+            alert(me);
+        }
 
         CreateGrid = function ()
         {
@@ -158,12 +155,12 @@
         }
     };
     
-    var models = 
+    /*var models = 
         {
             m1: new GridViewModel(),
             m2: new GridItemViewModel()
-        };
-    ko.applyBindings(models.m1);
-    ko.applyBindings(models.m2);
+        };*/
+    ko.applyBindings(new GridViewModel());
+   // ko.applyBindings(models.m2);
 
 </script>
