@@ -27,7 +27,11 @@
             <tr>
                 <th>Amount</th>
                 <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
-            </tr> 
+            </tr>
+            <tr>
+                <th>Incremental Value</th>
+                <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
+            </tr>
             <tr>
                 <td></td>
                 <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
@@ -35,7 +39,7 @@
             </table>
         }
 
-        @if (Model.Grid != null)
+        @*@if (Model.Grid != null)
         {
          <p>Owner Name:</p>
         <input id="ownerInputTextbox" size="16" type="text"/>
@@ -43,7 +47,6 @@
         <table id="displayTabel" border="1" class="table">
               <thead>
                   <tr>
-                    <th>Owner</th>
                     <th>Amount</th>
                     <th>Buy</th>
                   </tr>
@@ -51,9 +54,29 @@
               <tbody data-bind="foreach: gridItems">
                   <tr>                    
                     <td id="tableOwnerNumber" data-bind="text: Number, visible: false"></td>
-                    <td data-bind="text: Owner"></td>
                     <td data-bind="text: Amount"></td>
                     <td><input id="buyButton" type="button" value="Buy" data-bind="visible: IsAvailable == true, click: BuyGridItem, index: Number, index: Amount"/></td>
+                  </tr>
+              </tbody>
+          </table>
+        }*@
+        @if (Model.Grid != null)
+        {
+         <p>Owner Name:</p>
+        <input id="ownerInputTextbox" size="16" type="text"/>
+
+        <table id="displayTabel" border="1" class="grid" >
+              @*<thead>
+                  <tr>
+                    <th>Amount</th>
+                    <th>Buy</th>
+                  </tr>
+              </thead>*@
+              <tbody data-bind="foreach: gridItems">
+                  
+                  <tr>
+                    @*<td id="tableOwnerNumber" data-bind="text: Number, visible: false"></td>*@
+                    <td data-bind="text: Amount"></td>
                   </tr>
               </tbody>
           </table>
@@ -66,6 +89,8 @@
 <script>
     
     var viewModel = @(Html.Raw(Json.Encode(Model)))
+
+    
     
     GridItemViewModel = function()
     {
@@ -84,26 +109,29 @@
         self.row = ko.observable(0);
         self.column = ko.observable(0);
         self.gridItems = ko.observableArray();
-        self.gridvalue = ko.observable();
+        self.gridvalue = ko.observable(0);
+        self.gridincrementalvalue = ko.observable(0);
+        
 
         if(viewModel.Grid != null)
         {
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
-            var gia = viewModel.Grid.GridItemValue;
+            var ginitialvalue = viewModel.Grid.InitialValue;
+            var gincrementvalue = viewModel.Grid.IncrementValue;
 
             for(var i = 0; i < itemCount; i++)
             {
                 var model = new GridItemViewModel();
                 model.Number = i + 1;
                 model.IsAvailable = true;
-                
-                model.Amount = viewModel.Grid.GridItemValue;
+                model.Amount = ginitialvalue + (gincrementvalue * (model.Number - 1));
+
+                //model.Amount = viewModel.Grid.GridItemAmount
                 for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
                 {
                     if(model.Number == viewModel.Grid.GridItems[j].Number)
                     {
                         model.Owner = viewModel.Grid.GridItems[j].Owner;
-                        model.Amount = viewModel.Grid.GridItems[j].Amount;
                         model.IsAvailable = viewModel.Grid.GridItems[j].IsAvailable;
                     }
                 };
@@ -111,14 +139,16 @@
             }; 
         }
         
+
         CreateGrid = function ()
         {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value }, function() {location.reload()});
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
         }
 
         BuyGridItem = function()
         {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number , gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount}, function() {location.reload()});
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number, gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount }, function () { location.reload() });
+            ownerInputTextbox.value = "";
         }
 
         DeleteGrid = function()

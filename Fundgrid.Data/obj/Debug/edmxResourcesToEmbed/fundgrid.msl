@@ -4,6 +4,7 @@
     <EntitySetMapping Name="grids">
       <EntityTypeMapping TypeName="fundgridModel.grid">
         <MappingFragment StoreEntitySet="grid">
+          <ScalarProperty Name="increment_value" ColumnName="increment_value" />
           <ScalarProperty Name="item_value" ColumnName="item_value" />
           <ScalarProperty Name="project_id" ColumnName="project_id" />
           <ScalarProperty Name="dimension_column" ColumnName="dimension_column" />

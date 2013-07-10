@@ -75,9 +75,9 @@ namespace Fundgrid.MVC.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue)
+        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue, decimal incrementValue)
         {
-            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue);
+            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue, incrementValue);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
             return new JsonResult { Data = data };
         }
