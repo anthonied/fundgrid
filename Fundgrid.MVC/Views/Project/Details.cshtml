@@ -107,7 +107,6 @@
                 var gridItemColumns = ko.observableArray();
                 for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
                 {
-                    //gridItemColumns.push(ginitialvalue + (gincrementvalue * i * viewModel.Grid.DimensionRows + j));
                     gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
