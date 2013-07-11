@@ -44,16 +44,6 @@
          <p>Owner Name:</p>
         <input id="ownerInputTextbox" size="16" type="text"/>
 
-        <!--<table id="displayTabel" border="1" class="grid" >
-
-              <tbody data-bind="foreach: gridItems">
-                  
-                  <tr>
-                    <td data-bind="text: Amount"></td>
-                  </tr>
-              </tbody>
-          </table>-->
-
         <table id="displayTabel2" border="1" class="grid" >
 
               <tbody data-bind="foreach: gridItemsRows">
@@ -113,23 +103,7 @@
             }
                 
                 
-            for(var i = 0; i < itemCount; i++)
-            {
-                var model = new GridItemViewModel();
-                model.Number = i + 1;
-                model.IsAvailable = true;
-                model.Amount = ginitialvalue + (gincrementvalue * (model.Number - 1));
-
-                for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
-                {
-                    if(model.Number == viewModel.Grid.GridItems[j].Number)
-                    {
-                        model.Owner = viewModel.Grid.GridItems[j].Owner;
-                        model.IsAvailable = viewModel.Grid.GridItems[j].IsAvailable;
-                    }
-                };
-                this.gridItems.push(model);
-            }; 
+            
         }
         DoStuff = function (me)
         {
@@ -154,12 +128,6 @@
         }
     };
     
-    /*var models = 
-        {
-            m1: new GridViewModel(),
-            m2: new GridItemViewModel()
-        };*/
     ko.applyBindings(new GridViewModel());
-   // ko.applyBindings(models.m2);
 
 </script>
