@@ -44,7 +44,7 @@
          <p>Owner Name:</p>
         <input id="ownerInputTextbox" size="16" type="text"/>
 
-        <!--<table id="displayTabel" border="1" class="grid" >
+        @*<table id="displayTabel" border="1" class="grid" >
 
               <tbody data-bind="foreach: gridItems">
                   
@@ -52,7 +52,7 @@
                     <td data-bind="text: Amount"></td>
                   </tr>
               </tbody>
-          </table>-->
+          </table>*@
 
         <table id="displayTabel2" border="1" class="grid" >
 
@@ -70,12 +70,11 @@
     
 
 <script>
-    
     var viewModel = @(Html.Raw(Json.Encode(Model)))
 
-    
-    
-    GridItemViewModel = function()
+
+
+    GridItemViewModel = function ()
     {
         var self = this;
         self.Id = ko.observable();
@@ -84,8 +83,8 @@
         self.Amount = ko.observable();
         self.IsAvailable = ko.observable();
     };
-    
-    
+
+
     GridViewModel = function ()
     {
         var self = this;
@@ -94,43 +93,45 @@
         self.gridItems = ko.observableArray();
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
-        
-        if(viewModel.Grid != null)
+
+        if (viewModel.Grid != null)
         {
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
             var ginitialvalue = viewModel.Grid.InitialValue;
             var gincrementvalue = viewModel.Grid.IncrementValue;
 
             self.gridItemsRows = ko.observableArray();
+
             for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
             {
-                var gridItemColumns = ko.observableArray();
                 for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
                 {
                     gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
                 }
+
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
-            }
-                
-                
-            for(var i = 0; i < itemCount; i++)
+            };
+
+
+            for (var i = 0; i < itemCount; i++)
             {
                 var model = new GridItemViewModel();
                 model.Number = i + 1;
                 model.IsAvailable = true;
                 model.Amount = ginitialvalue + (gincrementvalue * (model.Number - 1));
 
-                for(var j = 0; j < viewModel.Grid.GridItems.length; j++)
+                for (var j = 0; j < viewModel.Grid.GridItems.length; j++)
                 {
-                    if(model.Number == viewModel.Grid.GridItems[j].Number)
+                    if (model.Number == viewModel.Grid.GridItems[j].Number)
                     {
                         model.Owner = viewModel.Grid.GridItems[j].Owner;
                         model.IsAvailable = viewModel.Grid.GridItems[j].IsAvailable;
                     }
                 };
                 this.gridItems.push(model);
-            }; 
+            };
         }
+
         DoStuff = function (me)
         {
             alert(me);
@@ -141,25 +142,25 @@
             $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
         }
 
-        BuyGridItem = function()
+        BuyGridItem = function ()
         {
             $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number, gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount }, function () { location.reload() });
             ownerInputTextbox.value = "";
         }
 
-        DeleteGrid = function()
+        DeleteGrid = function ()
         {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id },window.location.reload());
-            
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, window.location.reload());
+
         }
     };
-    
+
     /*var models = 
         {
             m1: new GridViewModel(),
             m2: new GridItemViewModel()
         };*/
     ko.applyBindings(new GridViewModel());
-   // ko.applyBindings(models.m2);
+    // ko.applyBindings(models.m2);
 
 </script>
