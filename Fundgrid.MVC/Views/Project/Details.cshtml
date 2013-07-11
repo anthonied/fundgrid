@@ -102,8 +102,6 @@
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
                 
-                
-            
         }
         DoStuff = function (me)
         {
@@ -123,8 +121,13 @@
 
         DeleteGrid = function()
         {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id },window.location.reload());
-            
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
+            ReloadThePage();
+        }
+
+        ReloadThePage = function ()
+        {
+            document.location.reload();
         }
     };
     
