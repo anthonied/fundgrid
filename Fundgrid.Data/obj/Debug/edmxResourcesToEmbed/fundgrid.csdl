@@ -23,6 +23,8 @@
     <Property Type="Int32" Name="dimension_rows" />
     <Property Type="Int32" Name="dimension_column" />
     <Property Type="Int32" Name="project_id" />
+    <Property Type="Decimal" Name="item_value" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="increment_value" Precision="18" Scale="2" />
     <NavigationProperty Name="grid_item" Relationship="fundgridModel.FK_grid_item_grid" FromRole="grid" ToRole="grid_item" />
     <NavigationProperty Name="project" Relationship="fundgridModel.FK_grid_projects" FromRole="grid" ToRole="project" />
   </EntityType>

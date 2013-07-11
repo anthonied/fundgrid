@@ -23,6 +23,8 @@
     <Property Name="dimension_rows" Type="int" />
     <Property Name="dimension_column" Type="int" />
     <Property Name="project_id" Type="int" />
+    <Property Name="item_value" Type="decimal" Scale="2" />
+    <Property Name="increment_value" Type="decimal" Scale="2" />
   </EntityType>
   <EntityType Name="grid_item">
     <Key>

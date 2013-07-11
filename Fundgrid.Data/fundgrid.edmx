@@ -28,6 +28,8 @@
           <Property Name="dimension_rows" Type="int" />
           <Property Name="dimension_column" Type="int" />
           <Property Name="project_id" Type="int" />
+          <Property Name="item_value" Type="decimal" Scale="2" />
+          <Property Name="increment_value" Type="decimal" Scale="2" />
         </EntityType>
         <EntityType Name="grid_item">
           <Key>
@@ -99,6 +101,8 @@
           <Property Type="Int32" Name="dimension_rows" />
           <Property Type="Int32" Name="dimension_column" />
           <Property Type="Int32" Name="project_id" />
+          <Property Type="Decimal" Name="item_value" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="increment_value" Precision="18" Scale="2" />
           <NavigationProperty Name="grid_item" Relationship="fundgridModel.FK_grid_item_grid" FromRole="grid" ToRole="grid_item" />
           <NavigationProperty Name="project" Relationship="fundgridModel.FK_grid_projects" FromRole="grid" ToRole="project" />
         </EntityType>
@@ -156,6 +160,8 @@
           <EntitySetMapping Name="grids">
             <EntityTypeMapping TypeName="fundgridModel.grid">
               <MappingFragment StoreEntitySet="grid">
+                <ScalarProperty Name="increment_value" ColumnName="increment_value" />
+                <ScalarProperty Name="item_value" ColumnName="item_value" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="dimension_column" ColumnName="dimension_column" />
                 <ScalarProperty Name="dimension_rows" ColumnName="dimension_rows" />
