@@ -11,20 +11,22 @@ namespace FunGrid.Domain
         public int? Number { get; set; }
         public string Owner { get; set; }
         public decimal? Amount { get; set; }
-        private bool _isAvailable;
-        public bool IsAvailable
+        public bool IsAvailible
         {
             get
             {
-                return _isAvailable;
+                if (Id == 0)
+                    return true;
+                return false;
             }
-            set
-            {
-                if (Id != null || Id != 0)
-                    _isAvailable = true;
-                else
-                    _isAvailable = false;
-            }
+        }
+        public GridItem() { }
+        public GridItem(GridItem parameter)
+        {
+            Id = parameter.Id;
+            Number = parameter.Number;
+            Owner = parameter.Owner;
+            Amount = parameter.Amount;
         }
     }
 }

@@ -22,3 +22,15 @@ C:\Development\Projects\fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.x
 C:\Development\Projects\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.csprojResolveAssemblyReference.cache
 C:\Development\Projects\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.dll
 C:\Development\Projects\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.pdb
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.dll.config
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.dll
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\FundGrid.Repository.pdb
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.dll
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\Fundgrid.Data.dll
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\FunGrid.Domain.dll
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\Fundgrid.Data.pdb
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\FunGrid.Domain.pdb
+F:\SolutionServer\fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.xml
+F:\SolutionServer\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.dll
+F:\SolutionServer\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.pdb
+F:\SolutionServer\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.csprojResolveAssemblyReference.cache

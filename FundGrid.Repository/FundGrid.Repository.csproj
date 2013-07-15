@@ -56,9 +56,9 @@
       <Project>{4c185630-6016-4052-b9a6-c5249c6767d7}</Project>
       <Name>Fundgrid.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FunGrid.Domain\FunGrid.Domain.csproj">
+    <ProjectReference Include="..\FunGrid.Domain\FundGrid.Domain.csproj">
       <Project>{574d4bd8-b62d-46f7-88f8-94aa60f1c6ea}</Project>
-      <Name>FunGrid.Domain</Name>
+      <Name>FundGrid.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

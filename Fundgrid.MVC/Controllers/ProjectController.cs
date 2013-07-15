@@ -26,6 +26,7 @@ namespace Fundgrid.MVC.Controllers
                 Description = project.Description,
                 Name = project.Name
             }));
+
             return View(projectModels);          
         }
 

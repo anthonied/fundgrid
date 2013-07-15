@@ -39,9 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,9 +75,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -116,6 +119,12 @@
     <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="UserAuthentication.Domain, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\UserAuthentication.0.0.2\lib\UserAuthentication.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="UserAuthentication.Repository, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\UserAuthentication.0.0.2\lib\UserAuthentication.Repository.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -328,9 +337,9 @@
       <Project>{7be3c84d-57c5-4a15-8927-5c3fc03b25d9}</Project>
       <Name>FundGrid.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FunGrid.Domain\FunGrid.Domain.csproj">
+    <ProjectReference Include="..\FunGrid.Domain\FundGrid.Domain.csproj">
       <Project>{574d4bd8-b62d-46f7-88f8-94aa60f1c6ea}</Project>
-      <Name>FunGrid.Domain</Name>
+      <Name>FundGrid.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
