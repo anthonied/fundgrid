@@ -49,7 +49,7 @@ namespace FundGrid.Repository
                                                DimensionRows = g.dimension_rows,
 
                                                InitialValue= g.item_value,
-                                               IncrementValue= g.increment_value
+                                               IncrementValue= g.increment_value,
                                                GridItems = new List<List<GridItem>>()
                                            }).FirstOrDefault();
 
