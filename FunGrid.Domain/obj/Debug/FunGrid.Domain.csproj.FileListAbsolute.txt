@@ -8,3 +8,8 @@ C:\Development\Projects\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
 C:\Development\Projects\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.csprojResolveAssemblyReference.cache
 C:\Development\Projects\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
 C:\Development\Projects\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb
+F:\SolutionServer\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.dll
+F:\SolutionServer\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
+F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\ResolveAssemblyReference.cache
+F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
+F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb

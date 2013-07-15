@@ -47,11 +47,11 @@ namespace FundGrid.Repository
                                                Id = g.id,
                                                DimensionColumns = g.dimension_column,
                                                DimensionRows = g.dimension_rows,
-
+                                               GridItems = new List<List<GridItem>>()
                                            }).FirstOrDefault();
 
                 if (selectedProject.Grid == null) return selectedProject;
-                selectedProject.Grid.GridItems = (from gi in model.grid_item
+                var existingGridItems = (from gi in model.grid_item
                                                   where gi.grid_id == selectedProject.Grid.Id
                                                   select new GridItem
                                                   {
@@ -60,6 +60,7 @@ namespace FundGrid.Repository
                                                       Amount = gi.amount,
                                                       Number = gi.number,
                                                   }).ToList();
+                selectedProject.Grid.FillGrid(existingGridItems);
                 return selectedProject;
             }
         }
@@ -74,7 +75,6 @@ namespace FundGrid.Repository
 
                 editProject.name = name;
                 editProject.description = description;
-
                 model.SaveChanges();
             }
         }
@@ -83,10 +83,11 @@ namespace FundGrid.Repository
         {
             using(var model = new fundgridEntities())
             {
-                var newProject = new Fundgrid.Data.project();                
-                newProject.name = project.Name;
-                newProject.description = project.Description;
-
+                var newProject = new Fundgrid.Data.project() 
+                                { 
+                                    name = project.Name,
+                                    description = project.Description,
+                                };                
                 model.projects.Add(newProject);
                 model.SaveChanges();
             }

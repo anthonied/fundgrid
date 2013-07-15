@@ -8,3 +8,12 @@ C:\Development\Projects\fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.pdb
 C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.csprojResolveAssemblyReference.cache
 C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.dll
 C:\Development\Projects\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.pdb
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.dll
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\FundGrid.Tests.pdb
+F:\SolutionServer\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.csprojResolveAssemblyReference.cache
+F:\SolutionServer\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.dll
+F:\SolutionServer\fundgrid\FundGrid.Tests\obj\Debug\FundGrid.Tests.pdb
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\FunGrid.Domain.dll
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\nunit.framework.dll
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\FunGrid.Domain.pdb
+F:\SolutionServer\fundgrid\FundGrid.Tests\bin\Debug\nunit.framework.xml
