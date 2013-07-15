@@ -31,23 +31,21 @@ namespace FundGrid.Tests
             Assert.That(item.IsAvailible, Is.True);
         }
         [Test]
-        public void GridFilledNoDataFromDB()
+        public void GridFilledNoData()
         {
-            Grid grid = new Grid() { DimensionColumns = 4, DimensionRows = 6, Id = 12, IncrementValue = 10, InitialValue = 10};
+            Grid grid = new Grid() { DimensionColumns = 4, DimensionRows = 6, Id = 12, IncrementValue = 10, InitialValue = 10, ExistingGridItems = new List<GridItem>()};
             List<GridItem> ExistingGridItems = new List<GridItem>();
-            grid.FillGrid(ExistingGridItems);
             Assert.That(grid.ItemCount, Is.EqualTo(24));
         }
         [Test]
-        public void GridFilledCorrectlyWithDataFromDB()
+        public void GridFilledCorrectlyWithData()
         {
-            Grid grid = new Grid() { DimensionColumns = 4, DimensionRows = 6, Id = 12, IncrementValue = 10, InitialValue = 10 };
-            grid.FillGrid(_ExistingGridItems);
-            Assert.That(grid.GridItems[0][3].Number, Is.EqualTo(4));
-            Assert.That(grid.GridItems[0][5].Number, Is.EqualTo(6));
-            Assert.That(grid.GridItems[1][1].Number, Is.EqualTo(8));
-            Assert.That(grid.GridItems[1][2].Number, Is.EqualTo(9));
-            Assert.That(grid.GridItems[3][5].Number, Is.EqualTo(24));
+            Grid grid = new Grid() { DimensionColumns = 4, DimensionRows = 6, Id = 12, IncrementValue = 10, InitialValue = 10, ExistingGridItems = _ExistingGridItems };
+            Assert.That(grid.FullGridItems[0][3].Number, Is.EqualTo(4));
+            Assert.That(grid.FullGridItems[0][5].Number, Is.EqualTo(6));
+            Assert.That(grid.FullGridItems[1][1].Number, Is.EqualTo(8));
+            Assert.That(grid.FullGridItems[1][2].Number, Is.EqualTo(9));
+            Assert.That(grid.FullGridItems[3][5].Number, Is.EqualTo(24));
         }
     }
 }

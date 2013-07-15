@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Fundgrid.Data;
 using FunGrid.Domain;
 using FunGrid.Domain.Interfaces;
@@ -50,11 +49,10 @@ namespace FundGrid.Repository
 
                                                InitialValue= g.item_value,
                                                IncrementValue= g.increment_value,
-                                               GridItems = new List<List<GridItem>>()
                                            }).FirstOrDefault();
 
                 if (selectedProject.Grid == null) return selectedProject;
-                var existingGridItems = (from gi in model.grid_item
+                selectedProject.Grid.ExistingGridItems = (from gi in model.grid_item
                                                   where gi.grid_id == selectedProject.Grid.Id
                                                   select new GridItem
                                                   {
@@ -63,7 +61,6 @@ namespace FundGrid.Repository
                                                       Amount = gi.amount,
                                                       Number = gi.number,
                                                   }).ToList();
-                selectedProject.Grid.FillGrid(existingGridItems);
                 return selectedProject;
             }
         }

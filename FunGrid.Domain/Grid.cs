@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FunGrid.Domain
 {
@@ -10,7 +9,34 @@ namespace FunGrid.Domain
         public int Id { get; set; }
         public int? DimensionRows { get; set; }
         public int? DimensionColumns { get; set; }
-        public List<List<GridItem>> GridItems { get; set; }
+        public List<List<GridItem>> FullGridItems 
+        {
+            get
+            {
+                return CreateFullGrid();
+            }
+        }
+        private List<List<GridItem>> CreateFullGrid()
+        {
+            int number = 1;
+            var fullGridItems = new List<List<GridItem>>();
+            for (int i = 0; i < DimensionColumns; i++)
+            {
+                fullGridItems.Add(new List<GridItem>());
+                for (int j = 0; j < DimensionRows; j++)
+                {
+                    fullGridItems[i].Add(new GridItem() { Id = 0, Number = number });
+                    ExistingGridItems.ForEach(gridItem =>
+                    {
+                        if (gridItem.Number == (number))
+                            fullGridItems[i][j] = gridItem;
+                    });
+                    number += 1;
+                }
+            }
+            return fullGridItems;
+        }
+        public List<GridItem> ExistingGridItems { set; private get; }
         public decimal? InitialValue { get; set; }
         public decimal? IncrementValue { get; set; }
         public int ItemCount
@@ -18,27 +44,8 @@ namespace FunGrid.Domain
             get
             {
                 int count = 0;
-                GridItems.ForEach(gridItemList => count += gridItemList.Count);
+                FullGridItems.ForEach(gridItemList => count += gridItemList.Count);
                 return count;
-            }
-        }
-        public void FillGrid(List<GridItem> existingGridItems)
-        {
-            int number = 1;
-            GridItems = new List<List<GridItem>>();
-            for (int i = 0; i < DimensionColumns; i++)
-            {
-                GridItems.Add(new List<GridItem>());
-                for (int j = 0; j < DimensionRows; j++)
-                {
-                    GridItems[i].Add(new GridItem() { Id = 0, Number = number });
-                    existingGridItems.ForEach(gridItem =>
-                                        {
-                                            if (gridItem.Number == (number))
-                                                GridItems[i][j] = new GridItem(gridItem);
-                                        });
-                    number += 1;
-                }
             }
         }
     }
