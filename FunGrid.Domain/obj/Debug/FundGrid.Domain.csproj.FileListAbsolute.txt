@@ -3,3 +3,7 @@ F:\SolutionServer\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
 F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
 F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb
 F:\SolutionServer\fundgrid\FunGrid.Domain\obj\Debug\FundGrid.Domain.csprojResolveAssemblyReference.cache
+C:\Develop\FundGrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.dll
+C:\Develop\FundGrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
+C:\Develop\FundGrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
+C:\Develop\FundGrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb

@@ -49,7 +49,8 @@
               <tbody data-bind="foreach: gridItemsRows">
                   
                   <tr data-bind="foreach: gridItemColumns">
-                    <td data-bind="text:  $data, click: DoStuff, me:this"></td>
+                    @*<td data-bind="text:  $data, click: DoStuff, me:this"></td>*@
+                      <td data-bind="disable: isdisable, text:  price, click: DoStuff, selectedGridItem:this, data: $data"></td>
                   </tr>
               </tbody>
           </table>
@@ -85,26 +86,31 @@
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
         
-        if(viewModel.Grid != null)
+        if (viewModel.Grid != null)
         {
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
             var ginitialvalue = viewModel.Grid.InitialValue;
             var gincrementvalue = viewModel.Grid.IncrementValue;
 
             self.gridItemsRows = ko.observableArray();
-            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
-            {
+            //for (var i = 0; i < viewModel.Grid.DimensionRows; i++) {
+            //    var gridItemColumns = ko.observableArray();
+            //    for (var j = 0; j < viewModel.Grid.DimensionColumns; j++) {
+            //        gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
+            //    }
+            //    self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
+            //}
+
+            for (var i = 0; i < viewModel.Grid.DimensionRows; i++) {
                 var gridItemColumns = ko.observableArray();
-                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
-                {
-                    gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
+                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++) {
+                    gridItemColumns.push({ price: viewModel.Grid.FullGridItems[i][j].Amount, count: viewModel.Grid.FullGridItems[i][j].Number, isdisable: viewModel.Grid.FullGridItems[i][j].IsAvailable });
+                    }
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
-                
-                
-            
         }
+
         DoStuff = function (me)
         {
             alert(me);

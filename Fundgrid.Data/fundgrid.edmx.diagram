@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="11.131499530343106" PointY="14.116641155498401" />
-        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="10.196527198979878" PointY="27.555784640626882" />
-        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="7.2891015407112905" PointY="2.7249696416430966" />
+        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="7.1498669810359683" PointY="0.6534312519493658" />
+        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="3.6187643537385226" PointY="0.87048880796436634" />
+        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="2.0585214020956872" PointY="18.191612520344375" />
         <AssociationConnector Association="fundgridModel.FK_grid_item_grid" />
         <AssociationConnector Association="fundgridModel.FK_grid_projects" />
       </Diagram>
