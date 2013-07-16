@@ -50,7 +50,7 @@
                   
                   <tr data-bind="foreach: gridItemColumns">
                     @*<td data-bind="text:  $data, click: DoStuff, me:this"></td>*@
-                      <td data-bind="disable: isdisable, text:  price, click: DoStuff, me:this, selectedGridItem:this, data: $data, style: { color: isdisable == true ? 'lightgrey' : 'black' }"></td>
+                      <td data-bind="disable: isdisable, text:  price, click: BuyGridItem, gridDonationItem:this, selectedGridItem:this, data: $data, style: { color: isdisable == true ? 'lightgrey' : 'black' }"></td>
                   </tr>
               </tbody>
           </table>
@@ -76,7 +76,7 @@
     //    self.Amount = ko.observable();
     //    self.IsAvailable = ko.observable();
     //}
-    //////////////////////////////////////////
+    ///////////////////////////////////////////
 
     FullGridItemViewModel = function () {
         var self = this;
@@ -108,9 +108,9 @@
         }
     }
 
-        DoStuff = function (me)
+    DoStuff = function (gridDonationItem)
         {
-            alert(me);
+        alert("Number: " + gridDonationItem.count + ", Amount: " + gridDonationItem.price);
         }
 
         CreateGrid = function ()
@@ -118,9 +118,9 @@
             $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
         }
 
-        BuyGridItem = function()
+        BuyGridItem = function (gridDonationItem)
         {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number, gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount }, function () { location.reload() });
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: gridDonationItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: gridDonationItem.price }, function () { location.reload() });
             ownerInputTextbox.value = "";
         }
 
