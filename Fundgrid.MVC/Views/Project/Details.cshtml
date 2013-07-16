@@ -50,7 +50,7 @@
                   
                   <tr data-bind="foreach: gridItemColumns">
                     @*<td data-bind="text:  $data, click: DoStuff, me:this"></td>*@
-                      <td data-bind="disable: isdisable, text:  price, click: DoStuff, me:this, selectedGridItem:this, data: $data"></td>
+                      <td data-bind="disable: isdisable, text:  price, click: DoStuff, me:this, selectedGridItem:this, data: $data, style: { color: isdisable == true ? 'lightgrey' : 'black' }"></td>
                   </tr>
               </tbody>
           </table>
