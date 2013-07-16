@@ -60,7 +60,7 @@ namespace FundGrid.Repository
                                                       Owner = gi.owner,
                                                       Amount = gi.amount,
                                                       Number = gi.number,
-                                                  }).ToList();
+                                                  }).OrderBy(grid => grid.Number).ToList();
                 return selectedProject;
             }
         }

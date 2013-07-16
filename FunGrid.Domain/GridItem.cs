@@ -21,9 +21,9 @@ namespace FunGrid.Domain
             set
             {
                 if (Id != null || Id != 0)
-                    _isAvailable = true;
-                else
                     _isAvailable = false;
+                else
+                    _isAvailable = true;
             }
         }
     }

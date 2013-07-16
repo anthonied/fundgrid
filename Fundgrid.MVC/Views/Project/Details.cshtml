@@ -49,7 +49,7 @@
               <tbody data-bind="foreach: gridItemsRows">
                   
                   <tr data-bind="foreach: gridItemColumns">
-                    <td data-bind="text:  $data, click: DoStuff, me:this"></td>
+                    <td data-bind="disable: isdisable, text:  price, click: BuyGridItem, selectedGridItem:this, data: $data"></td>
                   </tr>
               </tbody>
           </table>
@@ -81,55 +81,36 @@
         var self = this;
         self.row = ko.observable(0);
         self.column = ko.observable(0);
-        self.gridItems = ko.observableArray();
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
         
         if(viewModel.Grid != null)
         {
-            var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
-            var ginitialvalue = viewModel.Grid.InitialValue;
-            var gincrementvalue = viewModel.Grid.IncrementValue;
+            
+        }
+    }
 
-            self.gridItemsRows = ko.observableArray();
-            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
-            {
-                var gridItemColumns = ko.observableArray();
-                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
-                {
-                    gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
-                }
-                self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
-            }
-                
-        }
-        DoStuff = function (me)
-        {
-            alert(me);
-        }
+    CreateGrid = function ()
+    {
+        $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
+    }
 
-        CreateGrid = function ()
-        {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
-        }
+    BuyGridItem = function (selectedGridItem)
+    {
+        $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }, function () { location.reload() });
+        ownerInputTextbox.value = "";
+    }
 
-        BuyGridItem = function()
-        {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number, gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount }, function () { location.reload() });
-            ownerInputTextbox.value = "";
-        }
+    DeleteGrid = function()
+    {
+        $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
+        ReloadThePage();
+    }
 
-        DeleteGrid = function()
-        {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
-            ReloadThePage();
-        }
-
-        ReloadThePage = function ()
-        {
-            document.location.reload();
-        }
-    };
+    ReloadThePage = function ()
+    {
+        document.location.reload();
+    }
     
     ko.applyBindings(new GridViewModel());
 
