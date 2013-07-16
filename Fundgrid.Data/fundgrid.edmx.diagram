@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="7.1498669810359683" PointY="0.6534312519493658" />
-        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="3.6187643537385226" PointY="0.87048880796436634" />
-        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="2.0585214020956872" PointY="18.191612520344375" />
+      <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1" ZoomLevel="10">
+        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="10.692718427019528" PointY="12.459112948020508" />
+        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="7.4840806794744363" PointY="0.84367297629065485" />
+        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="2.79353956076947" PointY="28.780213294914091" />
         <AssociationConnector Association="fundgridModel.FK_grid_item_grid" />
         <AssociationConnector Association="fundgridModel.FK_grid_projects" />
       </Diagram>

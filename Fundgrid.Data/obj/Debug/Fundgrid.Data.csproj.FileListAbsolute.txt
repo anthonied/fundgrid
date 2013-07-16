@@ -21,3 +21,4 @@ F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
 F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
 F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb
 F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
+C:\Develop\FundGrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
