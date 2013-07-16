@@ -20,13 +20,5 @@ namespace FunGrid.Domain
                 return false;
             }
         }
-        public GridItem() { }
-        public GridItem(GridItem parameter)
-        {
-            Id = parameter.Id;
-            Number = parameter.Number;
-            Owner = parameter.Owner;
-            Amount = parameter.Amount;
-        }
     }
 }
