@@ -57,11 +57,18 @@ namespace Fundgrid.MVC.Controllers
             return View(project);
         }
 
-        public ActionResult Archive(int id)
+        public ActionResult ArchiveProject(int id)
         {
-            var project = _projectRepository.GetProjects(id, Status.archived);
+            var project = _projectRepository.GetProjectByGridId(id, Status.archived);
             return View(project);
         }
+
+        public ActionResult Archive(int id)
+        {
+            var archivedGrids = _projectRepository.GetArchivedGridsForProject(id);
+            return View(archivedGrids);
+        }
+
 
         [HttpPost]
         public ActionResult Create(string name, string description)

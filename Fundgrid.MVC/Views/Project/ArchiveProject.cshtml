@@ -1,0 +1,98 @@
+﻿@model FunGrid.Domain.Project
+<script src="~/Scripts/knockout-2.2.1.js"></script>
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+
+
+
+@{
+    ViewBag.Title = "Details";
+}
+    <h1 style="background-color:#FFFF66;">ARCHIVED:</h1>
+    
+
+    <tag><fieldset>
+        <legend>Project: @Html.DisplayFor(model => model.Name)</legend>
+        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+                
+        @if (Model.Grid == null)
+        {
+            <table>
+            <tr>
+                There is no grids archived.
+            </tr> 
+            </table>
+        }
+    
+        @if (Model.Grid != null)
+        {
+        <table id="displayTabel2" border="0" class="grid" >
+
+              <tbody data-bind="foreach: gridItemsRows">
+                  
+                  <tr data-bind="foreach: gridItemColumns">
+                      <td>
+                        <input type="button" style="width:100%" data-bind="disable: isdisabled, value:  price, click: ViewDetails, data: $data, style: {color: isdisabled == true ? 'lightgray' : 'black' }"/>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+        }
+        <input type="button" value="Delete" data-bind="click: DeleteGrid" />
+        <p>@Html.ActionLink("Back to List", "Index")</p>
+    </fieldset></tag>
+    
+
+<script>
+
+    var viewModel = @(Html.Raw(Json.Encode(Model)))
+
+
+
+    GridItemViewModel = function () {
+        var self = this;
+        self.Id = ko.observable();
+        self.Number = ko.observable();
+        self.Owner = ko.observable();
+        self.Amount = ko.observable();
+        self.IsAvailable = ko.observable();
+    };
+
+
+    GridViewModel = function () {
+        var self = this;
+        self.row = ko.observable(0);
+        self.column = ko.observable(0);
+        self.gridvalue = ko.observable(0);
+        self.gridincrementalvalue = ko.observable(0);
+
+        if (viewModel.Grid != null)
+        {
+            self.gridItemsRows = ko.observableArray();
+            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            {
+                var gridItemColumns = ko.observableArray();
+                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+                {
+                    gridItemColumns.push({ price: viewModel.Grid.FullGridItems[i][j].Amount, count: viewModel.Grid.FullGridItems[i][j].Number, owner: viewModel.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Grid.FullGridItems[i][j].IsAvailible });
+                }
+                self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
+            }
+        }
+
+        DeleteGrid = function () {
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
+            ReloadThePage();
+        }
+
+        ReloadThePage = function () {
+            document.location.reload();
+        }
+
+        ViewDetails = function (data) {
+            alert(data.owner + " bought item " + data.count + " at R" + data.price );
+        }
+    };
+
+    ko.applyBindings(new GridViewModel());
+
+</script>

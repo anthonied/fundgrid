@@ -24,7 +24,69 @@ namespace FundGrid.Repository
 
                 return projects;
             }
-        }   
+        }
+
+
+
+        public Project GetProjectByGridId(int gridId, Status status)
+        {
+            Project selectedProject;
+            string currentStatus = status.ToString();
+            using (var model = new fundgridEntities())
+            {
+                var archivedGridProjectId = (from g in model.grids
+                                             where g.id == gridId
+                                              && g.status == currentStatus
+                                             select g.project_id).SingleOrDefault();
+
+                selectedProject = GetProjectsWithSpesificGrid((int)archivedGridProjectId, gridId, status);
+            }
+            return selectedProject;
+        }
+
+        private Project GetProjectsWithSpesificGrid(int archivedGridProjectId, int gridId, Status status)
+        {
+            string currentStatus = status.ToString();
+            using (var model = new fundgridEntities())
+            {
+                var selectedProject = (from p in model.projects
+                                       where p.id == archivedGridProjectId
+                                       select new Project
+                                       {
+                                           Id = p.id,
+                                           Name = p.name,
+                                           Description = p.description
+                                       }).FirstOrDefault();
+
+                selectedProject.Grid = (from g in model.grids
+                                        where g.project_id == archivedGridProjectId
+                                        && g.id == gridId
+                                        && g.status == currentStatus
+                                        select new Grid
+                                        {
+                                            Id = g.id,
+                                            DimensionColumns = g.dimension_column,
+                                            DimensionRows = g.dimension_rows,
+                                            InitialValue = g.item_value,
+                                            GridStatus = status,
+                                            IncrementValue = g.increment_value,
+                                        }).FirstOrDefault();
+
+
+                if (selectedProject.Grid == null) return selectedProject;
+                selectedProject.Grid.ExistingGridItems = (from gi in model.grid_item
+                                                          where gi.grid_id == selectedProject.Grid.Id
+                                                          select new GridItem
+                                                          {
+                                                              Id = gi.id,
+                                                              Owner = gi.owner,
+                                                              Amount = gi.amount,
+                                                              Number = gi.number,
+                                                          }).ToList();
+                return selectedProject;
+
+            }
+        }
 
         public Project GetProjects(int searchId, Status status)
         {
@@ -65,6 +127,41 @@ namespace FundGrid.Repository
                                                       Number = gi.number,
                                                   }).ToList();
                 return selectedProject;
+            }
+        }
+
+        public List<Grid> GetArchivedGridsForProject(int searchId)
+        {
+            string currentStatus = Status.archived.ToString();
+            using (var model = new fundgridEntities())
+            {
+
+                var archivedGrids = (from g in model.grids
+                                     where g.project_id == searchId
+                                     && g.status == currentStatus
+                                     select new Grid
+                                     {
+                                         Id = g.id,
+                                         DimensionColumns = g.dimension_column,
+                                         DimensionRows = g.dimension_rows,
+                                         InitialValue = g.item_value,
+                                         GridStatus = Status.archived,
+                                         IncrementValue = g.increment_value,
+                                     }).ToList<Grid>();
+                foreach (var grid in archivedGrids)
+                {
+                    grid.ExistingGridItems = (from gi in model.grid_item
+                                                              where gi.grid_id == grid.Id
+                                                              select new GridItem
+                                                              {
+                                                                  Id = gi.id,
+                                                                  Owner = gi.owner,
+                                                                  Amount = gi.amount,
+                                                                  Number = gi.number,
+                                                              }).ToList();
+                }
+
+                return archivedGrids;
             }
         }
 
