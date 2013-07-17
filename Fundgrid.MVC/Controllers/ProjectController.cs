@@ -33,7 +33,7 @@ namespace Fundgrid.MVC.Controllers
        
         public ActionResult Edit(int id)
         {
-            var project = _projectRepository.GetProjectById(id);
+            var project = _projectRepository.GetProjects(id, Status.active);
 
             var projectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
             return View(projectModel);
@@ -53,7 +53,13 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var project = _projectRepository.GetProjectById(id);
+            var project = _projectRepository.GetProjects(id, Status.active);
+            return View(project);
+        }
+
+        public ActionResult Archive(int id)
+        {
+            var project = _projectRepository.GetProjects(id, Status.archived);
             return View(project);
         }
 
@@ -94,7 +100,16 @@ namespace Fundgrid.MVC.Controllers
         public ActionResult DeleteGrid(int gridId)
         {
             _projectRepository.RemoveGrid(gridId);
-            return RedirectToAction("Details");
+            return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult ArchiveGrid(int gridId)
+        {
+            _projectRepository.ArchiveGrid(gridId);
+            return RedirectToAction("Index");
+        }
+
+        
     }
 }

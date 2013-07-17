@@ -50,7 +50,7 @@ namespace FundGrid.Repository
             };
 
 
-        public Project GetProjectById(int searchId)
+        public Project GetActiveProjects(int searchId)
         {
             var selectedProject = _dummyProjects.Find(project => project.Id == searchId);
             return selectedProject;
@@ -89,6 +89,12 @@ namespace FundGrid.Repository
         }
 
         public void RemoveProject(int removeId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Project GetProjects(int searchId, Status status)
         {
             throw new NotImplementedException();
         }

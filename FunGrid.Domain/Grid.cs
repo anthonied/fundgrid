@@ -9,7 +9,7 @@ namespace FunGrid.Domain
         public int Id { get; set; }
         public int? DimensionRows { get; set; }
         public int? DimensionColumns { get; set; }
-        public List<List<GridItem>> FullGridItems 
+        public List<List<GridItem>> FullGridItems
         {
             get
             {
@@ -20,12 +20,12 @@ namespace FunGrid.Domain
         {
             int number = 1;
             var fullGridItems = new List<List<GridItem>>();
-            for (int i = 0; i < DimensionColumns; i++)
+            for (int i = 0; i < DimensionRows; i++)
             {
                 fullGridItems.Add(new List<GridItem>());
-                for (int j = 0; j < DimensionRows; j++)
+                for (int j = 0; j < DimensionColumns; j++)
                 {
-                    fullGridItems[i].Add(new GridItem() { Id = 0, Number = number });
+                    fullGridItems[i].Add(new GridItem() { Id = 0, Number = number, Amount = GetAmount(number) });
                     ExistingGridItems.ForEach(gridItem =>
                     {
                         if (gridItem.Number == (number))
@@ -36,6 +36,12 @@ namespace FunGrid.Domain
             }
             return fullGridItems;
         }
+
+        private decimal? GetAmount(int number)
+        {
+            return (InitialValue + (IncrementValue * (number - 1)));
+        }
+
         public List<GridItem> ExistingGridItems { set; private get; }
         public decimal? InitialValue { get; set; }
         public decimal? IncrementValue { get; set; }
@@ -48,5 +54,6 @@ namespace FunGrid.Domain
                 return count;
             }
         }
+        public Status GridStatus {get;set; }
     }
 }

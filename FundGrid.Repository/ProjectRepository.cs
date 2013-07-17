@@ -26,12 +26,13 @@ namespace FundGrid.Repository
             }
         }   
 
-        public Project GetProjectById(int searchId)
+        public Project GetProjects(int searchId, Status status)
         {
+            string currentStatus = status.ToString();
             using (var model = new fundgridEntities())
             {
                 var selectedProject = (from p in model.projects
-                                      where p.id == searchId
+                                      where p.id == searchId                                      
                                       select new Project
                                       {
                                           Id = p.id,
@@ -41,15 +42,17 @@ namespace FundGrid.Repository
 
                 selectedProject.Grid = (from g in model.grids
                                            where g.project_id == searchId
+                                           && g.status == currentStatus
                                            select new Grid
                                            {
                                                Id = g.id,
                                                DimensionColumns = g.dimension_column,
                                                DimensionRows = g.dimension_rows,
-
                                                InitialValue= g.item_value,
+                                               GridStatus = status,
                                                IncrementValue= g.increment_value,
                                            }).FirstOrDefault();
+               
 
                 if (selectedProject.Grid == null) return selectedProject;
                 selectedProject.Grid.ExistingGridItems = (from gi in model.grid_item
@@ -94,7 +97,7 @@ namespace FundGrid.Repository
         }
 
 
-        public bool CreateNewGrid(int projectId, int columns, int rows, decimal itemValue, decimal incrementValue)
+        public bool CreateNewGrid(int projectId, int rows, int columns, decimal itemValue, decimal incrementValue)
         {
             int result;
             using (var model = new fundgridEntities())
@@ -106,7 +109,8 @@ namespace FundGrid.Repository
                     dimension_rows = rows,
                     dimension_column = columns,
                     item_value = itemValue,
-                    increment_value = incrementValue
+                    increment_value = incrementValue,
+                    status = Status.active.ToString()
                 };
                 model.grids.Add(selectedGrid);
                 result = model.SaveChanges();
@@ -192,6 +196,17 @@ namespace FundGrid.Repository
 
         }
 
+        public void ArchiveGrid(int gridId)
+        {            
+            using (var model = new fundgridEntities())
+            {
+                var gridToArchive = (from g in model.grids
+                                  where g.id == gridId
+                                  select g).FirstOrDefault();
+                gridToArchive.status = Status.archived.ToString();
+                model.SaveChanges();
+            }
+        }
         private void removeGridItems(int gridId)
         {
             using (var model = new fundgridEntities())

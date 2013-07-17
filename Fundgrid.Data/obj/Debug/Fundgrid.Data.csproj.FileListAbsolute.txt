@@ -10,7 +10,6 @@ C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.pdb
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
-C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
 C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb
 C:\Develop\FundGrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache

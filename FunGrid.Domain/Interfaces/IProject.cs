@@ -9,7 +9,7 @@ namespace FunGrid.Domain.Interfaces
     public interface IProject
     {
         List<Project> GetAllProjects();
-        Project GetProjectById(int searchId);
+        Project GetProjects(int searchId, Status status);
         void EditProject(int id, string name, string description);
         void CreateNewProject(Project project);
         void RemoveProject(int removeId);

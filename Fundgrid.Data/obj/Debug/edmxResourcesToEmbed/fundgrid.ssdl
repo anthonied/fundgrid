@@ -25,6 +25,7 @@
     <Property Name="project_id" Type="int" />
     <Property Name="item_value" Type="decimal" Scale="2" />
     <Property Name="increment_value" Type="decimal" Scale="2" />
+    <Property Name="status" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="grid_item">
     <Key>

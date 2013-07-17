@@ -47,5 +47,6 @@ namespace FundGrid.Tests
             Assert.That(grid.FullGridItems[1][2].Number, Is.EqualTo(9));
             Assert.That(grid.FullGridItems[3][5].Number, Is.EqualTo(24));
         }
+
     }
 }
