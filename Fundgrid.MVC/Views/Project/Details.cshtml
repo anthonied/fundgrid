@@ -44,14 +44,15 @@
          <p>Owner Name:</p>
         <input id="ownerInputTextbox" size="16" type="text"/>
 
+            
         <table id="displayTabel2" border="1" class="grid" >
 
               <tbody data-bind="foreach: gridItemsRows">
-                  
                   <tr data-bind="foreach: gridItemColumns">
                     <td data-bind="text:  $data, click: DoStuff, me:this"></td>
                   </tr>
               </tbody>
+
           </table>
         }
         <input type="button" value="Delete" data-bind="click: DeleteGrid" />
@@ -63,9 +64,7 @@
     
     var viewModel = @(Html.Raw(Json.Encode(Model)))
 
-    
-    
-    GridItemViewModel = function()
+    GridItemViewModel = function ()
     {
         var self = this;
         self.Id = ko.observable();
@@ -74,7 +73,6 @@
         self.Amount = ko.observable();
         self.IsAvailable = ko.observable();
     };
-    
     
     GridViewModel = function ()
     {
@@ -87,24 +85,36 @@
         
         if(viewModel.Grid != null)
         {
+            
             var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
             var ginitialvalue = viewModel.Grid.InitialValue;
             var gincrementvalue = viewModel.Grid.IncrementValue;
+            
+            alert(viewModel.Grid.FullGridItems.length);
 
             self.gridItemsRows = ko.observableArray();
-            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            for (var i = 0; i < viewModel.Grid.FullGridItems.length; i++)
             {
                 var gridItemColumns = ko.observableArray();
-                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+                for (var j = 0; j < viewModel.Grid.FullGridItems[i].length; j++)
                 {
                     gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
-            }
-                
-                
+            } 
             
+            //self.gridItemsRows = ko.observableArray();
+            //for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            //{
+            //    var gridItemColumns = ko.observableArray();
+            //    for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+            //    {
+            //        gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
+            //    }
+            //    self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
+            //}            
         }
+
         DoStuff = function (me)
         {
             alert(me);

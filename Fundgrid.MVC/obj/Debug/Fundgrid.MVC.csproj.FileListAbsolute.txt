@@ -182,3 +182,7 @@ F:\SolutionServer\fundgrid\Fundgrid.MVC\bin\log4net.xml
 F:\SolutionServer\fundgrid\Fundgrid.MVC\obj\Debug\Fundgrid.MVC.dll
 F:\SolutionServer\fundgrid\Fundgrid.MVC\obj\Debug\Fundgrid.MVC.pdb
 F:\SolutionServer\fundgrid\Fundgrid.MVC\obj\Debug\Fundgrid.MVC.csprojResolveAssemblyReference.cache
+C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\log4net.dll
+C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Domain.dll
+C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Repository.dll
+C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\log4net.xml
