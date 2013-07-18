@@ -7,3 +7,8 @@ C:\Development\Projects\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.dll
 C:\Development\Projects\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
 C:\Development\Projects\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
 C:\Development\Projects\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb
+C:\Develop\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.dll
+C:\Develop\fundgrid\FunGrid.Domain\bin\Debug\FunGrid.Domain.pdb
+C:\Develop\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.dll
+C:\Develop\fundgrid\FunGrid.Domain\obj\Debug\FunGrid.Domain.pdb
+C:\Develop\fundgrid\FunGrid.Domain\obj\Debug\FundGrid.Domain.csprojResolveAssemblyReference.cache

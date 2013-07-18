@@ -94,7 +94,7 @@ namespace FundGrid.Repository
         }
 
 
-        public Project GetProjects(int searchId, Status status)
+        public Project GetProject(int searchId, Status status)
         {
             throw new NotImplementedException();
         }

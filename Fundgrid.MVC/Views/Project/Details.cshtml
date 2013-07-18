@@ -12,8 +12,8 @@
     
 
     <fieldset>
-        <legend>Project: @Html.DisplayFor(model => model.Name)</legend>
-        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+        <p><font size="6">@Html.DisplayFor(model => model.Name)</font></p>
+        <p><font size="5">@Html.DisplayFor(model => model.Description)</font></p>
                 
         @if (Model.Grid == null)
         {
@@ -22,18 +22,32 @@
                 <th>Rows</th>
                 <td><input id="GridRows" type="text" data-bind="value: row"></td>
             </tr>
+
             <tr>
                 <th>Columns</th>
                 <td><input id="GridColumns" type="text" data-bind="value: column"></td>
             </tr> 
+
             <tr>
                 <th>Amount</th>
                 <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
             </tr>
+
             <tr>
                 <th>Incremental Value</th>
                 <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
             </tr>
+
+            <tr>
+                <th>Grid Name</th>
+                <td><input id="GridName" type="text" data-bind="value: gridname"></td>
+            </tr>
+
+            <tr>
+                <th>Grid Discription</th>
+                <td><input id="GridDescription" type="text" data-bind="value: griddescription"></td>
+            </tr>
+
             <tr>
                 <td></td>
                 <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
@@ -43,16 +57,18 @@
     
         @if (Model.Grid != null)
         {
-         <p>Owner Name:</p>
-        <input id="ownerInputTextbox" size="16" type="text"/>
-
+            <div>
+         <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
+        <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Grid.Description)</i></font></p>   
+                </div>
+            
         <table id="displayTabel2" border="0" class="grid" >
 
               <tbody data-bind="foreach: gridItemsRows">
                   
                   <tr data-bind="foreach: gridItemColumns">
                       <td>
-                        <input type="button" style="width:100%" data-bind="disable: isdisabled, value:  price, click: BuyGridItem, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
+                        <input type="button" style="width:100%" data-bind="disable: isdisabled, value:  price, click: ViewDetails, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
                      </td>
                   </tr>
               </tbody>
@@ -89,6 +105,8 @@
         self.column = ko.observable(0);
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
+        self.gridname = ko.observable("");
+        self.griddescription = ko.observable("");
 
         if (viewModel.Grid != null)
         {
@@ -98,7 +116,7 @@
                 var gridItemColumns = ko.observableArray();
                 for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
                 {
-                    gridItemColumns.push({ price: viewModel.Grid.FullGridItems[i][j].Amount, count: viewModel.Grid.FullGridItems[i][j].Number, isdisabled: !viewModel.Grid.FullGridItems[i][j].IsAvailible });
+                    gridItemColumns.push({ price: viewModel.Grid.FullGridItems[i][j].Amount, count: viewModel.Grid.FullGridItems[i][j].Number, owner: viewModel.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Grid.FullGridItems[i][j].IsAvailible });
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
@@ -109,22 +127,21 @@
         }
 
         CreateGrid = function () {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
-        }
-
-        BuyGridItem = function (selectedGridItem) {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }, function () { location.reload(true) });
-            ownerInputTextbox.value = "";
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { location.reload() });
         }
 
         DeleteGrid = function () {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
-            ReloadThePage();
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { location.reload() });
+            //ReloadThePage();
         }
 
         Archive = function () {
-            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id });
-            ReloadThePage();
+            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id }, function () { location.reload() });
+            //ReloadThePage();
+        }
+
+        ViewDetails = function (data) {
+            alert(data.owner + " bought item " + data.count + " at R" + data.price);
         }
 
         ReloadThePage = function () {

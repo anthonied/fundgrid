@@ -64,6 +64,8 @@ namespace FundGrid.Repository
                                         && g.status == currentStatus
                                         select new Grid
                                         {
+                                            Name = g.name,
+                                            Description = g.description,
                                             Id = g.id,
                                             DimensionColumns = g.dimension_column,
                                             DimensionRows = g.dimension_rows,
@@ -88,7 +90,7 @@ namespace FundGrid.Repository
             }
         }
 
-        public Project GetProjects(int searchId, Status status)
+        public Project GetProject(int searchId, Status status)
         {
             string currentStatus = status.ToString();
             using (var model = new fundgridEntities())
@@ -107,6 +109,8 @@ namespace FundGrid.Repository
                                            && g.status == currentStatus
                                            select new Grid
                                            {
+                                               Name = g.name,
+                                               Description = g.description,
                                                Id = g.id,
                                                DimensionColumns = g.dimension_column,
                                                DimensionRows = g.dimension_rows,
@@ -141,6 +145,8 @@ namespace FundGrid.Repository
                                      && g.status == currentStatus
                                      select new Grid
                                      {
+                                         Name = g.name,
+                                         Description = g.description,
                                          Id = g.id,
                                          DimensionColumns = g.dimension_column,
                                          DimensionRows = g.dimension_rows,
@@ -194,14 +200,15 @@ namespace FundGrid.Repository
         }
 
 
-        public bool CreateNewGrid(int projectId, int rows, int columns, decimal itemValue, decimal incrementValue)
+        public bool CreateNewGrid(int projectId, int rows, int columns, decimal itemValue, decimal incrementValue, string gridName, string gridDescription)
         {
             int result;
             using (var model = new fundgridEntities())
             {
                 var selectedGrid = new grid
                 {
-                    
+                    name = gridName,
+                    description = gridDescription,
                     project_id = projectId,
                     dimension_rows = rows,
                     dimension_column = columns,

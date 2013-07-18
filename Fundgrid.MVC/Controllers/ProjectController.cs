@@ -33,7 +33,7 @@ namespace Fundgrid.MVC.Controllers
        
         public ActionResult Edit(int id)
         {
-            var project = _projectRepository.GetProjects(id, Status.active);
+            var project = _projectRepository.GetProject(id, Status.active);
 
             var projectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
             return View(projectModel);
@@ -53,7 +53,7 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var project = _projectRepository.GetProjects(id, Status.active);
+            var project = _projectRepository.GetProject(id, Status.active);
             return View(project);
         }
 
@@ -65,8 +65,14 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Archive(int id)
         {
-            var archivedGrids = _projectRepository.GetArchivedGridsForProject(id);
-            return View(archivedGrids);
+            var selectedProject = _projectRepository.GetProject(id, Status.archived);
+            var gridModel = new GridModel();
+
+            gridModel.ProjectName = selectedProject.Name;
+            gridModel.ProjectDescription = selectedProject.Description;
+            gridModel.Grids = _projectRepository.GetArchivedGridsForProject(id);
+
+            return View(gridModel);
         }
 
 
@@ -89,9 +95,9 @@ namespace Fundgrid.MVC.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue, decimal incrementValue)
+        public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue, decimal incrementValue, string gridName, string gridDescription)
         {
-            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue, incrementValue);
+            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue, incrementValue, gridName, gridDescription);
             var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
             return new JsonResult { Data = data };
         }
@@ -117,6 +123,26 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        public ActionResult Donate()
+        {
+            var projectModels = new List<ProjectModel>();
+
+            var projects = _projectRepository.GetAllProjects();
+
+            projects.ForEach(project => projectModels.Add(new ProjectModel
+            {
+                Id = project.Id,
+                Description = project.Description,
+                Name = project.Name
+            }));
+
+            return View(projectModels);  
+        }
+
+        public ActionResult DonateDetails(int id)
+        {
+            var project = _projectRepository.GetProject(id, Status.active);
+            return View(project); 
+        }
     }
 }

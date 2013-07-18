@@ -6,6 +6,8 @@ namespace FunGrid.Domain
 {
     public class Grid
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int Id { get; set; }
         public int? DimensionRows { get; set; }
         public int? DimensionColumns { get; set; }
