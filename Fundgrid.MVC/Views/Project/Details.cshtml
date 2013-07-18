@@ -12,8 +12,8 @@
     
 
     <fieldset>
-        <legend>Project: @Html.DisplayFor(model => model.Name)</legend>
-        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+        <p><font size="6">@Html.DisplayFor(model => model.Name)</font></p>
+        <p><font size="5">@Html.DisplayFor(model => model.Description)</font></p>
                 
         @if (Model.Grid == null)
         {
@@ -57,6 +57,11 @@
     
         @if (Model.Grid != null)
         {
+            <div>
+         <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
+        <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Grid.Description)</i></font></p>   
+                </div>
+            
         <table id="displayTabel2" border="0" class="grid" >
 
               <tbody data-bind="foreach: gridItemsRows">

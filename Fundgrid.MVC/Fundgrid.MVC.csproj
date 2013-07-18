@@ -191,6 +191,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
@@ -356,9 +357,9 @@
     <Content Include="Views\Project\Delete.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\ArchiveProject.cshtml" />
-    <Content Include="Views\Project\Archive.cshtml" />
     <Content Include="Views\Project\Donate.cshtml" />
     <Content Include="Views\Project\DonateDetails.cshtml" />
+    <Content Include="Views\Project\Archive.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

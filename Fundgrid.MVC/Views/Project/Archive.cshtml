@@ -1,26 +1,28 @@
-﻿@model IEnumerable<FunGrid.Domain.Grid>
+﻿@model Fundgrid.MVC.Models.GridModel
 
 @{
     ViewBag.Title = "Archive";
 }
 
-<h2>Archive</h2>
-
+<h1 style="background-color:#FFCC00;">Archive</h1>
+<p><font size="5">Project Name : @Html.DisplayName(@Model.ProjectName)</font></p>
+<p><font size="3">Description : @Html.DisplayName(@Model.ProjectDescription)</font></p>
 <p>
     
 </p>
 <table>
     <tr>
         <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Grids) 
+{
     <tr>
         @*<td>
             Project
@@ -40,3 +42,7 @@
 }
 
 </table>
+<script>
+
+    var viewModel = @(Html.Raw(Json.Encode(Model)))
+</script>
