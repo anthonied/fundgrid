@@ -357,6 +357,8 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\ArchiveProject.cshtml" />
     <Content Include="Views\Project\Archive.cshtml" />
+    <Content Include="Views\Project\Donate.cshtml" />
+    <Content Include="Views\Project\DonateDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

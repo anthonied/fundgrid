@@ -186,3 +186,7 @@ C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\log4net.dll
 C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Domain.dll
 C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Repository.dll
 C:\Development\Projects\fundgrid\Fundgrid.MVC\bin\log4net.xml
+C:\Develop\fundgrid\Fundgrid.MVC\bin\log4net.dll
+C:\Develop\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Domain.dll
+C:\Develop\fundgrid\Fundgrid.MVC\bin\UserAuthentication.Repository.dll
+C:\Develop\fundgrid\Fundgrid.MVC\bin\log4net.xml

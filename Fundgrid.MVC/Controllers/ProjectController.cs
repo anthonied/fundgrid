@@ -117,6 +117,26 @@ namespace Fundgrid.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        public ActionResult Donate()
+        {
+            var projectModels = new List<ProjectModel>();
+
+            var projects = _projectRepository.GetAllProjects();
+
+            projects.ForEach(project => projectModels.Add(new ProjectModel
+            {
+                Id = project.Id,
+                Description = project.Description,
+                Name = project.Name
+            }));
+
+            return View(projectModels);  
+        }
+
+        public ActionResult DonateDetails(int id)
+        {
+            var project = _projectRepository.GetProjects(id, Status.active);
+            return View(project); 
+        }
     }
 }
