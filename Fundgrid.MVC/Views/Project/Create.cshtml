@@ -38,6 +38,20 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            busyViewModel.IsBusy(false);
+        });
     @Scripts.Render("~/bundles/jqueryval")
+        
+    </script>
 }
+@*@section scripts {
+	<script>
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
+}*@

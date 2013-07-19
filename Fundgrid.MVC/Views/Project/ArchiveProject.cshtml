@@ -101,3 +101,11 @@
     ko.applyBindings(new GridViewModel());
 
 </script>
+
+@section scripts {
+	<script>
+	    $(document).ready(function () {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
+}
