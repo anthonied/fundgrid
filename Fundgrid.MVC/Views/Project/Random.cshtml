@@ -1,0 +1,29 @@
+﻿@model Fundgrid.MVC.Models.GridModel
+
+@{
+    ViewBag.Title = "Random";
+}
+
+<h2>Random</h2>
+
+<fieldset>
+    <legend>GridModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectDescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

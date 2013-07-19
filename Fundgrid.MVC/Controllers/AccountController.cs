@@ -10,8 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Fundgrid.MVC.Filters;
 using Models;
-using Authentication;
-using Authentication.Repository;
+//using Authentication;
+//using Authentication.Repository;
 
 namespace Fundgrid.MVC.Controllers
 {
@@ -38,29 +38,29 @@ namespace Fundgrid.MVC.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public JsonResult RegisterNewAccount(string fullName, string email, string password)
-        {
-            FlatFileRepository accountRepository = new FlatFileRepository();
-            Object data = null;
-            if(accountRepository.RegisterNewAccount(fullName, email, password))
-                data = new { isOk = true, errorMessage = "No Error encountered" };
-            else
-                data = new { isOk = false, errorMessage = "TO DO" };
-            return new JsonResult { Data = data };
-        }
+        //[AllowAnonymous]
+        //public JsonResult RegisterNewAccount(string fullName, string email, string password)
+        //{
+        //    FlatFileRepository accountRepository = new FlatFileRepository();
+        //    Object data = null;
+        //    if (accountRepository.RegisterNewAccount(fullName, email, password))
+        //        data = new { isOk = true, errorMessage = "No Error encountered" };
+        //    else
+        //        data = new { isOk = false, errorMessage = "TO DO" };
+        //    return new JsonResult { Data = data };
+        //}
 
-        [AllowAnonymous]
-        public JsonResult CheckLogin(string fullName, string email, string password)
-        {
-            FlatFileRepository accountRepository = new FlatFileRepository();
-            Object data = null;
-            if (accountRepository.CheckLogin(fullName, email, password))
-                data = new { isOk = true, errorMessage = "No Error encountered" };
-            else
-                data = new { isOk = false, errorMessage = "TO DO" };
-            return new JsonResult { Data = data };
-        }
+        //[AllowAnonymous]
+        //public JsonResult CheckLogin(string fullName, string email, string password)
+        //{
+        //    FlatFileRepository accountRepository = new FlatFileRepository();
+        //    Object data = null;
+        //    if (accountRepository.CheckLogin(fullName, email, password))
+        //        data = new { isOk = true, errorMessage = "No Error encountered" };
+        //    else
+        //        data = new { isOk = false, errorMessage = "TO DO" };
+        //    return new JsonResult { Data = data };
+        //}
 
         /*//
         // POST: /Account/Login
