@@ -114,41 +114,18 @@
 		</div>
 
 		<script>	
-		    @*var myLayoutModel = @(Html.Raw(Json.Encode(Model)))*@
+		    var layoutModel = @(Html.Raw(Json.Encode(ViewBag.Menu)))
 
 
-      		    var layoutModel =
+      		    @*var layoutModel =
                 {
                     navbarLeft:
                     [
                         { Id: 1, Text: "Home", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
-					    { Id: 6, Text: "Projects", HRef: "#", Role: "", DataToggle: "dropdown",
-					        DropDown:
-						    [
-							    { Id: 7, Text: "Donate", HRef: "@Href("~/Project/Donate")", Role: "", DataToggle: "" },
-    							{ Id: 8, Text: "Manage Projects", HRef: "@Href("~/Project")", Role: "", DataToggle: "" }
-	    					]
-		    			},
+					    
 			    	],
-			        navbarRight:
-    				[
-					    { Id: 4, Text: "Register", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", DropDown: [] },
-    					{ Id: 5, Text: "Login", HRef: "@Href("~/Account/Login")", Role: "", DataToggle: "", DropDown: [] },
-	    			],
-		    	    sidebar:
-			    	[
-				    	{ Id: 6, Text: "Projects", HRef: "", Role: "", DataToggle: "", IsHeader: true },
-					    { Id: 7, Text: "Donate", HRef: "@Href("~/Project/Donate")", Role: "", DataToggle: "", IsHeader: false },
-    					{ Id: 0, Text: "PAGE NAVIGATION", HRef: "", Role: "", DataToggle: "", IsHeader: true },
-	    				{ Id: 1, Text: "Home", HRef: "@Href("~/")", Role: "", DataToggle: "", IsHeader: false },
-		    			{ Id: 4, Text: "Register", HRef: "@Href("~/Account/Register")", Role: "", DataToggle: "", IsHeader: false },
-			    		{ Id: 5, Text: "Login", HRef: "@Href("~/Account/Login")", Role: "", DataToggle: "", IsHeader: false },
-				    ],
-    			    navPills:
-	    			[
-		    			{ Id: 1, Text: "Home", HRef: "@Href("~/")", Role: "", DataToggle: "" },
-			    	],
-			    };
+			       
+			    };*@
 
       		function NavBarViewModel()
       		{

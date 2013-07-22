@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Fundgrid.MVC.Models
 {
-    public class ProjectModel
+    public class ProjectModel:MenuBase
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Please supply the name")]

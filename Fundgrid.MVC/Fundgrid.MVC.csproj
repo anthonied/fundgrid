@@ -187,6 +187,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\MenuBase.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />

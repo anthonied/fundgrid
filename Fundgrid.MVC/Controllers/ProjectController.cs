@@ -11,7 +11,7 @@ namespace Fundgrid.MVC.Controllers
 {
     public class ProjectController : Controller
     {
-
+        private MenuBase _menuBase = new MenuBase();
         private ProjectRepository _projectRepository = new ProjectRepository();
 
         public ActionResult Index()
@@ -125,6 +125,7 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Donate()
         {
+            ViewBag.Menu = _menuBase.Menu;
             var projectModels = new List<ProjectModel>();
 
             var projects = _projectRepository.GetAllProjects();
