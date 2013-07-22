@@ -80,8 +80,7 @@
         }
 
         DeleteGrid = function () {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
-            ReloadThePage();
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
         }
 
         ReloadThePage = function () {

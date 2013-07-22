@@ -42,12 +42,11 @@
 }
 
 </table>
+@section scripts {
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
-</script>
-@section scripts {
-	<script>
+
 	    $(document).ready(function ()
 	    {
 	        busyViewModel.IsBusy(false);

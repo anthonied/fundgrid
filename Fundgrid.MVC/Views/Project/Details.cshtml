@@ -123,16 +123,16 @@
         }
 
         CreateGrid = function () {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { location.reload() });
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { document.location.reload(true) });
         }
 
         DeleteGrid = function () {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { location.reload() });
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
             //ReloadThePage();
         }
 
         Archive = function () {
-            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id }, function () { location.reload() });
+            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
             //ReloadThePage();
         }
 
@@ -141,7 +141,7 @@
         }
 
         ReloadThePage = function () {
-            document.location.reload();
+            document.location.reload(true);
         }
     };
 

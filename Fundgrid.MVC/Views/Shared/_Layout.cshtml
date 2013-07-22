@@ -24,7 +24,7 @@
 
         @Html.Partial("_html5shiv")
 
-		<link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+		@*<link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />*@
 	</head>
     <body>
     @Html.Partial("_busyIndicator")
@@ -112,7 +112,11 @@
 			<div class="modal-footer">
 			</div>
 		</div>
+
 		<script>	
+		    @*var myLayoutModel = @(Html.Raw(Json.Encode(Model)))*@
+
+
       		    var layoutModel =
                 {
                     navbarLeft:

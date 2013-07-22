@@ -20,9 +20,6 @@
     
         @if (Model.Grid != null)
         {
-        @*<p><font size="5">Project Name : @Html.DisplayNameFor(model => model.Name)</font></p>
-        <p><font size="3">Description : @Html.DisplayNameFor(model => model.Description)</font></p>  
-         *@
         <div>
             <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
             <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Grid.Description)</i></font></p>   
@@ -42,17 +39,12 @@
                   </tr>
               </tbody>
           </table>
-            
-            @*<input type="button" value="Archive List" data-bind="click: Archive" />
-            <input type="button" value="Delete" data-bind="click: DeleteGrid" />*@
         }
         
         
         <p>@Html.ActionLink("Back to List", "Donate")</p>
     </fieldset>
 
-@*<script src="../../Scripts/knockout-2.2.1.js" type="text/javascript"></script>
-<script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>*@    
 @section scripts {
 <script>
 
@@ -95,31 +87,15 @@
             alert("count: " + selectedGridItem.count + " price: " + selectedGridItem.price);
         }
 
-        //CreateGrid = function () {
-        //    $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
-        //}
-
         BuyGridItem = function (selectedGridItem) {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }, function () { location.reload(true) });
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }/*, function () { document.location.reload(true) }*/);
             ownerInputTextbox.value = "";
         }
-
-        //DeleteGrid = function () {
-        //    $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
-        //    ReloadThePage();
-        //}
-
-        //Archive = function () {
-        //    $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id });
-        //    ReloadThePage();
-        //}
 
         ReloadThePage = function () {
             document.location.reload();
         }
     };
-    
-    
 
 	    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
     
