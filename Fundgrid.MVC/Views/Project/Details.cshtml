@@ -1,8 +1,4 @@
 ﻿@model FunGrid.Domain.Project
-<script src="~/Scripts/knockout-2.2.1.js"></script>
-<script src="~/Scripts/jquery-1.9.1.js"></script>
-
-
 
 @{
     ViewBag.Title = "Details";
@@ -82,7 +78,7 @@
         <p>@Html.ActionLink("Back to List", "Index")</p>
     </fieldset>
     
-
+@section scripts {
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
@@ -149,6 +145,12 @@
         }
     };
 
-    ko.applyBindings(new GridViewModel());
+    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
 
-</script>
+
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
+}
