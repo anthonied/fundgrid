@@ -28,5 +28,7 @@ namespace Fundgrid.Data
         public DbSet<grid> grids { get; set; }
         public DbSet<grid_item> grid_item { get; set; }
         public DbSet<project> projects { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<user> users { get; set; }
     }
 }

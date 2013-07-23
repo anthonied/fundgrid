@@ -14,8 +14,7 @@ namespace Fundgrid.MVC.Controllers
         
         public ActionResult Index()
         {
-            var model = new HomeModel();
-            ViewBag.Menu = _menuBase.Menu;
+            var model = new HomeModel();            
             return View(model);
         }
 

@@ -12,20 +12,20 @@ namespace Fundgrid.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class project
+    public partial class user
     {
-        public project()
+        public user()
         {
-            this.grids = new HashSet<grid>();
+            this.projects = new HashSet<project>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public string description { get; set; }
-        public byte[] image { get; set; }
-        public Nullable<int> owner_id { get; set; }
+        public string surname { get; set; }
+        public string username { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     
-        public virtual ICollection<grid> grids { get; set; }
-        public virtual user user { get; set; }
+        public virtual ICollection<project> projects { get; set; }
     }
 }

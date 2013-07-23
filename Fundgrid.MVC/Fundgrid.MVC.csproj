@@ -185,6 +185,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DonateModel.cs" />
+    <Compile Include="Models\DonateProjectModel.cs" />
     <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="Models\HomeModel.cs" />

@@ -2,7 +2,7 @@
 <html lang="en">
     <head runat="server">
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - MVC 4 Razor Application</title>
+        <title>@ViewBag.Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<link href="@Href("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
@@ -114,19 +114,8 @@
 		</div>
 
 		<script>	
-		    var layoutModel = @(Html.Raw(Json.Encode(ViewBag.Menu)))
-
-
-      		    @*var layoutModel =
-                {
-                    navbarLeft:
-                    [
-                        { Id: 1, Text: "Home", HRef: "@Href("~/")", Role: "", DataToggle: "", DropDown: [] },
-					    
-			    	],
-			       
-			    };*@
-
+		    var layoutModel = @(Html.Raw(Json.Encode(Model.Menu)))
+            
       		function NavBarViewModel()
       		{
                 NavBarLeft = ko.observableArray(layoutModel.navbarLeft);

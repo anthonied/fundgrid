@@ -1,4 +1,4 @@
-﻿@model FunGrid.Domain.Project
+﻿@model Fundgrid.MVC.Models.DonateProjectModel
 
 @{
     ViewBag.Title = "Details";
@@ -42,7 +42,7 @@
         }
         
         
-        <p>@Html.ActionLink("Back to List", "Donate")</p>
+        <p class="btn">@Html.ActionLink("Back to List", "Donate")</p>
     </fieldset>
 
 @section scripts {
@@ -100,8 +100,6 @@
 	    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
     
 	    $(document).ready(function () {
-	        navBarViewModel.SelectedItemId(7);
-	        sideBarViewModel.SelectedItemId(7);
 	        busyViewModel.IsBusy(false);
 	    });
 </script>

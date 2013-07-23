@@ -4,12 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1" ZoomLevel="76">
-        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="10.989797489247192" PointY="16.35421902702852" />
-        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="7.4089591854293637" PointY="16.815861501179572" />
-        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="5.4941104266299448" PointY="22.383404831580542" />
+      <Diagram DiagramId="b551a5027a3f4fcaa8f0b3a5dc090bf8" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="fundgridModel.grid" Width="1.5" PointX="1.8372606494637491" PointY="23.859744053268685" />
+        <EntityTypeShape EntityType="fundgridModel.grid_item" Width="1.5" PointX="7.48345288051453" PointY="15.684798337372392" />
+        <EntityTypeShape EntityType="fundgridModel.project" Width="1.5" PointX="2.2389585926378883" PointY="20.367174068636807" />
+        <EntityTypeShape EntityType="fundgridModel.sysdiagram" Width="1.5" PointX="9.2550372170540669" PointY="16.627824448341421" />
+        <EntityTypeShape EntityType="fundgridModel.user" Width="1.5" PointX="8.375" PointY="10.25" />
         <AssociationConnector Association="fundgridModel.FK_grid_item_grid" />
         <AssociationConnector Association="fundgridModel.FK_grid_projects" />
+        <AssociationConnector Association="fundgridModel.FK_projects_user" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

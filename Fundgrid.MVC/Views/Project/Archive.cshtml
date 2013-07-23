@@ -10,14 +10,10 @@
 <p>
     
 </p>
-<table>
+<table class="table table-condensed table-hover table-no-border">
     <tr>
-        <th width="200" align="left">
-            Name
-        </th>
-        <th width="200" align="left">
-            Description
-        </th>
+        <th>Name</th>
+        <th>Description</th>
         <th></th>
     </tr>
 
@@ -27,14 +23,14 @@
         @*<td>
             Project
         </td>*@
-        <td>
+        <td class="btn">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
+        <td class="btn">
             @Html.DisplayFor(modelItem => item.Description)
         </td>
 
-        <td>
+        <td class="btn">
             @Html.ActionLink("Show", "ArchiveProject", new { id=item.Id })
 
         </td>

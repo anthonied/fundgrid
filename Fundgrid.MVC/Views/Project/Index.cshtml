@@ -6,17 +6,13 @@
 
 <h2>Index</h2>
 
-<p>
+<p class="btn">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class="table table-condensed table-hover table-no-border">
     <tr>
-        <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th width="400" align="left">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        <th>Name</th>
+        <th>Description</th>
         <th></th>
     </tr>
 
@@ -28,7 +24,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
+        <td class="btn">
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Archive", "Archive", new { id=item.Id }) |

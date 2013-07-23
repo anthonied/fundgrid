@@ -25,6 +25,7 @@ namespace Fundgrid.MVC.Controllers
                 Id = project.Id,
                 Description = project.Description,
                 Name = project.Name
+                
             }));
 
             return View(projectModels);          
@@ -125,7 +126,7 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Donate()
         {
-            ViewBag.Menu = _menuBase.Menu;
+            var donateModel = new DonateModel();
             var projectModels = new List<ProjectModel>();
 
             var projects = _projectRepository.GetAllProjects();
@@ -137,13 +138,22 @@ namespace Fundgrid.MVC.Controllers
                 Name = project.Name
             }));
 
-            return View(projectModels);  
+            donateModel.ProjectModels = projectModels;
+            return View(donateModel);  
         }
 
         public ActionResult DonateDetails(int id)
         {
             var project = _projectRepository.GetProject(id, Status.active);
-            return View(project); 
+            var donateProjectModel = new DonateProjectModel
+        {
+            Id =project.Id,
+            Description = project.Description,
+            Grid = project.Grid,
+            Name = project.Name,
+            Owner_Id = project.Owner_Id
+        };
+            return View(donateProjectModel); 
         }
     }
 }

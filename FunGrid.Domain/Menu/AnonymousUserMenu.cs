@@ -22,15 +22,23 @@ namespace FunGrid.Domain
                     Role = "",
                     DataToggle = "",
                     DropDown = new List<Menu>()
+                },
+                new Menu{
+                    Id = 1,
+                    Text = "Home",
+                    HRef = "/",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>()
                 }
             };
 
             NavbarRight = new List<Menu>
             {
                 new Menu{
-                    Id = 4,
-                    Text = "Register",
-                    HRef = "/Account/Register",
+                    Id = 5,
+                    Text = "Login",
+                    HRef = "/Account/Login",
                     Role = "",
                     DataToggle = "",
                     DropDown = new List<Menu>()
