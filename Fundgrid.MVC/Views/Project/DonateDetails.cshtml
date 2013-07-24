@@ -1,56 +1,84 @@
 ﻿@model Fundgrid.MVC.Models.DonateProjectModel
 
+
+
 @{
     ViewBag.Title = "Details";
 }
+<div class="page-header">
+        @*<h1 style="background-color:#99FFFF;">DONATIONS:</h1>*@
+        <h1>DONATIONS</h1>
+</div>  
+        
+    @if (Model.Grid == null)
+    {
+        <div class="page-header"><h2>Sorry</h2></div>
+            
+        <p>There is no grid created for this project.</p>
+        <p>Please return at a later time.</p>
+    }
 
-    <h1 style="background-color:#99FFFF;">DONATIONS:</h1>
     
-
-    <fieldset>
-        <p><font size="6">@Html.DisplayFor(model => model.Name)</font></p>
-        <p><font size="5">@Html.DisplayFor(model => model.Description)</font></p>
+    @if (Model.Grid != null)
+    {
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span7">
+                    <div class="page-header">
+                        <h2>@Html.DisplayFor(model => model.Name)</h2>
+                        <h3>@Html.DisplayFor(model => model.Description)</h3>
+                    </div>
                 
-        @if (Model.Grid == null)
-        {
+                    <div class="page-header">
+                        <p><strong>Grid Name: </strong>@Html.DisplayFor(model => model.Grid.Name)</p>
+                        <p><strong>Grid Description: </strong>@Html.DisplayFor(model => model.Grid.Description)</p> 
+                    </div>      
             
-            <p>Sorry, a grid has not yet been created for the current selected project.</p>
-            <p>Please return at a later time.</p>
-        }
-    
-        @if (Model.Grid != null)
-        {
-        <div>
-            <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
-            <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Grid.Description)</i></font></p>   
-        </div>  
-            
-         <p>Owner Name:</p>
-        <input id="ownerInputTextbox" size="16" type="text"/>
+                    <p><strong>Owner Name:</strong></p>
+                    <input id="ownerInputTextbox" size="16" type="text"/>
 
-        <table id="displayTabel2" border="0" class="grid" >
+                    <table id="displayTabel2" border="0" class="grid" >
+                        <tbody data-bind="foreach: gridItemsRows">
+                            <tr data-bind="foreach: gridItemColumns">
+                                <td><input type="button" style="width:100%" class="btn" data-bind="disable: isdisabled, value:  price, click: BuyGridItem, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
+                </div>
 
-              <tbody data-bind="foreach: gridItemsRows">
-                  
-                  <tr data-bind="foreach: gridItemColumns">
-                      <td>
-                        <input type="button" style="width:100%" data-bind="disable: isdisabled, value:  price, click: BuyGridItem, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
-                     </td>
-                  </tr>
-              </tbody>
-          </table>
-        }
-        
-        
-        <p class="btn">@Html.ActionLink("Back to List", "Donate")</p>
-    </fieldset>
+                <div class="span5">
+                    <blockquote>
+                    <div>
+                        
+                            <h2 class="text-info">Instructions:</h2>
+                            <p><small>Enret your name in the owner name box.</small></p>
+                            <p><small>Click on the value you want to donate.</small></p>
+                        
+                    </div>
+                        <br />
+                    <div>                        
+                            <p><small>Click on the 'Back to List' button to return to the donation list.</small></p>
+                        
+                    </div>
+    </blockquote>
+                    @*<div class="hero-unit">
+                        <div>
+                            <h2 class="text-info">Instructions:</h2>
+                            <p><small>- Enret your name in the owner name box</small></p>
+                            <p><small>- Click on the value you want to donate</small></p>
+                        </div>
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    }
 
 @section scripts {
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
-
-
 
     GridItemViewModel = function () {
         var self = this;
@@ -60,7 +88,6 @@
         self.Amount = ko.observable();
         self.IsAvailable = ko.observable();
     };
-
 
     GridViewModel = function () {
         var self = this;
@@ -83,24 +110,32 @@
             }
         }
 
-        DoStuff = function (selectedGridItem) {
-            alert("count: " + selectedGridItem.count + " price: " + selectedGridItem.price);
-        }
+        /////////////TEST///////////////
+        //DoStuff = function (selectedGridItem) {
+        //    alert("count: " + selectedGridItem.count + " price: " + selectedGridItem.price);
+        //}
+        ///////////////////////////////
 
         BuyGridItem = function (selectedGridItem) {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }/*, function () { document.location.reload(true) }*/);
+            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }, function () { document.location.reload(true) });
             ownerInputTextbox.value = "";
         }
 
-        ReloadThePage = function () {
-            document.location.reload();
-        }
+        ///////////////PAGE RELOAD FUNCTION///////////////
+        //ReloadThePage = function () {
+        //    document.location.reload();
+        //}
+        //////////////////////////////////////////////////
     };
 
-	    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
+    BackToTheList = function () {
+        changeLocation("/Project/Donate/");
+    }
+
+    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
     
-	    $(document).ready(function () {
-	        busyViewModel.IsBusy(false);
-	    });
+	$(document).ready(function () {
+        busyViewModel.IsBusy(false);
+	});
 </script>
 }

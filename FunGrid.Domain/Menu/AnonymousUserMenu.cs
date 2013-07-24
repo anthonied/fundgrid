@@ -24,9 +24,9 @@ namespace FunGrid.Domain
                     DropDown = new List<Menu>()
                 },
                 new Menu{
-                    Id = 1,
-                    Text = "Home",
-                    HRef = "/",
+                    Id = 7,
+                    Text = "Donate",
+                    HRef = "/Project/Donate",
                     Role = "",
                     DataToggle = "",
                     DropDown = new List<Menu>()
@@ -48,6 +48,14 @@ namespace FunGrid.Domain
             Sidebar = new List<Menu>
             {
                 new Menu{
+                    Id= 6,
+                    Text = "SIDEBAR",
+                    HRef = "",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>(),
+                    IsHeader = true
+                },new Menu{
                     Id= 7,
                     Text = "Donate",
                     HRef = "/Project/Donate",
@@ -55,6 +63,23 @@ namespace FunGrid.Domain
                     DataToggle = "",
                     DropDown = new List<Menu>(),
                     IsHeader = false
+                },
+                new Menu{
+                    Id= 0,
+                    Text = "PAGE NAVIGATION",
+                    HRef = "",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>(),
+                    IsHeader = true
+                },
+                new Menu{
+                    Id = 1,
+                    Text = "Home",
+                    HRef = "/",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>()
                 }
             };
         }

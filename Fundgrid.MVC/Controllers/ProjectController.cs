@@ -107,7 +107,7 @@ namespace Fundgrid.MVC.Controllers
         public ActionResult AddGridItem(int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
             _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
-            return RedirectToAction("Index");
+            return RedirectToAction("Donate");
         }
 
         [HttpPost]
