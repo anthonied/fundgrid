@@ -7,22 +7,18 @@ using System.Collections;
 
 namespace Fundgrid.MVC.Models
 {
-    public class MenuModel
-    {
+    public class MenuModel{
         public List<Menu> navbarLeft { get; set; }
         public List<Menu> navbarRight { get; set; }
         public List<Menu> sidebar { get; set; }
         public List<Menu> navPills { get; set; }
 
-        public MenuModel()
-        {
-
+        public MenuModel(){
             var menu = new AnonymousUserMenu();
             this.navbarLeft = menu.NavbarLeft;
             this.navbarRight = menu.NavbarRight;
             this.sidebar = menu.Sidebar;
             this.navPills = menu.NavPills;
-           
         }
     }
 }

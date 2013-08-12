@@ -8,7 +8,5 @@ namespace Fundgrid.MVC.Models
     public class MenuBase
     {
         public MenuModel Menu = new MenuModel();
-
-        
     }
 }

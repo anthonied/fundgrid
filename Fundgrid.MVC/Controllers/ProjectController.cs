@@ -11,9 +11,9 @@ namespace Fundgrid.MVC.Controllers
 {
     public class ProjectController : Controller
     {
-        private MenuBase _menuBase = new MenuBase();
+        private MenuBase _menubase = new MenuBase();
         private ProjectRepository _projectRepository = new ProjectRepository();
-
+        
         public ActionResult Index()
         {
             var projectModels = new List<ProjectModel>();
