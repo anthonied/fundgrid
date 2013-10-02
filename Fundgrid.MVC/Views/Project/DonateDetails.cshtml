@@ -9,11 +9,19 @@
         @*<h1 style="background-color:#99FFFF;">DONATIONS:</h1>*@
         <h1>DONATIONS</h1>
 </div>  
-        
     @if (Model.Grid == null)
     {
         <div class="page-header"><h2>Sorry</h2></div>
-            
+        
+        @*<div class="span7">
+            <div class="alert alert-info">
+                <p><strong>There is no grid created for this project.</strong></p>
+                <p><strong>Please return at a later time.</strong></p>
+            </div>    
+        <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
+                
+        </div>*@
+        
         <p>There is no grid created for this project.</p>
         <p>Please return at a later time.</p>
         <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
@@ -115,14 +123,16 @@
         }
 
         /////////////TEST///////////////
-        //DoStuff = function (selectedGridItem) {
-        //    alert("count: " + selectedGridItem.count + " price: " + selectedGridItem.price);
+        //DoStuff = function () {
+        //    alert(viewModel.Id);
         //}
         ///////////////////////////////
 
         BuyGridItem = function (selectedGridItem) {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price }, function () { document.location.reload(true) });
-            ownerInputTextbox.value = "";
+            
+            $.post("/Project/AddGridItem/", { donateId: viewModel.Id, gridId: viewModel.Grid.Id, gridItemNumber: selectedGridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: selectedGridItem.price } );
+            changeLocation("/Project/DonateDetails/" + viewModel.Id);
+           
         }
 
         ///////////////PAGE RELOAD FUNCTION///////////////
