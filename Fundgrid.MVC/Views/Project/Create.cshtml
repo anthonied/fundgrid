@@ -1,4 +1,4 @@
-﻿@model FunGrid.Domain.Project
+﻿@model Fundgrid.MVC.Models.CreateModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,22 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+<div>
+    <div>
+        <p>Project Name</p>
+        <input type="text" data-bind="value: projectName"/>
+        <br />
+
+        <p>Project Description</p>
+        <textarea data-bind="value: projectDescription"></textarea>
+    </div><br />
+
+    <button class="btn btn-primary" data-bind="click: CreateProject">Create</button><br />
+
+    <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
+</div>
+
+@*@using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -32,15 +47,35 @@
             <input type="submit" value="Create" />
         </p>
     </fieldset>
-}
+}*@
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
+        var model = @(Html.Raw(Json.Encode(Model)))
+
+        function CreateViewModel()
+        {
+            var self = this;
+            self.projectName = ko.observable();
+            self.projectDescription = ko.observable();
+        }
+
+        CreateProject = function ()
+        {
+
+        }
+
+        BackToTheList = function ()
+        {
+            changeLocation("/Project/Index/");
+        }
+
+        $(document).ready(function ()
+        {
             busyViewModel.IsBusy(false);
         });
     @Scripts.Render("~/bundles/jqueryval")

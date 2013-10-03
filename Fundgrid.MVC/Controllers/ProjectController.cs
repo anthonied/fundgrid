@@ -16,6 +16,7 @@ namespace Fundgrid.MVC.Controllers
         
         public ActionResult Index()
         {
+            var indexModel = new IndexModel();
             var projectModels = new List<ProjectModel>();
 
             var projects = _projectRepository.GetAllProjects();
@@ -28,7 +29,8 @@ namespace Fundgrid.MVC.Controllers
                 
             }));
 
-            return View(projectModels);          
+            indexModel.ProjectModels = projectModels;
+            return View(indexModel);          
         }
 
        
@@ -49,7 +51,9 @@ namespace Fundgrid.MVC.Controllers
         
         public ActionResult Create()
         {
-            return View();
+            var createModel = new CreateModel();
+
+            return View(createModel);
         }
 
         public ActionResult Details(int id)

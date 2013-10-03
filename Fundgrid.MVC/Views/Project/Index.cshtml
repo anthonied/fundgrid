@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>
+﻿@*@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>*@
+@model Fundgrid.MVC.Models.IndexModel
 
 <style>
     th { text-align: left }
@@ -11,9 +12,8 @@
 <div class="form-horizontal">
     <h2>Index</h2>
 
-    <p class="btn btn-primary">
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    <button class="btn btn-primary" data-bind="click: CreateProject">Create</button>
+
 
     <table class="table table-condensed table-hover table-no-border">
         <thead>
@@ -75,6 +75,11 @@
         function IndexViewModel() {
             Projects = ko.observableArray(model.ProjectModels);
         }
+
+	    CreateProject = function ()
+	    {
+	        changeLocation("/Project/Create/");
+	    }
 
 	    EditProject = function (project) {
 	        changeLocation("/Project/Edit/" + project.Id);
