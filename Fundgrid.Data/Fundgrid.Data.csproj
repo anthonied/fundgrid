@@ -71,12 +71,6 @@
       <DependentUpon>fundgrid.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>fundgrid.tt</DependentUpon>
-    </Compile>
-    <Compile Include="user.cs">
-      <DependentUpon>fundgrid.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

@@ -23,9 +23,7 @@ namespace Fundgrid.Data
         public string name { get; set; }
         public string description { get; set; }
         public byte[] image { get; set; }
-        public Nullable<int> owner_id { get; set; }
     
         public virtual ICollection<grid> grids { get; set; }
-        public virtual user user { get; set; }
     }
 }

@@ -57,16 +57,18 @@
     <script>
         var model = @(Html.Raw(Json.Encode(Model)))
 
+        projectName = ko.observable();
+        projectDescription = ko.observable();
+
         function CreateViewModel()
         {
             var self = this;
-            self.projectName = ko.observable();
-            self.projectDescription = ko.observable();
         }
 
         CreateProject = function ()
         {
-
+            alert(projectDescription());
+            $.post("/Project/Create/", { name: projectName(), description: projectDescription()}, function () { document.location.reload(true) });
         }
 
         BackToTheList = function ()
@@ -74,11 +76,12 @@
             changeLocation("/Project/Index/");
         }
 
+        ko.applyBindings(new CreateViewModel(), document.getElementById("bodyDiv"));
+
         $(document).ready(function ()
         {
             busyViewModel.IsBusy(false);
-        });
-    @Scripts.Render("~/bundles/jqueryval")
+        });    
         
     </script>
 }

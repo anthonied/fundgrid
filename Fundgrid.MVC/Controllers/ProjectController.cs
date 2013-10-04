@@ -36,10 +36,11 @@ namespace Fundgrid.MVC.Controllers
        
         public ActionResult Edit(int id)
         {
+            var editModel = new EditModel();
             var project = _projectRepository.GetProject(id, Status.active);
+            editModel.ProjectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
 
-            var projectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
-            return View(projectModel);
+            return View(editModel);
         }
 
         [HttpPost]
@@ -58,8 +59,11 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var project = _projectRepository.GetProject(id, Status.active);
-            return View(project);
+            var detailsModel = new DetailsModel();
+            detailsModel.Project = _projectRepository.GetProject(id, Status.active);
+
+
+            return View(detailsModel);
         }
 
         public ActionResult ArchiveProject(int id)
@@ -82,7 +86,7 @@ namespace Fundgrid.MVC.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(string name, string description)
+        public JsonResult Create(string name, string description)
         {
             var project = new Project
             {
@@ -90,7 +94,9 @@ namespace Fundgrid.MVC.Controllers
                 Description = description
             };
             _projectRepository.CreateNewProject(project);
-            return RedirectToAction("Index");
+            
+            var data = new { isOk = true, errorMessage = "Entry not added." };
+            return new JsonResult { Data = data };
         }
 
         public ActionResult Delete(int id)
