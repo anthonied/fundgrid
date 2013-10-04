@@ -1,22 +1,30 @@
-﻿@model Fundgrid.MVC.Models.GridModel
+﻿@model Fundgrid.MVC.Models.ArchiveModel.GridModel
 
 @{
     ViewBag.Title = "Archive";
 }
 
 <h1 style="background-color:#FFCC00;">Archive</h1>
-<p><font size="5">Project Name : @Html.DisplayName(@Model.ProjectName)</font></p>
-<p><font size="3">Description : @Html.DisplayName(@Model.ProjectDescription)</font></p>
+<p><font size="5">Project Name : @Html.DisplayName(@Model.GridModel.ProjectName)</font></p>
+<p><font size="3">Description : @Html.DisplayName(@Model.GridModel.ProjectDescription)</font></p>
 <p>
     
 </p>
 <table class="table table-condensed table-hover table-no-border">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th></th>
-    </tr>
-
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
 @foreach (var item in Model.Grids) 
 {
     <tr>
@@ -40,8 +48,9 @@
 </table>
 @section scripts {
 <script>
+    var model = @(Html.Raw(Json.Encode(Model)))
 
-    var viewModel = @(Html.Raw(Json.Encode(Model)))
+
 
 	    $(document).ready(function ()
 	    {

@@ -74,12 +74,14 @@ namespace Fundgrid.MVC.Controllers
         public ActionResult Archive(int id)
         {
             var selectedProject = _projectRepository.GetProject(id, Status.archived);
+            var archiveModel = new ArchiveModel();
             var gridModel = new GridModel();
 
             gridModel.ProjectName = selectedProject.Name;
             gridModel.ProjectDescription = selectedProject.Description;
             gridModel.Grids = _projectRepository.GetArchivedGridsForProject(id);
 
+            archiveModel.GridModel = gridModel;
             return View(gridModel);
         }
 

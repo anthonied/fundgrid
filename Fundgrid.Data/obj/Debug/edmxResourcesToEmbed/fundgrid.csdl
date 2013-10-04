@@ -4,6 +4,7 @@
     <EntitySet Name="grids" EntityType="fundgridModel.grid" />
     <EntitySet Name="grid_item" EntityType="fundgridModel.grid_item" />
     <EntitySet Name="projects" EntityType="fundgridModel.project" />
+    <EntitySet Name="users" EntityType="fundgridModel.user" />
     <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.FK_grid_item_grid">
       <End Role="grid" EntitySet="grids" />
       <End Role="grid_item" EntitySet="grid_item" />
@@ -12,12 +13,16 @@
       <End Role="project" EntitySet="projects" />
       <End Role="grid" EntitySet="grids" />
     </AssociationSet>
+    <AssociationSet Name="FK_projects_user" Association="fundgridModel.FK_projects_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="project" EntitySet="projects" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="grid">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="id" Nullable="false" />
     <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="dimension_rows" />
@@ -48,7 +53,21 @@
     <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
+    <Property Type="Int32" Name="owner_id" />
     <NavigationProperty Name="grids" Relationship="fundgridModel.FK_grid_projects" FromRole="project" ToRole="grid" />
+    <NavigationProperty Name="user" Relationship="fundgridModel.FK_projects_user" FromRole="project" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="surname" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="username" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="email" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="password" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="projects" Relationship="fundgridModel.FK_projects_user" FromRole="user" ToRole="project" />
   </EntityType>
   <Association Name="FK_grid_item_grid">
     <End Type="fundgridModel.grid" Role="grid" Multiplicity="0..1" />
@@ -71,6 +90,18 @@
       </Principal>
       <Dependent Role="grid">
         <PropertyRef Name="project_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_projects_user">
+    <End Type="fundgridModel.user" Role="user" Multiplicity="0..1" />
+    <End Type="fundgridModel.project" Role="project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="project">
+        <PropertyRef Name="owner_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
