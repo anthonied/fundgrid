@@ -4,8 +4,6 @@
     <EntitySet Name="grid" EntityType="fundgridModel.Store.grid" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="grid_item" EntityType="fundgridModel.Store.grid_item" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="projects" EntityType="fundgridModel.Store.projects" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="fundgridModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="user" EntityType="fundgridModel.Store.user" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.Store.FK_grid_item_grid">
       <End Role="grid" EntitySet="grid" />
       <End Role="grid_item" EntitySet="grid_item" />
@@ -14,16 +12,12 @@
       <End Role="projects" EntitySet="projects" />
       <End Role="grid" EntitySet="grid" />
     </AssociationSet>
-    <AssociationSet Name="FK_projects_user" Association="fundgridModel.Store.FK_projects_user">
-      <End Role="user" EntitySet="user" />
-      <End Role="projects" EntitySet="projects" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="grid">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="description" Type="varchar" MaxLength="50" />
     <Property Name="dimension_rows" Type="int" />
@@ -51,28 +45,6 @@
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="description" Type="varchar" MaxLength="50" />
     <Property Name="image" Type="image" />
-    <Property Name="owner_id" Type="int" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
-  <EntityType Name="user">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="varchar" MaxLength="20" />
-    <Property Name="surname" Type="varchar" MaxLength="20" />
-    <Property Name="username" Type="varchar" MaxLength="10" />
-    <Property Name="email" Type="varchar" MaxLength="20" />
-    <Property Name="password" Type="varchar" MaxLength="20" />
   </EntityType>
   <Association Name="FK_grid_item_grid">
     <End Role="grid" Type="fundgridModel.Store.grid" Multiplicity="0..1" />
@@ -95,18 +67,6 @@
       </Principal>
       <Dependent Role="grid">
         <PropertyRef Name="project_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_projects_user">
-    <End Role="user" Type="fundgridModel.Store.user" Multiplicity="0..1" />
-    <End Role="projects" Type="fundgridModel.Store.projects" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="projects">
-        <PropertyRef Name="owner_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

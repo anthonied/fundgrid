@@ -1,4 +1,4 @@
-﻿@model FunGrid.Domain.Project
+﻿@model Fundgrid.MVC.Models.DetailsModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,10 +8,10 @@
     
 
     <fieldset>
-        <p><font size="6">@Html.DisplayFor(model => model.Name)</font></p>
-        <p><font size="5">@Html.DisplayFor(model => model.Description)</font></p>
+        <p><font size="6">@Html.DisplayFor(model => model.Project.Name)</font></p>
+        <p><font size="5">@Html.DisplayFor(model => model.Project.Description)</font></p>
                 
-        @if (Model.Grid == null)
+        @if (Model.Project.Grid == null)
         {
             <table>
             <tr>
@@ -51,11 +51,11 @@
             </table>
         }
     
-        @if (Model.Grid != null)
+        @if (Model.Project.Grid != null)
         {
             <div>
-         <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
-        <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Grid.Description)</i></font></p>   
+         <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Project.Grid.Name) </i></font></p>
+        <p><font size="2"><i>Grid Description : @Html.DisplayFor(model => model.Project.Grid.Description)</i></font></p>   
                 </div>
             
         <table id="displayTabel2" border="0" class="grid" >
@@ -104,15 +104,15 @@
         self.gridname = ko.observable("");
         self.griddescription = ko.observable("");
 
-        if (viewModel.Grid != null)
+        if (viewModel.Project.Grid != null)
         {
             self.gridItemsRows = ko.observableArray();
-            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            for (var i = 0; i < viewModel.Project.Grid.DimensionRows; i++)
             {
                 var gridItemColumns = ko.observableArray();
-                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+                for (var j = 0; j < viewModel.Project.Grid.DimensionColumns; j++)
                 {
-                    gridItemColumns.push({ price: viewModel.Grid.FullGridItems[i][j].Amount, count: viewModel.Grid.FullGridItems[i][j].Number, owner: viewModel.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Grid.FullGridItems[i][j].IsAvailible });
+                    gridItemColumns.push({ price: viewModel.Project.Grid.FullGridItems[i][j].Amount, count: viewModel.Project.Grid.FullGridItems[i][j].Number, owner: viewModel.Project.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Project.Grid.FullGridItems[i][j].IsAvailible });
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
@@ -123,16 +123,17 @@
         }
 
         CreateGrid = function () {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { document.location.reload(true) });
+            alert(GridColumns.value);
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Project.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { document.location.reload(true) });
         }
 
         DeleteGrid = function () {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Project.Grid.Id }, function () { document.location.reload(true) });
             //ReloadThePage();
         }
 
         Archive = function () {
-            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
+            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Project.Grid.Id }, function () { document.location.reload(true) });
             //ReloadThePage();
         }
 

@@ -178,6 +178,8 @@
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
+    <Compile Include="Models\DetailsModel.cs" />
+    <Compile Include="Models\EditModel.cs" />
     <Compile Include="Models\CreateModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\IndexModel.cs" />

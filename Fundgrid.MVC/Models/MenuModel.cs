@@ -14,8 +14,8 @@ namespace Fundgrid.MVC.Models
         public List<Menu> navPills { get; set; }
 
         public MenuModel(){
-            var menu = new AnonymousUserMenu();
-            //var menu = new AdminUserMenu();
+            //var menu = new AnonymousUserMenu();
+            var menu = new AdminUserMenu();
             this.navbarLeft = menu.NavbarLeft;
             this.navbarRight = menu.NavbarRight;
             this.sidebar = menu.Sidebar;
