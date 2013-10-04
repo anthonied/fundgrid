@@ -123,7 +123,6 @@
         }
 
         CreateGrid = function () {
-            alert(GridColumns.value);
             $.post("/Project/CreateGrid/", { projectId: viewModel.Project.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { document.location.reload(true) });
         }
 

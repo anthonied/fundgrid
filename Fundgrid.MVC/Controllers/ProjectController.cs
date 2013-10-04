@@ -62,7 +62,6 @@ namespace Fundgrid.MVC.Controllers
             var detailsModel = new DetailsModel();
             detailsModel.Project = _projectRepository.GetProject(id, Status.active);
 
-
             return View(detailsModel);
         }
 
