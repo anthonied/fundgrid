@@ -1,40 +1,110 @@
-﻿@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>
+﻿@*@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>*@
+@model Fundgrid.MVC.Models.IndexModel
+
+<style>
+    th { text-align: left }
+</style>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="form-horizontal">
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th width="400" align="left">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+    <button class="btn btn-primary" data-bind="click: CreateProject">Create</button>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Archive", "Archive", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "return confirm('Are you sure you want to delete?');" })
-        </td>
-    </tr>
+
+    <table class="table table-condensed table-hover table-no-border">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody data-bind="foreach: Projects">
+            <tr>
+                <td data-bind="text: Name"></td>
+                <td data-bind="text: Description"></td>
+                <td><a href="#" class="btn btn-primary" data-bind="click: EditProject">Edit</a></td>
+                <td><a href="#" class="btn btn-primary" data-bind="click: ProjectDetails">Details</a></td>
+                <td><a href="#" class="btn btn-primary" data-bind="click: DeleteProject">Delete</a></td>
+            </tr>
+        </tbody>
+   @* @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="btn">
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Archive", "Archive", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "return confirm('Are you sure you want to delete?');" })
+            </td>
+        </tr>
+    }*@
+    </table>
+</div>
+
+<div id="myModal" class="modal hide">
+    <div class="modal-header">
+         <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btnYes" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+</div>
+@section scripts {
+	<script>
+	    var model = @(Html.Raw(Json.Encode(Model)))
+
+        function IndexViewModel() {
+            Projects = ko.observableArray(model.ProjectModels);
+        }
+
+	    CreateProject = function ()
+	    {
+	        changeLocation("/Project/Create/");
+	    }
+
+	    EditProject = function (project) {
+	        changeLocation("/Project/Edit/" + project.Id);
+	    }
+
+	    ProjectDetails = function (project) {
+	        changeLocation("/Project/Details/" + project.Id);
+	    }
+
+	    ArchiveProject = function (project) {
+	        changeLocation("/Project/Archive/" + project.Id);
+	    }
+
+	    DeleteProject = function (project) {
+	        $('#myModal').modal();
+	        $('#btnYes').click(function () {
+	            changeLocation("/Project/Delete/" + project.Id);
+	        });
+
+	    }
+
+	    ko.applyBindings(new IndexViewModel(), document.getElementById("bodyDiv"));
+
+
+	    $(document).ready(function () {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
 }
-
-</table>

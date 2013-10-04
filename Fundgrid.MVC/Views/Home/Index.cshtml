@@ -64,15 +64,18 @@
 			Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
 		</p>
 		<p><a class="btn" href="#">View details &raquo;</a></p>
-	</div>
+	</div>*@
 	<!--/span-->
-</div>*@
+</div>
 <!--/row-->
 @section scripts {
 	<script>
 		$(document).ready(function ()
 		{
-			$('#Home').addClass('active');
+		    $('#Home').addClass('active');
+		    //navBarViewModel.SelectedItemId(1);
+		    //sideBarViewModel.SelectedItemId(1);		    
+		    busyViewModel.IsBusy(false);
 		});
 	</script>
 }

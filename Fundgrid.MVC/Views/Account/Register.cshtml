@@ -37,7 +37,8 @@
 <script>
 	$(document).ready(function ()
 	{
- 		$('#Register').addClass('active');
+	    $('#Register').addClass('active');
+	    busyViewModel.IsBusy(false);
 	});
 
 	function registerViewModel()

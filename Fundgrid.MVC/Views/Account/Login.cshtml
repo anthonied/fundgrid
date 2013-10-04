@@ -30,10 +30,7 @@
 </div>
 @section Scripts {
 <script>
-	$(document).ready(function ()
-	{
-   		$('#Login').addClass('active');
-	});
+	
 
 	function loginViewModel()
 	{
@@ -90,6 +87,11 @@
 
 	};
 
-	ko.applyBindings(new loginViewModel(), document.getElementById('loginForm'));
+	ko.applyBindings(new loginViewModel(), document.getElementById('bodyDiv'));
+
+	$(document).ready(function () {
+	    $('#Login').addClass('active');
+	    busyViewModel.IsBusy(false);
+	});
 </script>
 }

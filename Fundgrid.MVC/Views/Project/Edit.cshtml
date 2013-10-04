@@ -1,4 +1,4 @@
-﻿@model Fundgrid.MVC.Models.ProjectModel
+﻿@model Fundgrid.MVC.Models.EditModel
 
 @{
     ViewBag.Title = "Edit";
@@ -6,40 +6,40 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>ProjectModel</legend>
-
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
 <div>
+    <p>Name</p>
+    <input type="text" data-bind="value: projectName"/><br />
+
+    <p>Description</p>
+    <textarea data-bind="value: projectDescription"></textarea><br />
+
+    <button class="btn btn-primary" data-bind="click: EditProject">Save</button><br />
+
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section scripts {
+	<script>
+
+	    var model = @(Html.Raw(Json.Encode(Model)))
+
+        projectName = ko.observable(model.ProjectModel.Name);
+	    projectDescription = ko.observable(model.ProjectModel.Description);
+
+	    EditViewModel = function () { }
+
+	    EditProject = function () {
+	        $.post("/Project/Edit/", { id: model.ProjectModel.Id, name: projectName(), description: projectDescription() }, function () { document.location.reload(true) });
+	    }
+
+	    ko.applyBindings(new EditViewModel(), document.getElementById("bodyDiv"));
+
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
+	
+
+@*    @Scripts.Render("~/bundles/jqueryval")*@
+        </script>
 }

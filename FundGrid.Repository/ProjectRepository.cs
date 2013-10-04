@@ -101,7 +101,7 @@ namespace FundGrid.Repository
                                       {
                                           Id = p.id,
                                           Name = p.name,
-                                          Description = p.description
+                                          Description = p.description,
                                       }).FirstOrDefault();
 
                 selectedProject.Grid = (from g in model.grids

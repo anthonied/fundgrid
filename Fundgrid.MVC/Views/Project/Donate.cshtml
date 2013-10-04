@@ -1,15 +1,18 @@
-﻿@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>
+﻿@model Fundgrid.MVC.Models.DonateModel
+
+<style>
+    th { text-align: left }
+</style>
 
 @{
     ViewBag.Title = "Donate";
 }
 
-<h2>Donate</h2>
+<div class="form-horizontal">
+    <h2>Donate</h2>
 
-<p>
-</p>
 
-<table>
+<table class="table table-condensed table-hover table-no-border">
     <thead>
         <tr>
             <th>Name</th>
@@ -17,39 +20,36 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+    
+
+    <tbody data-bind="foreach: Projects">
+    <tr>
+       <td data-bind="text: Name"></td>
+        <td data-bind="text: Description"></td>
+        <td><a href="#" class="btn btn-primary" data-bind="click: DonateProject">Donate</a></td>
+    </tr>
     </tbody>
+
 </table>
+</div>
 
-@*<table>
-    <tr>
-        <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+@section scripts {
+<script>
+    var model = @(Html.Raw(Json.Encode(Model)))
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Donate", "DonateDetails", new { id=item.Id })
-        </td>
-    </tr>
+    function DonateViewModel()
+    {
+        Projects = ko.observableArray(model.ProjectModels);        
+    }
+
+    DonateProject = function (project) {        
+        changeLocation("/Project/DonateDetails/" + project.Id);
+    }
+  
+    ko.applyBindings(new DonateViewModel(), document.getElementById("bodyDiv"));
+
+    $(document).ready(function () {
+        busyViewModel.IsBusy(false);
+    });
+</script>
 }
-
-</table>*@
-

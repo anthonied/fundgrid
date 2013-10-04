@@ -10,18 +10,18 @@ C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.pdb
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
-C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
 C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
 C:\Development\Projects\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb
-<<<<<<< HEAD
-C:\Develop\FundGrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
-=======
 F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll.config
 F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.dll
 F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\Fundgrid.Data.pdb
 F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.dll
 F:\SolutionServer\fundgrid\Fundgrid.Data\bin\Debug\EntityFramework.xml
-F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\ResolveAssemblyReference.cache
 F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.dll
 F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.pdb
->>>>>>> DomainChanges
+F:\SolutionServer\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
+C:\Development\Projects\Fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
+=======
+C:\Develop\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache
+>>>>>>> origin/develop

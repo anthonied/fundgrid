@@ -2,7 +2,7 @@
 <html lang="en">
     <head runat="server">
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - MVC 4 Razor Application</title>
+        <title>@ViewBag.Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<link href="@Href("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
@@ -11,6 +11,7 @@
 		<link href="@Href("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" type="text/css" />
 		<link href="@Href("~/Content/Custom.css")" rel="stylesheet")" type="text/css" />
         
+        <script src="@Href("~/Scripts/spin.min.js")" type="text/javascript"></script>
 		<script src="@Href("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
 		<script src="@Href("~/Scripts/jquery-migrate-1.9.1.min.js")" type="text/javascript"></script>
 		<script src="@Href("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
@@ -23,33 +24,37 @@
 
         @Html.Partial("_html5shiv")
 
-		<link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+		@*<link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />*@
 	</head>
     <body>
+    @Html.Partial("_busyIndicator")
 		<header>
 			<nav>
-				<div class="navbar navbar-inverse navbar-fixed-top" id="navBar">
+				<div class="navbar navbar-inverse navbar-fixed-top" id="navBarDiv">
 					<div class="navbar-inner">
 						<div class="container-fluid">
-							<a class="brand" href="#">Fund Grid</a>
-								<div class="">
-									<ul class="nav">
-										<li id="Home"><a  href="@Href("~/")">Home</a></li>
-										<li><a href="#AboutModal" role="button" data-toggle="modal" >About</a></li>
-										<li id="ContactUs"><a href="@Href("~/Home/Contact/")">Contact Us</a></li>
-										<li id="Dropdown" class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
-											<ul class="dropdown-menu pull-right">
-                                                <li class="divider"></li>
-												<li id="manageProjects"><a href="@Href("~/Project")"">Manage Projects</a></li>
-                                                <li id="donateProjects"><a href="@Href("~/Project/Donate")"">Donate</a></li>
-                                                <li class="divider"></li>
-											  </ul>
+							<a class="brand" href="@Href("~/")">Fund Grid</a>
+								<div>
+									<ul class="nav" data-bind="foreach: NavBarLeft">
+										<li data-bind="visible: !DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
+											<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+											<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: gotoLocation, text: Text"></a>
+										</li>
+										<li class="dropdown" data-bind="visible: DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
+											<a class="dropdown-toggle" data-bind="attr: {href: HRef, role: Role, 'data-toggle': DataToggle}"><span data-bind="text: Text"></span> <b class="caret"></b></a>
+											<ul class="dropdown-menu pull-right" data-bind="foreach: DropDown">
+												<li>
+													<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+													<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: gotoLocation, text: Text"></a>
+												</li>
+											</ul>
 										</li>
 									</ul>
-									<ul class="nav pull-right">
-										<li id="Register"><a href="@Href("~/Account/Register")">Register</a></li>
-										<li id="Login"><a href="@Href("~/Account/Login")">Login</a></li>
+									<ul class="nav pull-right" data-bind="foreach: NavBarRight">
+										<li data-bind="css: {active: $parent.SelectedItemId() == Id}">
+											<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+											<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: gotoLocation, text: Text"></a>
+										</li>
 									</ul>
 								</div>
 						</div>
@@ -60,23 +65,18 @@
         <div id="body">
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<div class="span3">
+					<div id="sideBarDiv" class="span3">
 						<div class="well sidebar-nav">
-							<ul class="nav nav-list">
-								<li class="nav-header">Sidebar</li>
-								<li id="manageProjects"><a href="@Href("~/Project")"">Manage Projects</a></li>
-                                <li id="donateProjects"><a href="@Href("~/Project/Donate")"">Donate</a></li>
-								<li class="nav-header">Page Navigation</li>
-								<li id="sbHome"><a href="/.">Home</a></li>
-								<li><a href="#AboutModal" role="button" data-toggle="modal">About</a></li>
-								<li id="sbContactUs"><a href="@Href("~/Home/Contact")">Contact Us</a></li>
-								<li id="sbRegister"><a href="@Href("~/Account/Register")">Register</a></li>
-								<li id="sbLogin"><a href="@Href("~/Account/Login")">Login</a></li>
-
+							<ul class="nav nav-list" data-bind="foreach: SideBar">
+								<li class="nav-header" data-bind="visible: IsHeader, text: Text"></li>
+								<li data-bind="visible: !IsHeader, css: {active: $parent.SelectedItemId() == Id}">
+									<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+									<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: gotoLocation, text: Text"></a>
+								</li>
 							</ul>
 						</div> <!--/.well -->
 					</div> <!--/span-->
-					<div class="span9">
+					<div id="bodyDiv" class="span9">
 						@RenderBody()
 					</div> <!--/span-->
 				</div> <!--/row-->
@@ -85,11 +85,12 @@
 		</div>
 
 		<footer>
-			<div class="container-fluid">
-				<ul class="nav nav-pills">
-					<li><a href="@Href("~/")">Home</a></li>
-					<li><a href="#AboutModal" role="button" data-toggle="modal" >About</a></li>
-					<li><a href="@Href("~/Home/Contact")">Contact Us</a></li>
+			<div id="navPillsDiv" class="container-fluid">
+				<ul class="nav nav-pills" data-bind="foreach: NavPillsLeft">
+					<li>
+						<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
+						<a role="button" data-bind="visible: !DataToggle, attr: {href: HRef}, click: gotoLocation, text: Text"></a>
+					</li>
 				</ul>
 				<p>&copy; SolutionServer @DateTime.Today.Year</p>
 			</div>
@@ -112,20 +113,51 @@
 			</div>
 		</div>
 
-		@RenderSection("scripts", required: false)
-		<script>
-			function masterViewModel()
-			{
-				$('.nav li a').click(function (e)
-				{
-					$('.nav li a').removeClass('active');
-					var $this = $(this);
-					$this.addClass('active');
-					//e.preventDefault();
-				});
-			}
+		<script>	
+		    var layoutModel = @(Html.Raw(Json.Encode(Model.Menu)))
+            
+      		function NavBarViewModel()
+      		{
+                NavBarLeft = ko.observableArray(layoutModel.navbarLeft);
+                NavBarRight = ko.observableArray(layoutModel.navbarRight);
+                this.SelectedItemId = ko.observable(0);
 
-			ko.applyBindings(new masterViewModel(), document.getElementById('navBar'));
+                gotoLocation = function (data)
+                {
+                    changeLocation(data.HRef);
+                }
+            }
+
+            var navBarViewModel = new NavBarViewModel();
+            ko.applyBindings(navBarViewModel, document.getElementById('navBarDiv'));
+
+            function SideBarViewModel()
+            {
+                SideBar = ko.observableArray(layoutModel.sidebar);
+                this.SelectedItemId = ko.observable();
+
+                gotoLocation = function (data)
+                {
+                    changeLocation(data.HRef);
+                }
+            }
+
+            var sideBarViewModel = new SideBarViewModel();
+            ko.applyBindings(sideBarViewModel, document.getElementById('sideBarDiv'));
+
+            function NavPillsViewModel()
+            {
+                NavPillsLeft = ko.observableArray(layoutModel.navPills);
+
+                gotoLocation = function (data)
+                {
+                    changeLocation(data.HRef);
+                }
+            }
+
+            var navPillsViewModel = new NavPillsViewModel();
+            ko.applyBindings(navPillsViewModel, document.getElementById('navPillsDiv'));
 		</script>
+		@RenderSection("Scripts", required: false)
     </body>
 </html>

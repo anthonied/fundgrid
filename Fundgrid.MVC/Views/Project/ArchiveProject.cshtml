@@ -1,8 +1,4 @@
 ﻿@model FunGrid.Domain.Project
-<script src="~/Scripts/knockout-2.2.1.js"></script>
-<script src="~/Scripts/jquery-1.9.1.js"></script>
-
-
 
 @{
     ViewBag.Title = "Details";
@@ -21,9 +17,8 @@
                 There is no grids archived.
             </tr> 
             </table>
-        }
-    
-        @if (Model.Grid != null)
+        }    
+        else
         {
         <div>
             <p><font size="2"><i>Grid Name : @Html.DisplayFor(model => model.Grid.Name) </i></font></p>
@@ -43,10 +38,10 @@
           </table>
         }
         <input type="button" value="Delete" data-bind="click: DeleteGrid" />
-        <p>@Html.ActionLink("Back to List", "Index")</p>
+        <p class="btn">@Html.ActionLink("Back to List", "Index")</p>
     </fieldset></tag>
     
-
+@section scripts {
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
@@ -85,8 +80,7 @@
         }
 
         DeleteGrid = function () {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id });
-            ReloadThePage();
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id }, function () { document.location.reload(true) });
         }
 
         ReloadThePage = function () {
@@ -98,6 +92,13 @@
         }
     };
 
-    ko.applyBindings(new GridViewModel());
+    
+    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
 
-</script>
+
+	    $(document).ready(function () {	        
+	        busyViewModel.IsBusy(false);
+	    });
+	    
+	</script>
+}

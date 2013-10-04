@@ -30,8 +30,21 @@
     <EntitySetMapping Name="projects">
       <EntityTypeMapping TypeName="fundgridModel.project">
         <MappingFragment StoreEntitySet="projects">
+          <ScalarProperty Name="owner_id" ColumnName="owner_id" />
           <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="fundgridModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

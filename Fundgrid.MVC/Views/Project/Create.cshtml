@@ -1,4 +1,4 @@
-﻿@model FunGrid.Domain.Project
+﻿@model Fundgrid.MVC.Models.CreateModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,22 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+<div>
+    <div>
+        <p>Project Name</p>
+        <input type="text" data-bind="value: projectName"/>
+        <br />
+
+        <p>Project Description</p>
+        <textarea data-bind="value: projectDescription"></textarea>
+    </div><br />
+
+    <button class="btn btn-primary" data-bind="click: CreateProject">Create</button><br />
+
+    <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
+</div>
+
+@*@using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -32,12 +47,49 @@
             <input type="submit" value="Create" />
         </p>
     </fieldset>
-}
+}*@
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section scripts {
+    <script>
+        var model = @(Html.Raw(Json.Encode(Model)))
+
+        projectName = ko.observable();
+        projectDescription = ko.observable();
+
+        function CreateViewModel()
+        {
+            var self = this;
+        }
+
+        CreateProject = function ()
+        {
+            alert(projectDescription());
+            $.post("/Project/Create/", { name: projectName(), description: projectDescription()}, function () { document.location.reload(true) });
+        }
+
+        BackToTheList = function ()
+        {
+            changeLocation("/Project/Index/");
+        }
+
+        ko.applyBindings(new CreateViewModel(), document.getElementById("bodyDiv"));
+
+        $(document).ready(function ()
+        {
+            busyViewModel.IsBusy(false);
+        });    
+        
+    </script>
 }
+@*@section scripts {
+	<script>
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
+}*@
