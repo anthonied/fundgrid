@@ -5,17 +5,21 @@
 }
 
 <h2>Edit</h2>
-
 <div>
-    <p>Name</p>
-    <input type="text" data-bind="value: projectName"/><br />
+    <div>
+        <p>Name</p>
+        <input type="text" data-bind="value: projectName"/><br />
 
-    <p>Description</p>
-    <textarea data-bind="value: projectDescription"></textarea><br />
+        <p>Description</p>
+        <textarea data-bind="value: projectDescription"></textarea><br />
 
-    <button class="btn btn-primary" data-bind="click: EditProject">Save</button><br />
+        <button class="btn btn-primary" data-bind="click: EditProject">Save</button><br />
 
-    @Html.ActionLink("Back to List", "Index")
+    </div><br />
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
 
 @section scripts {

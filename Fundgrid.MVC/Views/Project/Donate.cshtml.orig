@@ -1,0 +1,93 @@
+﻿@model Fundgrid.MVC.Models.DonateModel
+
+<style>
+    th { text-align: left }
+</style>
+
+@{
+    ViewBag.Title = "Donate";
+}
+
+<div class="form-horizontal">
+    <h2>Donate</h2>
+
+<<<<<<< HEAD
+<p>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+@*<table>
+    <tr>
+        <th width="200" align="left">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th width="200" align="left">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+=======
+>>>>>>> anon_donate_mainview
+
+<table class="table table-condensed table-hover table-no-border">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    
+
+    <tbody data-bind="foreach: Projects">
+    <tr>
+       <td data-bind="text: Name"></td>
+        <td data-bind="text: Description"></td>
+        <td><a href="#" class="btn btn-primary" data-bind="click: DonateProject">Donate</a></td>
+    </tr>
+    </tbody>
+
+<<<<<<< HEAD
+</table>*@
+
+=======
+</table>
+</div>
+
+@section scripts {
+<script>
+    var model = @(Html.Raw(Json.Encode(Model)))
+
+    function DonateViewModel()
+    {
+        Projects = ko.observableArray(model.ProjectModels);        
+    }
+
+    DonateProject = function (project) {        
+        changeLocation("/Project/DonateDetails/" + project.Id);
+    }
+  
+    ko.applyBindings(new DonateViewModel(), document.getElementById("bodyDiv"));
+
+    $(document).ready(function () {
+        busyViewModel.IsBusy(false);
+    });
+</script>
+}
+>>>>>>> anon_donate_mainview
