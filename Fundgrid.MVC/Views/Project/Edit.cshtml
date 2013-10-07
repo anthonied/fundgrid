@@ -18,7 +18,7 @@
     </div><br />
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
     </div>
 </div>
 
@@ -34,6 +34,10 @@
 
 	    EditProject = function () {
 	        $.post("/Project/Edit/", { id: model.ProjectModel.Id, name: projectName(), description: projectDescription() }, function () { document.location.reload(true) });
+	    }
+
+	    BackToTheList = function () {
+	        changeLocation("/Project/Index/");
 	    }
 
 	    ko.applyBindings(new EditViewModel(), document.getElementById("bodyDiv"));

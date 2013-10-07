@@ -13,15 +13,6 @@
     {
         <div class="page-header"><h2>Sorry</h2></div>
         
-        @*<div class="span7">
-            <div class="alert alert-info">
-                <p><strong>There is no grid created for this project.</strong></p>
-                <p><strong>Please return at a later time.</strong></p>
-            </div>    
-        <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
-                
-        </div>*@
-        
         <p>There is no grid created for this project.</p>
         <p>Please return at a later time.</p>
         <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
@@ -34,13 +25,13 @@
             <div class="row-fluid">
                 <div class="span7">
                     <div class="page-header">
-                        <h2>@Html.DisplayFor(model => model.Name)</h2>
-                        <h3>@Html.DisplayFor(model => model.Description)</h3>
+                        <h2 data-bind="text: projectName"></h2>
+                        <h3 data-bind="text: projectDescription"></h3>
                     </div>
                 
                     <div class="page-header">
-                        <p><strong>Grid Name: </strong>@Html.DisplayFor(model => model.Grid.Name)</p>
-                        <p><strong>Grid Description: </strong>@Html.DisplayFor(model => model.Grid.Description)</p> 
+                        <p><strong>Grid Name: </strong><span data-bind="text: gridName"></span></p>
+                        <p><strong>Grid Description: </strong><span data-bind="text: gridDescription"></span></p> 
                     </div>      
             
                     <p><strong>Owner Name:</strong></p>
@@ -54,7 +45,7 @@
                         </tbody>
                     </table>
                     <br />
-                    <a href="#" class="btn btn-primary" data-bind="click: BackToTheList">Back to List</a>
+                    <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
                 </div>
 
                 <div class="span5">
@@ -82,6 +73,19 @@
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
+    
+    projectName = ko.observable();
+    projectDescription = ko.observable();
+    gridName = ko.observable();
+    gridDescription = ko.observable();
+
+    if(viewModel.Grid)
+    {
+        projectName(viewModel.Name);
+        projectDescription(viewModel.Description);
+        gridName(viewModel.Grid.Name);
+        gridDescription(viewModel.Grid.Description);
+    }
 
     GridItemViewModel = function () {
         var self = this;
