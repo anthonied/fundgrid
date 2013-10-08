@@ -4,79 +4,77 @@
     ViewBag.Title = "Details";
 }
 
-    <h1 style="background-color:#00FFCC;">ACTIVE:</h1>
-    
-
+<div>
     <div>
-        <div>
-            <p style="font-size: 40px" data-bind="text: projectName"></p>
-            <p style="font-size: 25px" data-bind="text: projectDescription"></p><br />
+        <br />
+        <p style="font-size: 40px" data-bind="text: projectName"></p><br />
+        <p style="font-size: 25px" data-bind="text: projectDescription"></p><br />
                 
-            @if (Model.Project.Grid == null)
-            {
-                <table>
-                    <tr>
-                        <th>Rows</th>
-                        <td><input id="GridRows" type="text" data-bind="value: row"></td>
-                    </tr>
+        @if (Model.Project.Grid == null)
+        {
+            <table>
+                <tr>
+                    <th>Rows</th>
+                    <td><input id="GridRows" type="text" data-bind="value: row"></td>
+                </tr>
 
-                    <tr>
-                        <th>Columns</th>
-                        <td><input id="GridColumns" type="text" data-bind="value: column"></td>
-                    </tr> 
+                <tr>
+                    <th>Columns</th>
+                    <td><input id="GridColumns" type="text" data-bind="value: column"></td>
+                </tr> 
 
-                    <tr>
-                        <th>Amount</th>
-                        <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
-                    </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
+                </tr>
 
-                    <tr>
-                        <th>Incremental Value</th>
-                        <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
-                    </tr>
+                <tr>
+                    <th>Incremental Value</th>
+                    <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
+                </tr>
 
-                    <tr>
-                        <th>Grid Name</th>
-                        <td><input id="GridName" type="text" data-bind="value: gridname"></td>
-                    </tr>
+                <tr>
+                    <th>Grid Name</th>
+                    <td><input id="GridName" type="text" data-bind="value: gridname"></td>
+                </tr>
 
-                    <tr>
-                        <th>Grid Discription</th>
-                        <td><input id="GridDescription" type="text" data-bind="value: griddescription"></td>
-                    </tr>
+                <tr>
+                    <th>Grid Discription</th>
+                    <td><input id="GridDescription" type="text" data-bind="value: griddescription"></td>
+                </tr>
 
-                    <tr>
-                        <td></td>
-                        <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
-                    </tr> 
-                </table>
-            }
+                <tr>
+                    <td></td>
+                    <td><input type="button" class="btn btn-success" value="Create Grid" data-bind="click: CreateGrid" /></td>
+                </tr> 
+            </table>
+        }
     
-            @if (Model.Project.Grid != null)
-            {
-                <div>
-                    <p style="font-size: 20px; font-style:italic" data-bind="text: gridtName"></p>
-                    <p style="font-size: 20px; font-style:italic" data-bind="text: gridDescription"></p><br />
-                </div>
+        @if (Model.Project.Grid != null)
+        {
+            <div>
+                <p style="font-size: 20px; font-style:italic" data-bind="text: gridtName"></p>
+                <p style="font-size: 20px; font-style:italic" data-bind="text: gridDescription"></p><br />
+            </div>
             
-                <table id="displayTabel2" border="0" class="grid" >
-                      <tbody data-bind="foreach: gridItemsRows">
+            <table id="displayTabel2" border="0" class="grid" >
+                    <tbody data-bind="foreach: gridItemsRows">
                   
-                          <tr data-bind="foreach: gridItemColumns">
-                              <td>
-                                <input type="button" class="btn" style="width:100%" data-bind="disable: isdisabled, value:  price, click: ViewDetails, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
-                             </td>
-                          </tr>
-                      </tbody>
-                  </table><br />
+                        <tr data-bind="foreach: gridItemColumns">
+                            <td>
+                            <input type="button" class="btn" style="width:100%;font-family:'Century Gothic'" data-bind="disable: isdisabled, value:  price, click: ViewDetails, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><br />
             
-                <input type="button" value="Delete" class="btn" data-bind="click: DeleteGrid" />
-            }
-        </div><br />
-        <div>
-            <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
-        </div>
+            <input type="button" value="Delete" class="btn btn-danger" data-bind="click: DeleteGrid" />
+        }
+    </div><br />
+    <div>
+        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
     </div>
+</div>
     
 @section scripts {
 <script>

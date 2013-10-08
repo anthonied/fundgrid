@@ -5,7 +5,7 @@
 <hgroup class="title">
     <h2>Log in</h2>
 </hgroup>
-<div class="row-fluid" id="loginForm">
+<div  class="row-fluid" id="loginForm">
     <div class="span5">
 		<div class="form-horizontal">
 			<div class="control-group">
@@ -22,7 +22,9 @@
 			</div>
 				
 			<div class="control-group">
-				<div class="controls"><button type="button" class="btn btn-primary pull-right" data-bind="click:submitLogin">Login</button></div>
+				<div  class="controls">
+                    <button type="button" style="font-family:'Century Gothic'" class="btn btn-primary pull-right" data-bind="click:submitLogin">Login</button>
+				</div>
 			</div>
 		</div>
 		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>

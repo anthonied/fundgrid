@@ -3,24 +3,28 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
-
 <div>
     <div>
-        <div>
-            <p>Project Name</p>
-            <input type="text" data-bind="value: projectName"/>
-            <br />
-
-            <p>Project Description</p>
-            <textarea data-bind="value: projectDescription"></textarea>
-        </div><br />
-
-        <button class="btn btn-primary" data-bind="click: CreateProject">Create</button>
+        <br />
+        <h2 style="font-size:100px;font-family:'Century Gothic'">Create</h2><br /><br />
     </div><br />
+
     <div>
-        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
+        <div>
+            <div>
+                <p>Project Name</p>
+                <input type="text" data-bind="value: projectName"/>
+                <br />
+
+                <p>Project Description</p>
+                <textarea data-bind="value: projectDescription"></textarea>
+            </div><br />
+
+            <button class="btn btn-primary" style="font-family:'Century Gothic'" data-bind="click: CreateProject">Create</button>
+        </div><br />
+        <div>
+            <a href="#" class="btn btn-info" style="font-family:'Century Gothic'" data-bind="click: BackToTheList">Back to List</a>
+        </div>
     </div>
 </div>
 

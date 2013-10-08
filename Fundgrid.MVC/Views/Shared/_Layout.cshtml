@@ -30,11 +30,11 @@
     @Html.Partial("_busyIndicator")
 		<header>
 			<nav>
-				<div class="navbar navbar-inverse navbar-fixed-top" id="navBarDiv">
+				<div style="font-family:'Century Gothic'" class="navbar navbar-inverse navbar-fixed-top" id="navBarDiv">
 					<div class="navbar-inner">
 						<div class="container-fluid">
 							<a class="brand" href="@Href("~/")">Fund Grid</a>
-								<div>
+								<div >
 									<ul class="nav" data-bind="foreach: NavBarLeft">
 										<li data-bind="visible: !DropDown.length, css: {active: $parent.SelectedItemId() == Id}">
 											<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
@@ -63,11 +63,11 @@
 			</nav>
 		</header>
         <div id="body">
-			<div class="container-fluid">
+			<div style="font-family:'Century Gothic'" class="container-fluid">
 				<div class="row-fluid">
 					<div id="sideBarDiv" class="span3">
-						<div class="well sidebar-nav">
-							<ul class="nav nav-list" data-bind="foreach: SideBar">
+						<div class="sidebar-nav">
+							<ul class="nav nav-pills nav-stacked" data-bind="foreach: SideBar">
 								<li class="nav-header" data-bind="visible: IsHeader, text: Text"></li>
 								<li data-bind="visible: !IsHeader, css: {active: $parent.SelectedItemId() == Id}">
 									<a data-bind="visible: DataToggle, attr: {href: HRef, role: Role, 'data-toggle': DataToggle}, text: Text"></a>
@@ -84,7 +84,7 @@
 			</div> <!--/.fluid-container-->
 		</div>
 
-		<footer>
+		<footer style="position:absolute;bottom:0;font-family:'Century Gothic'">
 			<div id="navPillsDiv" class="container-fluid">
 				<ul class="nav nav-pills" data-bind="foreach: NavPillsLeft">
 					<li>
@@ -95,6 +95,7 @@
 				<p>&copy; SolutionServer @DateTime.Today.Year</p>
 			</div>
 		</footer>
+        
 
 		<div id="AboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
