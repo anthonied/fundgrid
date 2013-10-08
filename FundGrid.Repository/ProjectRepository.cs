@@ -4,6 +4,7 @@ using System.Linq;
 using Fundgrid.Data;
 using FunGrid.Domain;
 using FunGrid.Domain.Interfaces;
+using SolutionServerWebSession;
 
 namespace FundGrid.Repository
 {
@@ -19,7 +20,7 @@ namespace FundGrid.Repository
                                     Id = p.id,
                                     Name = p.name,
                                     Description = p.description,
-                                    Image = p.image                                    
+                                    Image = p.image
                                 }).ToList();
 
                 return projects;
@@ -27,6 +28,25 @@ namespace FundGrid.Repository
         }
 
 
+
+        public List<Project> GetSpecificProjects()
+        {
+            var loggedInUserId = UserSession.LoggedInUser.UserId.ToString();
+            using (var model = new fundgridEntities())
+            {
+                var projects = (from p in model.projects
+                                where p.owner_id == loggedInUserId
+                                select new Project
+                                {
+                                    Id = p.id,
+                                    Name = p.name,
+                                    Description = p.description,
+                                    Image = p.image,
+                                }).ToList();
+
+                return projects;
+            }
+        }
 
         public Project GetProjectByGridId(int gridId, Status status)
         {
@@ -187,12 +207,14 @@ namespace FundGrid.Repository
 
         public void CreateNewProject(Project project)
         {
+            var loggedInUserId = UserSession.LoggedInUser.UserId.ToString();
             using(var model = new fundgridEntities())
             {
                 var newProject = new Fundgrid.Data.project() 
                                 { 
                                     name = project.Name,
                                     description = project.Description,
+                                    owner_id = loggedInUserId,
                                 };                
                 model.projects.Add(newProject);
                 model.SaveChanges();

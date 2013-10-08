@@ -38,17 +38,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="users">
-      <EntityTypeMapping TypeName="fundgridModel.user">
-        <MappingFragment StoreEntitySet="user">
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="surname" ColumnName="surname" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

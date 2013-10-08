@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundGrid.Repository", "Fund
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fundgrid.Data", "Fundgrid.Data\Fundgrid.Data.csproj", "{4C185630-6016-4052-B9A6-C5249C6767D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthentication.Domain", "..\..\Users\Els\Desktop\UserAuthentication\UserAuthentication\UserAuthentication\UserAuthentication.Domain.csproj", "{33F01808-9E5A-4228-99DA-5F32600DC352}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAuthentication.Repository", "..\..\Users\Els\Desktop\UserAuthentication\UserAuthentication\UserAuthentication.Repository\UserAuthentication.Repository.csproj", "{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,26 +69,6 @@ Global
 		{4C185630-6016-4052-B9A6-C5249C6767D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4C185630-6016-4052-B9A6-C5249C6767D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4C185630-6016-4052-B9A6-C5249C6767D7}.Release|x86.ActiveCfg = Release|Any CPU
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|x86.ActiveCfg = Debug|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Debug|x86.Build.0 = Debug|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|Any CPU.ActiveCfg = Release|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|Mixed Platforms.Build.0 = Release|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|x86.ActiveCfg = Release|x86
-		{33F01808-9E5A-4228-99DA-5F32600DC352}.Release|x86.Build.0 = Release|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|x86.ActiveCfg = Debug|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Debug|x86.Build.0 = Debug|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|Any CPU.ActiveCfg = Release|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|Mixed Platforms.Build.0 = Release|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|x86.ActiveCfg = Release|x86
-		{AC7D1192-CD63-4BF9-A0C0-1BD22795C862}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

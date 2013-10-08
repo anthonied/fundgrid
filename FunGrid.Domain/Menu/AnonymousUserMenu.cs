@@ -5,83 +5,32 @@ using System.Text;
 
 namespace FunGrid.Domain
 {
-    public class AnonymousUserMenu
+    public class AnonymousUserMenu:UserMenu
     {
-        public List<Menu> NavbarLeft { get; set; }
-        public List<Menu> NavbarRight { get; set; }
-        public List<Menu> Sidebar { get; set; }
-        public List<Menu> NavPills { get; set; }
         public AnonymousUserMenu()
         {
-            NavbarLeft = new List<Menu>
-            {
-                new Menu{
-                    Id = 1,
-                    Text = "Home",
-                    HRef = "/",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>()
-                },
-                new Menu{
+            NavbarLeft.Add(
+                new Menu
+                {
                     Id = 7,
                     Text = "Donate",
                     HRef = "/Project/Donate",
                     Role = "",
                     DataToggle = "",
                     DropDown = new List<Menu>()
-                }
-            };
+                });
 
-            NavbarRight = new List<Menu>
-            {
-                new Menu{
-                    Id = 5,
-                    Text = "Login",
-                    HRef = "/Account/Login",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>()
-                }
-            };
-
-            Sidebar = new List<Menu>
-            {
-                new Menu{
-                    Id= 6,
-                    Text = "SIDEBAR",
-                    HRef = "",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>(),
-                    IsHeader = true
-                },new Menu{
-                    Id= 7,
+            Sidebar.Insert(1,
+                new Menu
+                {
+                    Id = 7,
                     Text = "Donate",
                     HRef = "/Project/Donate",
                     Role = "",
                     DataToggle = "",
                     DropDown = new List<Menu>(),
                     IsHeader = false
-                },
-                new Menu{
-                    Id= 0,
-                    Text = "PAGE NAVIGATION",
-                    HRef = "",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>(),
-                    IsHeader = true
-                },
-                new Menu{
-                    Id = 1,
-                    Text = "Home",
-                    HRef = "/",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>()
-                }
-            };
+                });
         }
     }
 }

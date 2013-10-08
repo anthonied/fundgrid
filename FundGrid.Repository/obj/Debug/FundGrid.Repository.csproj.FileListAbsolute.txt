@@ -34,3 +34,11 @@ C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\EntityFramework.xml
 C:\Develop\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.csprojResolveAssemblyReference.cache
 C:\Develop\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.dll
 C:\Develop\fundgrid\FundGrid.Repository\obj\Debug\FundGrid.Repository.pdb
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\log4net.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\log4net.xml
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\SolutionServerWebSession.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\Newtonsoft.Json.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\UserAuthentication.Data.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\UserAuthentication.Domain.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\UserAuthentication.Repository.dll
+C:\Develop\fundgrid\FundGrid.Repository\bin\Debug\Newtonsoft.Json.xml

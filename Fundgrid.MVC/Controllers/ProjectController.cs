@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Fundgrid.MVC.Models;
 using FundGrid.Repository;
 using FunGrid.Domain;
+using SolutionServerWebSession;
 
 namespace Fundgrid.MVC.Controllers
 {
@@ -19,15 +20,16 @@ namespace Fundgrid.MVC.Controllers
             var indexModel = new IndexModel();
             var projectModels = new List<ProjectModel>();
 
-            var projects = _projectRepository.GetAllProjects();
-
+            var projects = _projectRepository.GetSpecificProjects();
+            
             projects.ForEach(project => projectModels.Add(new ProjectModel
             {
                 Id = project.Id,
                 Description = project.Description,
                 Name = project.Name
-                
             }));
+
+
 
             indexModel.ProjectModels = projectModels;
             return View(indexModel);          
@@ -162,7 +164,7 @@ namespace Fundgrid.MVC.Controllers
             Description = project.Description,
             Grid = project.Grid,
             Name = project.Name,
-            Owner_Id = project.Owner_Id
+            //Owner_Id = project.Owner_Id
         };
             return View(donateProjectModel); 
         }

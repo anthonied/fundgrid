@@ -33,6 +33,16 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SolutionServerWebSession">
+      <HintPath>..\packages\SolutionServerWebSession.1.0.1\lib\net40\SolutionServerWebSession.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -44,6 +54,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UserAuthentication.Data">
+      <HintPath>..\packages\UserAuthentication.0.0.10\lib\net40-client\UserAuthentication.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="UserAuthentication.Domain">
+      <HintPath>..\packages\UserAuthentication.0.0.10\lib\net40-client\UserAuthentication.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="UserAuthentication.Repository">
+      <HintPath>..\packages\UserAuthentication.0.0.10\lib\net40-client\UserAuthentication.Repository.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="fundgrid.Context.cs">
@@ -71,9 +90,6 @@
       <DependentUpon>fundgrid.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="user.cs">
-      <DependentUpon>fundgrid.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

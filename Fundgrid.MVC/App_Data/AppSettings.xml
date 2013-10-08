@@ -5,5 +5,5 @@
 	<add key="PreserveLoginUrl" value="true" />
 	<add key="ClientValidationEnabled" value="true" />
 	<add key="UnobtrusiveJavaScriptEnabled" value="true" />
-  <add key="FlatFileDatabaseLocation" value="C:\FlatFileAuthentication.txt"/>
+    <add key="FlatFileDatabaseLocation" value="C:\FlatFileAuthentication.txt"/>
 </appSettings>

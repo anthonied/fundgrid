@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using FunGrid.Domain;
 using System.Collections;
+using SolutionServerWebSession;
 
 namespace Fundgrid.MVC.Models
 {
@@ -14,8 +15,13 @@ namespace Fundgrid.MVC.Models
         public List<Menu> navPills { get; set; }
 
         public MenuModel(){
-            //var menu = new AnonymousUserMenu();
-            var menu = new AdminUserMenu();
+
+             var menu = new UserMenu();
+             if (UserSession.LoggedInUser != null)
+                 menu = new AdminUserMenu();
+             else
+                menu = new AnonymousUserMenu();
+
             this.navbarLeft = menu.NavbarLeft;
             this.navbarRight = menu.NavbarRight;
             this.sidebar = menu.Sidebar;

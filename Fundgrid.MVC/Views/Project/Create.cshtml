@@ -39,8 +39,7 @@
 
         CreateProject = function ()
         {
-            alert(projectDescription());
-            $.post("/Project/Create/", { name: projectName(), description: projectDescription()}, function () { document.location.reload(true) });
+            $.post("/Project/Create/", { name: projectName(), description: projectDescription() }, function () { BackToTheList(); });
         }
 
         BackToTheList = function ()
@@ -57,11 +56,3 @@
         
     </script>
 }
-@*@section scripts {
-	<script>
-	    $(document).ready(function ()
-	    {
-	        busyViewModel.IsBusy(false);
-	    });
-	</script>
-}*@

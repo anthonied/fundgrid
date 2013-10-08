@@ -41,13 +41,14 @@
    		showMessage = ko.observable(false);
    		messageOk = ko.observable();
    		messageResponse = ko.observable();
-
+        
    		submitLogin = function ()
    		{
-   			showMessage(true);
+   			
 
    			if (!fullName() || !email() || !password())
    			{
+   			    showMessage(true);
    				messageOk(false);
    				messageResponse("Please complete all fields");
    				return;
@@ -68,11 +69,6 @@
 
    		function handleLogin(loginDetails)
    		{
-   			/*loginDetails =
-			{ isOk: false,
-				errorMessage: "Cannot be logged in"
-			};*/
-
    			if (!loginDetails.isOk)
    			{
    				messageOk(false);
@@ -80,9 +76,10 @@
    				return;
    			};
 
-   			messageOk(true);
+   		    //messageOk(true);
+   			//messageResponse("You are now logged in");
 
-   			messageResponse("You are now logged in");
+   			changeLocation("/Home/");
    		};
 
 	};

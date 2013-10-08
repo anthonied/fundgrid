@@ -9,7 +9,6 @@
           <EntitySet Name="grid" EntityType="fundgridModel.Store.grid" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="grid_item" EntityType="fundgridModel.Store.grid_item" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="projects" EntityType="fundgridModel.Store.projects" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="user" EntityType="fundgridModel.Store.user" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.Store.FK_grid_item_grid">
             <End Role="grid" EntitySet="grid" />
             <End Role="grid_item" EntitySet="grid_item" />
@@ -17,10 +16,6 @@
           <AssociationSet Name="FK_grid_projects" Association="fundgridModel.Store.FK_grid_projects">
             <End Role="projects" EntitySet="projects" />
             <End Role="grid" EntitySet="grid" />
-          </AssociationSet>
-          <AssociationSet Name="FK_projects_user" Association="fundgridModel.Store.FK_projects_user">
-            <End Role="user" EntitySet="user" />
-            <End Role="projects" EntitySet="projects" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="grid">
@@ -55,18 +50,7 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="description" Type="varchar" MaxLength="50" />
           <Property Name="image" Type="image" />
-          <Property Name="owner_id" Type="int" />
-        </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="varchar" MaxLength="20" />
-          <Property Name="surname" Type="varchar" MaxLength="20" />
-          <Property Name="username" Type="varchar" MaxLength="10" />
-          <Property Name="email" Type="varchar" MaxLength="20" />
-          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="owner_id" Type="char" Nullable="false" MaxLength="38" />
         </EntityType>
         <Association Name="FK_grid_item_grid">
           <End Role="grid" Type="fundgridModel.Store.grid" Multiplicity="0..1" />
@@ -92,18 +76,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_projects_user">
-          <End Role="user" Type="fundgridModel.Store.user" Multiplicity="0..1" />
-          <End Role="projects" Type="fundgridModel.Store.projects" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="projects">
-              <PropertyRef Name="owner_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -112,7 +84,6 @@
           <EntitySet Name="grids" EntityType="fundgridModel.grid" />
           <EntitySet Name="grid_item" EntityType="fundgridModel.grid_item" />
           <EntitySet Name="projects" EntityType="fundgridModel.project" />
-          <EntitySet Name="users" EntityType="fundgridModel.user" />
           <AssociationSet Name="FK_grid_item_grid" Association="fundgridModel.FK_grid_item_grid">
             <End Role="grid" EntitySet="grids" />
             <End Role="grid_item" EntitySet="grid_item" />
@@ -120,10 +91,6 @@
           <AssociationSet Name="FK_grid_projects" Association="fundgridModel.FK_grid_projects">
             <End Role="project" EntitySet="projects" />
             <End Role="grid" EntitySet="grids" />
-          </AssociationSet>
-          <AssociationSet Name="FK_projects_user" Association="fundgridModel.FK_projects_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="project" EntitySet="projects" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="grid">
@@ -161,21 +128,8 @@
           <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="description" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Binary" Name="image" MaxLength="Max" FixedLength="false" />
-          <Property Type="Int32" Name="owner_id" />
+          <Property Type="String" Name="owner_id" Nullable="false" MaxLength="38" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="grids" Relationship="fundgridModel.FK_grid_projects" FromRole="project" ToRole="grid" />
-          <NavigationProperty Name="user" Relationship="fundgridModel.FK_projects_user" FromRole="project" ToRole="user" />
-        </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="surname" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="username" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="email" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="password" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="projects" Relationship="fundgridModel.FK_projects_user" FromRole="user" ToRole="project" />
         </EntityType>
         <Association Name="FK_grid_item_grid">
           <End Type="fundgridModel.grid" Role="grid" Multiplicity="0..1" />
@@ -198,18 +152,6 @@
             </Principal>
             <Dependent Role="grid">
               <PropertyRef Name="project_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_projects_user">
-          <End Type="fundgridModel.user" Role="user" Multiplicity="0..1" />
-          <End Type="fundgridModel.project" Role="project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="project">
-              <PropertyRef Name="owner_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -251,18 +193,6 @@
                 <ScalarProperty Name="owner_id" ColumnName="owner_id" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="fundgridModel.user">
-              <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
