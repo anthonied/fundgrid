@@ -72,7 +72,7 @@ namespace Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterModel
+    public class RegisterModel:MenuBase
     {
         [Required]
         [Display(Name = "User name")]

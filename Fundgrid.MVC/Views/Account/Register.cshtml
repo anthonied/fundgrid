@@ -26,7 +26,7 @@
 				<div class="controls"><input class="input-large" id="Password2" type="password" data-bind="value: password2" /></div>
 			</div>
 			<div class="control-group">
-				<div class="controls"><button type="button" class="btn btn-primary pull-right" data-bind="click: submitRegistration">Submit</button></div>
+				<div class="controls"><button type="button" class="btn btn-primary pull-right" onclick="submitRegistration()">Submit</button></div>
 			</div>
 		</div>
 		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
@@ -56,14 +56,14 @@
  		submitRegistration = function ()
  		{
  			showMessage(true);
- 			if (!fullName() || !email() || !password1() || !password2())
+ 			if (!newFullName.value || !newEmail.value || !Password1.value || !Password2.value)
  			{
  				messageOk(false);
  				messageResponse("Please complete all fields");
  				return;
  			};
 
- 			if (!IsValidEmailAddress1(email()) || !IsValidEmailAddress2(email()))
+ 			if (!IsValidEmailAddress1(newEmail.value) || !IsValidEmailAddress2(email()))
  			{
  				showMessage(true);
  				messageOk(false);
@@ -71,14 +71,14 @@
  				return;
  			};
 
- 			if (password1().length < 6)
+ 			if (Password1.length < 6)
  			{
  				messageOk(false);
  				messageResponse("Password should be at least 6 characters long");
  				return;
  			}
 
- 			if (password1() != password2())
+ 			if (Password1.value != Password2.value)
  			{
  				messageOk(false);
  				password1("");
@@ -87,7 +87,7 @@
  				return;
  			};
 
- 			$.post("/Account/RegisterNewAccount/", { fullName: fullName(), email: email(), password: password1() },
+ 			$.post("/Account/RegisterNewAccount/", { fullName: newFullName.value, email: newEmail.value, password: Password1.value },
 					function (response) { handleRegister(response) });
  		};
 
@@ -106,9 +106,7 @@
  				return;
  			}
 
- 			messageOk(true);
- 			messageResponse("Registration completed");
- 			return;
+ 			changeLocation("/Home/");
  		};
 	};
 

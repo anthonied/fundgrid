@@ -25,18 +25,6 @@ namespace FunGrid.Domain
                 }
             };
 
-            NavbarRight = new List<Menu>
-            {
-                new Menu{
-                    Id = 5,
-                    Text = "Login",
-                    HRef = "/Account/Login",
-                    Role = "",
-                    DataToggle = "",
-                    DropDown = new List<Menu>()
-                }
-            };
-
             Sidebar = new List<Menu>
             {
                 new Menu{

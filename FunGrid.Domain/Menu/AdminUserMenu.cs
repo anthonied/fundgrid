@@ -19,6 +19,18 @@ namespace FunGrid.Domain
                     DropDown = new List<Menu>()
                 });
 
+            NavbarRight = new List<Menu>
+            {
+                new Menu
+                {
+                    Id = 5,
+                    Text = "Logoff",
+                    HRef = "/Account/Logoff",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>()
+                }
+            };
 
             Sidebar.Insert(1,
                 new Menu

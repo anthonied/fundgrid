@@ -32,13 +32,21 @@ namespace Fundgrid.MVC.Controllers
             return View(loginModel);
         }
 
+        [AllowAnonymous]
+        public ActionResult Logoff()
+        {
+            UserSession.LoggedInUser = null;
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // GET: /Account/Register
 
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var registerModel = new RegisterModel();
+            return View(registerModel);
         }
 
         [AllowAnonymous]

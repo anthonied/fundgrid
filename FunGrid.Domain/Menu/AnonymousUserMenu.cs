@@ -20,6 +20,28 @@ namespace FunGrid.Domain
                     DropDown = new List<Menu>()
                 });
 
+            NavbarRight = new List<Menu>
+            {
+                new Menu
+                {
+                    Id = 5,
+                    Text = "Register",
+                    HRef = "/Account/Register",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>()
+                },
+                new Menu
+                {
+                    Id = 5,
+                    Text = "Login",
+                    HRef = "/Account/Login",
+                    Role = "",
+                    DataToggle = "",
+                    DropDown = new List<Menu>()
+                }
+            };
+
             Sidebar.Insert(1,
                 new Menu
                 {
