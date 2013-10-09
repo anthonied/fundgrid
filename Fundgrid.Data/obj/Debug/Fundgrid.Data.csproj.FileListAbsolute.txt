@@ -29,4 +29,3 @@ C:\Develop\fundgrid\Fundgrid.Data\bin\Debug\UserAuthentication.Domain.dll
 C:\Develop\fundgrid\Fundgrid.Data\bin\Debug\UserAuthentication.Repository.dll
 C:\Develop\fundgrid\Fundgrid.Data\bin\Debug\log4net.xml
 C:\Develop\fundgrid\Fundgrid.Data\bin\Debug\Newtonsoft.Json.xml
-C:\Develop\fundgrid\Fundgrid.Data\obj\Debug\Fundgrid.Data.csprojResolveAssemblyReference.cache

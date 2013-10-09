@@ -4,11 +4,17 @@
     ViewBag.Title = "Details";
 }
 
+<div class="page-header">
+        <h1 style="font-size:70px;font-family:'Century Gothic'">GRID DETAILS</h1>
+</div> 
+
 <div>
     <div>
-        <br />
-        <p style="font-size: 40px" data-bind="text: projectName"></p><br />
-        <p style="font-size: 25px" data-bind="text: projectDescription"></p><br />
+        <div class="page-header" >
+            <br />
+            <h2 style="font-size: 40px" data-bind="text: projectName"></h2>
+            <h3 style="font-size: 25px" data-bind="text: projectDescription"></h3><br />
+        </div>
                 
         @if (Model.Project.Grid == null)
         {
@@ -52,9 +58,9 @@
     
         @if (Model.Project.Grid != null)
         {
-            <div>
-                <p style="font-size: 20px; font-style:italic" data-bind="text: gridtName"></p>
-                <p style="font-size: 20px; font-style:italic" data-bind="text: gridDescription"></p><br />
+            <div class="page-header">
+                <p style="font-size: 20px;"><strong>You are currently viewing: </strong><span style="font-style:italic" data-bind="text: gridtName"></span></p>
+                <p style="font-size: 20px; font-style:italic"><span data-bind="text: gridDescription"></span></p><br />
             </div>
             
             <table id="displayTabel2" border="0" class="grid" >
@@ -62,17 +68,32 @@
                   
                         <tr data-bind="foreach: gridItemColumns">
                             <td>
-                            <input type="button" class="btn" style="width:100%;font-family:'Century Gothic'" data-bind="disable: isdisabled, value:  price, click: ViewDetails, selectedGridItem:this, data: $data, style: {color: isdisabled == true ? 'lightgrey' : 'black' }" />
+                            <input type="button" style="width:100%;font-family:'Century Gothic'" data-bind="disable: isdisabled, value: price, click: ViewDetails, selectedGridItem: this, data: $data, style: { color: isdisabled == true ? 'lightgrey' : 'black' }, css: type" />
                             </td>
                         </tr>
                     </tbody>
                 </table><br />
             
-            <input type="button" value="Delete" class="btn btn-danger" data-bind="click: DeleteGrid" />
+            <input type="button" value="Delete grid" class="btn btn-danger" data-bind="click: DeleteGrid" />
         }
     </div><br />
     <div>
-        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">Back to List</a>
+        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">< Back my projects</a>
+    </div>
+</div>
+
+<div class="modal hide fade" id="purchaseModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="vertical-align:middle">
+    <div class="modal-header">
+        <h3>Donation on item: <span data-bind="text: gridItemNumber"></span></h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <p><strong>Owner: </strong><span data-bind="text: gridItemOwner"></span></p>
+            <p><strong>Value: </strong>R<span data-bind="text: gridItemPrice"></span></p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
     </div>
 </div>
     
@@ -85,6 +106,10 @@
     projectDescription = ko.observable(viewModel.Project.Description);
     gridtName = ko.observable();
     gridDescription = ko.observable();
+
+    gridItemOwner = ko.observable("");
+    gridItemNumber = ko.observable("");
+    gridItemPrice = ko.observable("");
 
     if (viewModel.Project.Grid)
     {
@@ -111,15 +136,22 @@
         self.gridname = ko.observable("");
         self.griddescription = ko.observable("");
 
+
         if (viewModel.Project.Grid != null)
         {
+            var btnType = "btn";
             self.gridItemsRows = ko.observableArray();
             for (var i = 0; i < viewModel.Project.Grid.DimensionRows; i++)
             {
                 var gridItemColumns = ko.observableArray();
                 for (var j = 0; j < viewModel.Project.Grid.DimensionColumns; j++)
                 {
-                    gridItemColumns.push({ price: viewModel.Project.Grid.FullGridItems[i][j].Amount, count: viewModel.Project.Grid.FullGridItems[i][j].Number, owner: viewModel.Project.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Project.Grid.FullGridItems[i][j].IsAvailible });
+                    if (!viewModel.Project.Grid.FullGridItems[i][j].IsAvailible)
+                        btnType = "btn btn-success";
+                    else
+                        btnType = "btn";
+
+                    gridItemColumns.push({ price: viewModel.Project.Grid.FullGridItems[i][j].Amount, count: viewModel.Project.Grid.FullGridItems[i][j].Number, owner: viewModel.Project.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Project.Grid.FullGridItems[i][j].IsAvailible, type: btnType });
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
@@ -144,7 +176,10 @@
         }
 
         ViewDetails = function (data) {
-            alert(data.owner + " bought item " + data.count + " at R" + data.price);
+            gridItemOwner(data.owner);
+            gridItemNumber(data.count);
+            gridItemPrice(data.price);
+            $('#purchaseModel').modal({ backdrop: 'static', show: true });
         }
 
         ReloadThePage = function () {
@@ -159,5 +194,5 @@
 	    {
 	        busyViewModel.IsBusy(false);
 	    });
-	</script>
+</script>
 }

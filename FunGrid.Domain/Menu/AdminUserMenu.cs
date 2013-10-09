@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SolutionServerWebSession;
 
 namespace FunGrid.Domain
 {
@@ -21,6 +22,10 @@ namespace FunGrid.Domain
 
             NavbarRight = new List<Menu>
             {
+                new Menu
+                {
+                    Text = "You are logged in as: "+UserSession.LoggedInUser.UserName
+                },
                 new Menu
                 {
                     Id = 5,

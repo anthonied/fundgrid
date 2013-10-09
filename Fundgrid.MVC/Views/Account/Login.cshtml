@@ -4,12 +4,12 @@
 }
 <hgroup class="title">
     <h2>Log in</h2>
-</hgroup>
+</hgroup><br />
 <div  class="row-fluid" id="loginForm">
     <div class="span5">
 		<div class="form-horizontal">
 			<div class="control-group">
-				<label class="control-label" for="fullNameId">Full Name:</label>
+				<label class="control-label" for="fullNameId">User Name:</label>
 				<div class="controls"><input class="input-large" id="fullNameId" type="text" data-bind="value: fullName" /></div>
 			</div>
 			<div class="control-group">
@@ -47,7 +47,7 @@
    		submitLogin = function ()
    		{
    			
-
+   		    showMessage(true);
    			if (!fullName() || !email() || !password())
    			{
    			    showMessage(true);

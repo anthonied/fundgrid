@@ -57,7 +57,7 @@ namespace Fundgrid.MVC.Controllers
             if (accountRepository.RegisterNewAccount(fullName, email, password, 1))
                 data = new { isOk = true, errorMessage = "No Error encountered" };
             else
-                data = new { isOk = false, errorMessage = "TO DO" };
+                data = new { isOk = false, errorMessage = "Registration  unsuccessful" };
             return new JsonResult { Data = data };
         }
 
@@ -78,7 +78,7 @@ namespace Fundgrid.MVC.Controllers
                 data = new { isOk = true, errorMessage = "No Error encountered" };
             }
             else
-                data = new { isOk = false, errorMessage = "TO DO" };
+                data = new { isOk = false, errorMessage = "Login  unsuccessful" };
             return new JsonResult { Data = data };
         }
 
