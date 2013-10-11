@@ -78,16 +78,19 @@
     <div class="modal-header">
         <h3>Buy a grid</h3>
     </div>
-    <div class="modal-body">
-        <div>
+    <div class="modal-body row-fluid">
+        <div class="span6">
             <p><strong>Please complete the following:</strong></p>
             <p><strong>Owner Name:</strong></p>
             <input id="ownerInputTextbox" size="16" type="text"/>
         </div>
+        <div class="span6">
+            <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_SbyPP_mc_vs_dc_ae.jpg" width="200px" border="0" alt="PayPal Acceptance Mark"></a></td></tr></table><!-- PayPal Logo -->
+        </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" data-bind="click: BuyGridItem">Buy</button>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-info" data-dismiss="modal" aria-hidden="true" data-bind="click: BuyGridItem">Make PayPal payment</button>
+        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
     </div>
 </div>
 
@@ -146,11 +149,6 @@
             }
         }
 
-        /////////////TEST///////////////
-        //DoStuff = function () {
-        //    alert(viewModel.Id);
-        //}
-        ///////////////////////////////
         var gridItem;
         OpenBuyModal = function (selectedGridItem)
         {
@@ -158,19 +156,17 @@
             $('#purchaseModel').modal({ backdrop: 'static', show: true });
         }
 
-        BuyGridItem = function (selectedGridItem) {
-            
-            $.post("/Project/AddGridItem/", { donateId: viewModel.Id, gridId: viewModel.Grid.Id, gridItemNumber: gridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: gridItem.price });
-            changeLocation("/Project/DonateDetails/" + viewModel.Id);
-           
+        BuyGridItem = function (selectedGridItem)
+        {
+            $.post("/Project/AddGridItem/", { donateId: viewModel.Id, gridId: viewModel.Grid.Id, gridItemNumber: gridItem.count, gridItemOwner: ownerInputTextbox.value, gridItemAmount: gridItem.price },
+            function (response) { handelResponse(response); });
         }
-
-        ///////////////PAGE RELOAD FUNCTION///////////////
-        //ReloadThePage = function () {
-        //    document.location.reload();
-        //}
-        //////////////////////////////////////////////////
     };
+
+    function handelResponse(response)
+    {
+        window.location.href = response;
+    }
 
     BackToTheList = function () {
         changeLocation("/Project/Donate/");

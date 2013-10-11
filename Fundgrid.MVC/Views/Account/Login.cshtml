@@ -27,7 +27,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
+		<div class="alert" hidden data-bind="text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
 	</div>
 </div>
 @section Scripts {
@@ -44,6 +44,8 @@
    		messageOk = ko.observable();
    		messageResponse = ko.observable();
         
+   		messageResponse("Please complete the above form");
+
    		submitLogin = function ()
    		{
    			

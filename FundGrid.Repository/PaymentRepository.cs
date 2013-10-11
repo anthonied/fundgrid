@@ -11,7 +11,7 @@ namespace FundGrid.Repository
     public class PaymentRepository
     {
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private PayPalConfiguration Configuration
+        private PayPalConfiguration configuration
         {
             get
             {
@@ -29,7 +29,7 @@ namespace FundGrid.Repository
         {
             get
             {
-                return new PayPalExpressCheckout(Configuration);
+                return new PayPalExpressCheckout(configuration);
             }
         }
         public string CancelUrl { get; set; }

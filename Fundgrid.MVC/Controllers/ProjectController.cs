@@ -117,10 +117,19 @@ namespace Fundgrid.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddGridItem(int donateId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
+        public JsonResult AddGridItem(int donateId, int gridId, int gridItemNumber, string gridItemOwner, decimal gridItemAmount)
         {
-            _projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
-            return RedirectToAction("Donate"/*, donateId*/);
+            var _paymentrepository = new PaymentRepository()
+            {
+                ConfirmationUrl = "http://localhost:58150/Project/Donate/",
+                CancelUrl = "http://localhost:58150/Project/DonateDetails/" + donateId
+            };
+            var redirectURL = _paymentrepository.PayUsingPaypal(gridItemAmount);
+
+            return new JsonResult { Data = redirectURL };
+
+            //_projectRepository.AssignItemToGrid(gridId, gridItemNumber, gridItemOwner, gridItemAmount);
+            //return RedirectToAction("Donate");
         }
 
         [HttpPost]
