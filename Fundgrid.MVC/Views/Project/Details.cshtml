@@ -1,72 +1,123 @@
-﻿@model FunGrid.Domain.Project
-<script src="~/Scripts/knockout-2.2.1.js"></script>
-<script src="~/Scripts/jquery-1.9.1.js"></script>
-
-
+﻿@model Fundgrid.MVC.Models.DetailsModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-    <h1>@Html.DisplayFor(model => model.Name)</h1>
+<div class="page-header">
+        <h1 style="font-size:70px;font-family:'Century Gothic'">GRID DETAILS</h1>
+</div> 
 
-    <fieldset>
-        <legend>Description: @Html.DisplayFor(model => model.Description)</legend>
+<div>
+    <div>
+        <div class="page-header" >
+            <br />
+            <h2 style="font-size: 40px" data-bind="text: projectName"></h2>
+            <h3 style="font-size: 25px" data-bind="text: projectDescription"></h3><br />
+        </div>
                 
-        @if (Model.Grid == null)
+        @if (Model.Project.Grid == null)
         {
             <table>
-            <tr>
-                <th>Rows</th>
-                <td><input id="GridRows" type="text" data-bind="value: row"></td>
-            </tr>
-            <tr>
-                <th>Columns</th>
-                <td><input id="GridColumns" type="text" data-bind="value: column"></td>
-            </tr> 
-            <tr>
-                <th>Amount</th>
-                <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
-            </tr>
-            <tr>
-                <th>Incremental Value</th>
-                <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="button" value="Create Grid" data-bind="click: CreateGrid" /></td>
-            </tr> 
+                <tr>
+                    <th>Rows</th>
+                    <td><input id="GridRows" type="text" data-bind="value: row"></td>
+                </tr>
+
+                <tr>
+                    <th>Columns</th>
+                    <td><input id="GridColumns" type="text" data-bind="value: column"></td>
+                </tr> 
+
+                <tr>
+                    <th>Amount</th>
+                    <td><input id="GridItemAmount" type="text" data-bind="value: gridvalue"></td>
+                </tr>
+
+                <tr>
+                    <th>Incremental Value</th>
+                    <td><input id="GridItemIncrementalValue" type="text" data-bind="value: gridincrementalvalue"></td>
+                </tr>
+
+                <tr>
+                    <th>Grid Name</th>
+                    <td><input id="GridName" type="text" data-bind="value: gridname"></td>
+                </tr>
+
+                <tr>
+                    <th>Grid Discription</th>
+                    <td><input id="GridDescription" type="text" data-bind="value: griddescription"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input type="button" class="btn btn-success" value="Create Grid" data-bind="click: CreateGrid" /></td>
+                </tr> 
             </table>
         }
     
-        @if (Model.Grid != null)
+        @if (Model.Project.Grid != null)
         {
-         <p>Owner Name:</p>
-        <input id="ownerInputTextbox" size="16" type="text"/>
-
-        <table id="displayTabel2" border="1" class="grid" >
-
-              <tbody data-bind="foreach: gridItemsRows">
+            <div class="page-header">
+                <p style="font-size: 20px;"><strong>You are currently viewing: </strong><span style="font-style:italic" data-bind="text: gridtName"></span></p>
+                <p style="font-size: 20px; font-style:italic"><span data-bind="text: gridDescription"></span></p><br />
+            </div>
+            
+            <table id="displayTabel2" border="0" class="grid" >
+                    <tbody data-bind="foreach: gridItemsRows">
                   
-                  <tr data-bind="foreach: gridItemColumns">
-                    <td data-bind="text:  $data, click: DoStuff, me:this"></td>
-                  </tr>
-              </tbody>
-          </table>
+                        <tr data-bind="foreach: gridItemColumns">
+                            <td>
+                            <input type="button" style="width:100%;font-family:'Century Gothic'" data-bind="disable: isdisabled, value: price, click: ViewDetails, selectedGridItem: this, data: $data, style: { color: isdisabled == true ? 'lightgrey' : 'black' }, css: type" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><br />
+            
+            <input type="button" value="Delete grid" class="btn btn-danger" data-bind="click: DeleteGrid" />
         }
-        <input type="button" value="Delete" data-bind="click: DeleteGrid" />
-        <p>@Html.ActionLink("Back to List", "Index")</p>
-    </fieldset>
-    
+    </div><br />
+    <div>
+        <a href="#" class="btn btn-info" data-bind="click: BackToTheList">< Back my projects</a>
+    </div>
+</div>
 
-<script>
+<div class="modal hide fade" id="purchaseModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="vertical-align:middle">
+    <div class="modal-header">
+        <h3>Donation on item: <span data-bind="text: gridItemNumber"></span></h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <p><strong>Owner: </strong><span data-bind="text: gridItemOwner"></span></p>
+            <p><strong>Value: </strong>R<span data-bind="text: gridItemPrice"></span></p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
+    </div>
+</div>
     
+@section scripts {
+<script>
+
     var viewModel = @(Html.Raw(Json.Encode(Model)))
 
-    
-    
-    GridItemViewModel = function()
+    projectName = ko.observable(viewModel.Project.Name);
+    projectDescription = ko.observable(viewModel.Project.Description);
+    gridtName = ko.observable();
+    gridDescription = ko.observable();
+
+    gridItemOwner = ko.observable("");
+    gridItemNumber = ko.observable("");
+    gridItemPrice = ko.observable("");
+
+    if (viewModel.Project.Grid)
     {
+        gridtName(viewModel.Project.Grid.Name);
+        gridDescription(viewModel.Project.Grid.Description);
+    }
+
+    GridItemViewModel = function () {
         var self = this;
         self.Id = ko.observable();
         self.Number = ko.observable();
@@ -74,60 +125,74 @@
         self.Amount = ko.observable();
         self.IsAvailable = ko.observable();
     };
-    
-    
-    GridViewModel = function ()
-    {
+
+
+    GridViewModel = function () {
         var self = this;
         self.row = ko.observable(0);
         self.column = ko.observable(0);
-        self.gridItems = ko.observableArray();
         self.gridvalue = ko.observable(0);
         self.gridincrementalvalue = ko.observable(0);
-        
-        if(viewModel.Grid != null)
-        {
-            var itemCount = viewModel.Grid.DimensionRows * viewModel.Grid.DimensionColumns;
-            var ginitialvalue = viewModel.Grid.InitialValue;
-            var gincrementvalue = viewModel.Grid.IncrementValue;
+        self.gridname = ko.observable("");
+        self.griddescription = ko.observable("");
 
+
+        if (viewModel.Project.Grid != null)
+        {
+            var btnType = "btn";
             self.gridItemsRows = ko.observableArray();
-            for (var i = 0; i < viewModel.Grid.DimensionRows; i++)
+            for (var i = 0; i < viewModel.Project.Grid.DimensionRows; i++)
             {
                 var gridItemColumns = ko.observableArray();
-                for (var j = 0; j < viewModel.Grid.DimensionColumns; j++)
+                for (var j = 0; j < viewModel.Project.Grid.DimensionColumns; j++)
                 {
-                    gridItemColumns.push(ginitialvalue + (gincrementvalue * (i * viewModel.Grid.DimensionRows + j)));
+                    if (!viewModel.Project.Grid.FullGridItems[i][j].IsAvailible)
+                        btnType = "btn btn-success";
+                    else
+                        btnType = "btn";
+
+                    gridItemColumns.push({ price: viewModel.Project.Grid.FullGridItems[i][j].Amount, count: viewModel.Project.Grid.FullGridItems[i][j].Number, owner: viewModel.Project.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Project.Grid.FullGridItems[i][j].IsAvailible, type: btnType });
                 }
                 self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
             }
-                
-                
-            
-        }
-        DoStuff = function (me)
-        {
-            alert(me);
         }
 
-        CreateGrid = function ()
-        {
-            $.post("/Project/CreateGrid/", { projectId: viewModel.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value }, function () { location.reload() });
+        BackToTheList = function () {
+            changeLocation("/Project/Index/");
         }
 
-        BuyGridItem = function()
-        {
-            $.post("/Project/AddGridItem/", { gridId: viewModel.Grid.Id, gridItemNumber: this.Number, gridItemOwner: ownerInputTextbox.value, gridItemAmount: this.Amount }, function () { location.reload() });
-            ownerInputTextbox.value = "";
+        CreateGrid = function () {
+            $.post("/Project/CreateGrid/", { projectId: viewModel.Project.Id, gridDimensionRows: GridRows.value, gridDimensionColumns: GridColumns.value, gridValue: GridItemAmount.value, incrementValue: GridItemIncrementalValue.value, gridName: GridName.value, gridDescription: GridDescription.value }, function () { document.location.reload(true) });
         }
 
-        DeleteGrid = function()
-        {
-            $.post("/Project/DeleteGrid/", { gridId: viewModel.Grid.Id },window.location.reload());
-            
+        DeleteGrid = function () {
+            $.post("/Project/DeleteGrid/", { gridId: viewModel.Project.Grid.Id }, function () { document.location.reload(true) });
+            //ReloadThePage();
+        }
+
+        Archive = function () {
+            $.post("/Project/ArchiveGrid/", { gridId: viewModel.Project.Grid.Id }, function () { document.location.reload(true) });
+            //ReloadThePage();
+        }
+
+        ViewDetails = function (data) {
+            gridItemOwner(data.owner);
+            gridItemNumber(data.count);
+            gridItemPrice(data.price);
+            $('#purchaseModel').modal({ backdrop: 'static', show: true });
+        }
+
+        ReloadThePage = function () {
+            document.location.reload(true);
         }
     };
-    
-    ko.applyBindings(new GridViewModel());
 
+    ko.applyBindings(new GridViewModel(), document.getElementById("bodyDiv"));
+
+
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
 </script>
+}

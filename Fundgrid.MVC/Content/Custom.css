@@ -1,7 +1,12 @@
 ﻿body {
+
 }
 
 .span7,.span6, .span5, .span4, .span3, .span2, .span1
 {
 	border:0px solid red;
+}
+#busyDiv
+{
+     height: 150px;
 }

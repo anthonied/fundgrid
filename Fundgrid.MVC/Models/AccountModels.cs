@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using Fundgrid.MVC.Models;
 
 namespace Models
 {
@@ -56,7 +57,7 @@ namespace Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginModel
+    public class LoginModel:MenuBase
     {
         [Required]
         [Display(Name = "User name")]
@@ -71,7 +72,7 @@ namespace Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterModel
+    public class RegisterModel:MenuBase
     {
         [Required]
         [Display(Name = "User name")]

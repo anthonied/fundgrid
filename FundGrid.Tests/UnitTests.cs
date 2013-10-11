@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FunGrid.Domain;
 using NUnit.Framework;
+using Fundgrid.MVC.Controllers;
 
 namespace FundGrid.Tests
 {
@@ -46,6 +47,17 @@ namespace FundGrid.Tests
             Assert.That(grid.FullGridItems[1][1].Number, Is.EqualTo(8));
             Assert.That(grid.FullGridItems[1][2].Number, Is.EqualTo(9));
             Assert.That(grid.FullGridItems[3][5].Number, Is.EqualTo(24));
+        }
+
+        [Test]
+        public void RegisterNewAccount_GivenUnregisteredUser_ShouldRegisterUser()
+        {
+            //Arrange
+            var accountController = new AccountController();
+            //Action
+            var results = accountController.RegisterNewAccount("Enrico", "test@testEmail.co.za", "qwerty");
+            //Assert
+            Assert.That(results, Is.True);
         }
     }
 }

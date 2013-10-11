@@ -1,0 +1,56 @@
+﻿@model Fundgrid.MVC.Models.DonateModel
+
+<style>
+    th { text-align: left }
+</style>
+
+@{
+    ViewBag.Title = "Donate";
+}
+
+<div class="form-horizontal">
+    <div>
+        <br />
+        <h2 style="font-size:70px;font-family:'Century Gothic'">Donate</h2>
+    </div><br /><br /><br />
+
+    <div>
+        <table class="table  table-hover table-no-border">
+            <thead>
+                <tr style="font-family:Arial;font-size:18px">
+                    <th>Name</th>
+                    <th>What are we about?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Projects">
+                <tr>
+                   <td style="font-family:'Arial';font-size:16px" data-bind="text: Name"></td>
+                    <td style="font-family:'Arial';font-size:16px" data-bind="text: Description"></td>
+                    <td><a href="#" style="font-family:'Century Gothic'" class="btn btn-primary" data-bind="click: DonateProject">Donate</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+<script>
+    var model = @(Html.Raw(Json.Encode(Model)))
+
+    function DonateViewModel()
+    {
+        Projects = ko.observableArray(model.ProjectModels);        
+    }
+
+    DonateProject = function (project) {        
+        changeLocation("/Project/DonateDetails/" + project.Id);
+    }
+  
+    ko.applyBindings(new DonateViewModel(), document.getElementById("bodyDiv"));
+
+    $(document).ready(function () {
+        busyViewModel.IsBusy(false);
+    });
+</script>
+}

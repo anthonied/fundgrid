@@ -1,39 +1,102 @@
-﻿@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>
+﻿@*@model IEnumerable<Fundgrid.MVC.Models.ProjectModel>*@
+@model Fundgrid.MVC.Models.IndexModel
+
+<style>
+    th { text-align: left }
+</style>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="form-horizontal">
+    <div>
+        <br />
+        <h2 style="font-size:70px;font-family:'Century Gothic'">Index</h2>
+    </div><br /><br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th width="200" align="left">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th width="400" align="left">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+    <div>
+        <button class="btn btn-primary" style="font-family:'Century Gothic'" data-bind="click: CreateProject">Create</button>
+    </div><br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "return confirm('Are you sure you want to delete?');" })
-        </td>
-    </tr>
+    <div>
+        <table class="table table-hover table-no-border">
+            <thead>
+                <tr style="font-family:Arial;font-size:18px">
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody data-bind="foreach: Projects">
+                <tr>
+                    <td style="font-family:'Arial';font-size:16px" data-bind="text: Name"></td>
+                    <td style="font-family:'Arial';font-size:16px" data-bind="text: Description"></td>
+                    <td><a href="#" style="font-family:'Century Gothic'" class="btn btn-info" data-bind="click: EditProject">Edit</a></td>
+                    <td><a href="#" style="font-family:'Century Gothic'" class="btn btn-primary" data-bind="click: ProjectDetails">Details</a></td>
+                    <td><a href="#" style="font-family:'Century Gothic'" class="btn btn-danger" data-bind="click: DeleteProject">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="myModal" class="modal hide">
+    <div class="modal-header">
+         <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btnYes" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+</div>
+@section scripts {
+	<script>
+	    var model = @(Html.Raw(Json.Encode(Model)))
+
+        function IndexViewModel() {
+            Projects = ko.observableArray(model.ProjectModels);
+
+
+        }
+
+	    CreateProject = function ()
+	    {
+	        changeLocation("/Project/Create/");
+	    }
+
+	    EditProject = function (project) {
+	        changeLocation("/Project/Edit/" + project.Id);
+	    }
+
+	    ProjectDetails = function (project) {
+	        changeLocation("/Project/Details/" + project.Id);
+	    }
+
+	    ArchiveProject = function (project) {
+	        changeLocation("/Project/Archive/" + project.Id);
+	    }
+
+	    DeleteProject = function (project) {
+	        $('#myModal').modal();
+	        $('#btnYes').click(function () {
+	            changeLocation("/Project/Delete/" + project.Id);
+	        });
+
+	    }
+
+	    ko.applyBindings(new IndexViewModel(), document.getElementById("bodyDiv"));
+
+
+	    $(document).ready(function () {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
 }
-
-</table>

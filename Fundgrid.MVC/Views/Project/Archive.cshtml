@@ -1,0 +1,60 @@
+﻿@model Fundgrid.MVC.Models.ArchiveModel.GridModel
+
+@{
+    ViewBag.Title = "Archive";
+}
+
+<h1 style="background-color:#FFCC00;">Archive</h1>
+<p><font size="5">Project Name : @Html.DisplayName(@Model.GridModel.ProjectName)</font></p>
+<p><font size="3">Description : @Html.DisplayName(@Model.GridModel.ProjectDescription)</font></p>
+<p>
+    
+</p>
+<table class="table table-condensed table-hover table-no-border">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+@foreach (var item in Model.Grids) 
+{
+    <tr>
+        @*<td>
+            Project
+        </td>*@
+        <td class="btn">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="btn">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+        <td class="btn">
+            @Html.ActionLink("Show", "ArchiveProject", new { id=item.Id })
+
+        </td>
+    </tr>
+}
+
+</table>
+@section scripts {
+<script>
+    var model = @(Html.Raw(Json.Encode(Model)))
+
+
+
+	    $(document).ready(function ()
+	    {
+	        busyViewModel.IsBusy(false);
+	    });
+	</script>
+}

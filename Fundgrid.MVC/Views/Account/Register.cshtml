@@ -5,12 +5,12 @@
 <hgroup class="title">
     <h1>Register</h1>
     <h2>Create a new account</h2>
-</hgroup>
+</hgroup><br />
 <div class="row-fluid">
     <div class="span5">
 		<div class="form-horizontal">
 			<div class="control-group">
-				<label class="control-label" for="newFullName">Full Name:</label>
+				<label class="control-label" for="newFullName">User Name:</label>
 				<div class="controls"><input class="input-large" id="newFullName" type="text" data-bind="value: fullName" /></div>
 			</div>
 			<div class="control-group">
@@ -26,10 +26,10 @@
 				<div class="controls"><input class="input-large" id="Password2" type="password" data-bind="value: password2" /></div>
 			</div>
 			<div class="control-group">
-				<div class="controls"><button type="button" class="btn btn-primary pull-right" data-bind="click: submitRegistration">Submit</button></div>
+				<div class="controls"><button type="button" style="font-family:'Century Gothic'" class="btn btn-primary pull-right" onclick="submitRegistration()">Submit</button></div>
 			</div>
 		</div>
-		<div class="alert" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
+		<div class="alert" style="font-family:'Century Gothic'" data-bind="visible:showMessage, text:messageResponse, css:{'alert-success':messageOk, 'alert-error':!messageOk()}"></div>
 	</div>
 
 </div>
@@ -37,7 +37,8 @@
 <script>
 	$(document).ready(function ()
 	{
- 		$('#Register').addClass('active');
+	    $('#Register').addClass('active');
+	    busyViewModel.IsBusy(false);
 	});
 
 	function registerViewModel()
@@ -50,19 +51,19 @@
  		message = ko.observable();
  		showMessage = ko.observable(false);
  		messageResponse = ko.observable();
- 		messageOk = ko.observable(true);
+ 		messageOk = ko.observable(false);
 
  		submitRegistration = function ()
  		{
  			showMessage(true);
- 			if (!fullName() || !email() || !password1() || !password2())
+ 			if (!newFullName.value || !newEmail.value || !Password1.value || !Password2.value)
  			{
  				messageOk(false);
  				messageResponse("Please complete all fields");
  				return;
  			};
 
- 			if (!IsValidEmailAddress1(email()) || !IsValidEmailAddress2(email()))
+ 			if (!IsValidEmailAddress1(newEmail.value) || !IsValidEmailAddress2(email()))
  			{
  				showMessage(true);
  				messageOk(false);
@@ -70,14 +71,14 @@
  				return;
  			};
 
- 			if (password1().length < 6)
+ 			if (Password1.length < 6)
  			{
  				messageOk(false);
  				messageResponse("Password should be at least 6 characters long");
  				return;
  			}
 
- 			if (password1() != password2())
+ 			if (Password1.value != Password2.value)
  			{
  				messageOk(false);
  				password1("");
@@ -86,7 +87,7 @@
  				return;
  			};
 
- 			$.post("/Account/RegisterNewAccount/", { fullName: fullName(), email: email(), password: password1() },
+ 			$.post("/Account/RegisterNewAccount/", { fullName: newFullName.value, email: newEmail.value, password: Password1.value },
 					function (response) { handleRegister(response) });
  		};
 
@@ -105,9 +106,7 @@
  				return;
  			}
 
- 			messageOk(true);
- 			messageResponse("Registration completed");
- 			return;
+ 			changeLocation("/Home/");
  		};
 	};
 

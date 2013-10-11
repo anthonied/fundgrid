@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fundgrid.MVC.Models;
 //using Models;
 
 namespace Fundgrid.MVC.Controllers
 {
     public class HomeController : BootstrapBaseController
     {
+        private MenuBase _menuBase = new MenuBase();
+        
         public ActionResult Index()
         {
-            return View();
+            var model = new HomeModel();            
+            return View(model);
         }
 
         public ActionResult Contact()

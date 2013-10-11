@@ -27,6 +27,7 @@ namespace Fundgrid.Data
         public Nullable<int> project_id { get; set; }
         public Nullable<decimal> item_value { get; set; }
         public Nullable<decimal> increment_value { get; set; }
+        public string status { get; set; }
     
         public virtual ICollection<grid_item> grid_item { get; set; }
         public virtual project project { get; set; }

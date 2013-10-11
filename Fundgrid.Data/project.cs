@@ -23,6 +23,7 @@ namespace Fundgrid.Data
         public string name { get; set; }
         public string description { get; set; }
         public byte[] image { get; set; }
+        public string owner_id { get; set; }
     
         public virtual ICollection<grid> grids { get; set; }
     }

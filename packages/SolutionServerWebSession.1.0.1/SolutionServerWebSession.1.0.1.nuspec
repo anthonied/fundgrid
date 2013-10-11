@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SolutionServerWebSession</id>
+    <version>1.0.1</version>
+    <authors>SolutionServer</authors>
+    <owners>SolutionServer</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Wrapper around Http Websessios</description>
+    <releaseNotes>Change userId from Guid to int</releaseNotes>
+    <references>
+      <reference file="SolutionServerWebSession.dll" />
+    </references>
+  </metadata>
+</package>

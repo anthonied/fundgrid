@@ -10,8 +10,10 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Fundgrid.MVC.Filters;
 using Models;
-using Authentication;
-using Authentication.Repository;
+using UserAuthenticationDomain.Repository;
+using SolutionServerWebSession;
+//using Authentication;
+//using Authentication.Repository;
 
 namespace Fundgrid.MVC.Controllers
 {
@@ -25,8 +27,16 @@ namespace Fundgrid.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            var loginModel = new LoginModel();
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(loginModel);
+        }
+
+        [AllowAnonymous]
+        public ActionResult Logoff()
+        {
+            UserSession.LoggedInUser = null;
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -35,7 +45,8 @@ namespace Fundgrid.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var registerModel = new RegisterModel();
+            return View(registerModel);
         }
 
         [AllowAnonymous]
@@ -43,10 +54,10 @@ namespace Fundgrid.MVC.Controllers
         {
             FlatFileRepository accountRepository = new FlatFileRepository();
             Object data = null;
-            if(accountRepository.RegisterNewAccount(fullName, email, password))
+            if (accountRepository.RegisterNewAccount(fullName, email, password, 1))
                 data = new { isOk = true, errorMessage = "No Error encountered" };
             else
-                data = new { isOk = false, errorMessage = "TO DO" };
+                data = new { isOk = false, errorMessage = "Registration  unsuccessful" };
             return new JsonResult { Data = data };
         }
 
@@ -55,10 +66,19 @@ namespace Fundgrid.MVC.Controllers
         {
             FlatFileRepository accountRepository = new FlatFileRepository();
             Object data = null;
-            if (accountRepository.CheckLogin(fullName, email, password))
+            var user = accountRepository.CheckLogin(fullName, email, password);
+            if (user != null)
+            {
+                UserSession.LoggedInUser = new RegisteredUserBase
+                { 
+                    Email = user.EmailAddress,
+                    UserName = user.FullName,
+                    UserId = user.Id
+                };
                 data = new { isOk = true, errorMessage = "No Error encountered" };
+            }
             else
-                data = new { isOk = false, errorMessage = "TO DO" };
+                data = new { isOk = false, errorMessage = "Login  unsuccessful" };
             return new JsonResult { Data = data };
         }
 
