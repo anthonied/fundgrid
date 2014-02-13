@@ -24,7 +24,7 @@ namespace FunGrid.Domain
             {
                 new Menu
                 {
-                    Text = "You are logged in as: "+UserSession.LoggedInUser.UserName
+                    Text = "You are logged in as: "+UserSession.LoggedInUser.FullName
                 },
                 new Menu
                 {

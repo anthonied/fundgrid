@@ -16,6 +16,7 @@ namespace Fundgrid.MVC
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo("C:\\LogConfigs\\FundGrid.config"));
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

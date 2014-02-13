@@ -13,43 +13,44 @@ namespace Fundgrid.MVC.Controllers
     public class ProjectController : Controller
     {
         private MenuBase _menubase = new MenuBase();
-        private ProjectRepository _projectRepository = new ProjectRepository();
-        
+
         public ActionResult Index()
         {
-            var indexModel = new IndexModel();
-            var projectModels = new List<ProjectModel>();
-
-            var projects = _projectRepository.GetSpecificProjects();
-            
-            projects.ForEach(project => projectModels.Add(new ProjectModel
+            using (var projectRepository = new ProjectRepository())
             {
-                Id = project.Id,
-                Description = project.Description,
-                Name = project.Name
-            }));
-
-
-
-            indexModel.ProjectModels = projectModels;
-            return View(indexModel);          
+                var indexModel = new IndexModel();
+                var projectModels = new List<ProjectModel>();
+                var projects = projectRepository.GetSpecificProjects();
+                projects.ForEach(project => projectModels.Add(new ProjectModel
+                {
+                    Id = project.Id,
+                    Description = project.Description,
+                    Name = project.Name
+                }));
+                indexModel.ProjectModels = projectModels;
+                return View(indexModel);
+            }
         }
 
-       
         public ActionResult Edit(int id)
         {
-            var editModel = new EditModel();
-            var project = _projectRepository.GetProject(id, Status.active);
-            editModel.ProjectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
-
-            return View(editModel);
+            using (var projectRepository = new ProjectRepository())
+            {
+                var editModel = new EditModel();
+                var project = projectRepository.GetProject(id, Status.active);
+                editModel.ProjectModel = new ProjectModel { Id = project.Id, Name = project.Name, Description = project.Description };
+                return View(editModel);
+            }
         }
 
         [HttpPost]
         public ActionResult Edit(int id, string name, string description)
         {
-            _projectRepository.EditProject(id, name, description);
-            return RedirectToAction("Index");
+            using (var projectRepository = new ProjectRepository())
+            {
+                projectRepository.EditProject(id, name, description);
+                return RedirectToAction("Index");
+            }
         }
         
         public ActionResult Create()
@@ -61,59 +62,78 @@ namespace Fundgrid.MVC.Controllers
 
         public ActionResult Details(int id)
         {
-            var detailsModel = new DetailsModel();
-            detailsModel.Project = _projectRepository.GetProject(id, Status.active);
-
-            return View(detailsModel);
+            using (var projectRepository = new ProjectRepository())
+            {
+                var detailsModel = new DetailsModel();
+                detailsModel.Project = projectRepository.GetProject(id, Status.active);
+                return View(detailsModel);
+            }
         }
 
         public ActionResult ArchiveProject(int id)
         {
-            var project = _projectRepository.GetProjectByGridId(id, Status.archived);
-            return View(project);
+            using (var projectRepository = new ProjectRepository())
+            {
+                var project = projectRepository.GetProject(id, Status.archived);
+                return View(project);
+            }
         }
 
         public ActionResult Archive(int id)
         {
-            var selectedProject = _projectRepository.GetProject(id, Status.archived);
-            var archiveModel = new ArchiveModel();
-            var gridModel = new GridModel();
+            using (var projectRepository = new ProjectRepository())
+            {
+                using (var gridRepository = new GridRepository())
+                {
+                    var selectedProject = projectRepository.GetProject(id, Status.archived);
+                    var archiveModel = new ArchiveModel();
+                    var gridModel = new GridModel();
 
-            gridModel.ProjectName = selectedProject.Name;
-            gridModel.ProjectDescription = selectedProject.Description;
-            gridModel.Grids = _projectRepository.GetArchivedGridsForProject(id);
+                    gridModel.ProjectName = selectedProject.Name;
+                    gridModel.ProjectDescription = selectedProject.Description;
+                    gridModel.Grids = gridRepository.GetArchivedGridsByProjectId(id);
 
-            archiveModel.GridModel = gridModel;
-            return View(gridModel);
+                    archiveModel.GridModel = gridModel;
+                    return View(gridModel);
+                }
+            }
         }
 
 
         [HttpPost]
         public JsonResult Create(string name, string description)
         {
-            var project = new Project
+            using (var projectRepository = new ProjectRepository())
             {
-                Name = name,
-                Description = description
-            };
-            _projectRepository.CreateNewProject(project);
-            
-            var data = new { isOk = true, errorMessage = "Entry not added." };
-            return new JsonResult { Data = data };
+                var project = new Project
+                {
+                    Name = name,
+                    Description = description
+                };
+                projectRepository.CreateNewProject(project);
+                var data = new { isOk = true, errorMessage = "Entry not added." };
+                return new JsonResult { Data = data };
+            }
         }
 
         public ActionResult Delete(int id)
         {
-            _projectRepository.RemoveProject(id);
-            return RedirectToAction("Index");
+            using (var projectRepository = new ProjectRepository())
+            {
+                projectRepository.RemoveProject(id);
+                return RedirectToAction("Index");
+            }
         }
 
         [AllowAnonymous]
         public JsonResult CreateGrid(int projectId, int gridDimensionRows, int gridDimensionColumns, decimal gridValue, decimal incrementValue, string gridName, string gridDescription)
         {
-            var isEntryAdded = _projectRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue, incrementValue, gridName, gridDescription);
-            var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
-            return new JsonResult { Data = data };
+            using (var gridRepository = new GridRepository())
+            {
+                var isEntryAdded = gridRepository.CreateNewGrid(projectId, gridDimensionRows, gridDimensionColumns, gridValue, incrementValue, gridName, gridDescription);
+                var data = new { isOk = isEntryAdded, errorMessage = "Entry not added." };
+                return new JsonResult { Data = data };
+            }
         }
 
         [HttpPost]
@@ -135,47 +155,56 @@ namespace Fundgrid.MVC.Controllers
         [HttpPost]
         public ActionResult DeleteGrid(int gridId)
         {
-            _projectRepository.RemoveGrid(gridId);
-            return RedirectToAction("Index");
+            using (var gridRepository = new GridRepository())
+            {
+                gridRepository.RemoveGrid(gridId);
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public ActionResult ArchiveGrid(int gridId)
         {
-            _projectRepository.ArchiveGrid(gridId);
-            return RedirectToAction("Index");
+            using (var gridRepository = new GridRepository())
+            {
+                gridRepository.ArchiveGrid(gridId);
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Donate()
         {
-            var donateModel = new DonateModel();
-            var projectModels = new List<ProjectModel>();
-
-            var projects = _projectRepository.GetAllProjects();
-
-            projects.ForEach(project => projectModels.Add(new ProjectModel
+            using (var projectRepository = new ProjectRepository())
             {
-                Id = project.Id,
-                Description = project.Description,
-                Name = project.Name
-            }));
-
-            donateModel.ProjectModels = projectModels;
-            return View(donateModel);  
+                var donateModel = new DonateModel();
+                var projectModels = new List<ProjectModel>();
+                var projects = projectRepository.GetAllProjects();
+                projects.ForEach(project => projectModels.Add(new ProjectModel
+                {
+                    Id = project.Id,
+                    Description = project.Description,
+                    Name = project.Name
+                }));
+                donateModel.ProjectModels = projectModels;
+                return View(donateModel);
+            }
         }
 
         public ActionResult DonateDetails(int id)
         {
-            var project = _projectRepository.GetProject(id, Status.active);
-            var donateProjectModel = new DonateProjectModel
-        {
-            Id =project.Id,
-            Description = project.Description,
-            Grid = project.Grid,
-            Name = project.Name,
-            //Owner_Id = project.Owner_Id
-        };
-            return View(donateProjectModel); 
+            using (var projectRepository = new ProjectRepository())
+            {
+                var project = projectRepository.GetProject(id, Status.active);
+                var donateProjectModel = new DonateProjectModel
+                            {
+                                Id = project.Id,
+                                Description = project.Description,
+                                Grid = project.Grid,
+                                Name = project.Name,
+                                //Owner_Id = project.Owner_Id
+                            };
+                return View(donateProjectModel);
+            }
         }
     }
 }

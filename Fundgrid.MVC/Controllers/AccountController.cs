@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
-using WebMatrix.WebData;
-using Fundgrid.MVC.Filters;
 using Models;
-using UserAuthenticationDomain.Repository;
 using SolutionServerWebSession;
+using UserAuthentication.Repository;
+using UserAuthentication.Domain;
+using Fundgrid.MVC.Models;
 //using Authentication;
 //using Authentication.Repository;
 
@@ -52,34 +47,36 @@ namespace Fundgrid.MVC.Controllers
         [AllowAnonymous]
         public JsonResult RegisterNewAccount(string fullName, string email, string password)
         {
-            FlatFileRepository accountRepository = new FlatFileRepository();
-            Object data = null;
-            if (accountRepository.RegisterNewAccount(fullName, email, password, 1))
-                data = new { isOk = true, errorMessage = "No Error encountered" };
-            else
-                data = new { isOk = false, errorMessage = "Registration  unsuccessful" };
-            return new JsonResult { Data = data };
+            using (var accountRepository = new AuthenticationRepository())
+            {
+                var registrationResult = accountRepository.RegisterNewAccount(new User() { FullName = fullName, EmailAddress = email, Password = password }, 1);
+                if (registrationResult.IsOk)
+                    return new JsonResult()
+                    {
+                        Data = new { isOk = true, message = registrationResult.Message }
+                    };
+                else
+                    return new JsonResult()
+                    {
+                        Data = new { isOk = false, message = registrationResult.Message }
+                    };
+            }
         }
 
         [AllowAnonymous]
         public JsonResult CheckLogin(string fullName, string email, string password)
         {
-            FlatFileRepository accountRepository = new FlatFileRepository();
-            Object data = null;
-            var user = accountRepository.CheckLogin(fullName, email, password);
-            if (user != null)
+            using (var accountRepository = new AuthenticationRepository())
             {
-                UserSession.LoggedInUser = new RegisteredUserBase
-                { 
-                    Email = user.EmailAddress,
-                    UserName = user.FullName,
-                    UserId = user.Id
-                };
-                data = new { isOk = true, errorMessage = "No Error encountered" };
+                var loginResult = accountRepository.CheckLogin(fullName, email, password);
+                if (loginResult.IsOk)
+                {
+                    UserSession.LoggedInUser = loginResult.Data;
+                    return new JsonResult() { Data = new { isOk = true, message = loginResult.Message } };
+                }
+                else
+                    return new JsonResult() { Data = new { isOk = false, errorMessage = loginResult.Message } };
             }
-            else
-                data = new { isOk = false, errorMessage = "Login  unsuccessful" };
-            return new JsonResult { Data = data };
         }
 
         /*//

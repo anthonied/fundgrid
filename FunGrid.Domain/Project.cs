@@ -14,6 +14,5 @@ namespace FunGrid.Domain
         public byte[] Image { get; set; }
         public string Owner_Id { get; set; }
         public Grid Grid { get; set; }
-        
     }
 }

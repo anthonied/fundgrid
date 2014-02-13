@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>UserAuthentication.Domain</id>
+    <version>0.0.10</version>
+    <title>UserAuthentication.Domain</title>
+    <authors>SolutionServer</authors>
+    <owners>SolutionServer</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>UserAuthentication domain</description>
+    <summary>UserAuthentication domain</summary>
+    <releaseNotes>Added ResetPassword field to User domain object</releaseNotes>
+    <dependencies>
+      <dependency id="log4net" version="2.0.3" />
+      <dependency id="NUnit" version="2.6.3" />
+      <dependency id="ServiceStack.OrmLite" version="4.0.10" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SolutionServerResult</id>
+    <version>0.0.1</version>
+    <title>SolutionServerResult</title>
+    <authors>SolutionServer</authors>
+    <owners>SolutionServer</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Default SolutionServer Result type</description>
+  </metadata>
+</package>
