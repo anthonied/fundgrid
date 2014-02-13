@@ -12,6 +12,7 @@ namespace FundGrid.Repository
     {
         private Grid GetFullDomainGrid(GridData gridDb)
         {
+            if (gridDb == null) return null;
             var grid = gridDb.ToDomain();
             grid.ExistingGridItems = new GridItemRepository().GetGridItemsByGridId(grid.Id);
             return grid;
@@ -42,7 +43,17 @@ namespace FundGrid.Repository
         }
         public bool CreateNewGrid(int projectId, int rows, int columns, decimal itemValue, decimal incrementValue, string gridName, string gridDescription)
         {
-            _db.Insert<GridData>(new GridData() { ProjectId = projectId, DimensionColumns = columns, DimensionRows = rows, InitialValue = itemValue, IncrementValue = incrementValue, Name = gridName, Description = gridDescription });
+            _db.InsertOnly<GridData>(
+                new GridData() 
+                { 
+                    ProjectId = projectId,
+                    DimensionColumns = columns,
+                    DimensionRows = rows,
+                    InitialValue = itemValue,
+                    IncrementValue = incrementValue,
+                    Name = gridName,
+                    Description = gridDescription 
+                }, x => x.Insert(y => new { y.Description, y.DimensionColumns, y.DimensionRows, y.GridStatus, y.IncrementValue, y.InitialValue, y.Name, y.ProjectId }));
             if (_db.LastInsertId() > 0)
                 return true;
             return false;

@@ -108,7 +108,8 @@ namespace Fundgrid.MVC.Controllers
                 var project = new Project
                 {
                     Name = name,
-                    Description = description
+                    Description = description,
+                    Owner_Id = UserSession.LoggedInUser.BaseId.ToString()
                 };
                 projectRepository.CreateNewProject(project);
                 var data = new { isOk = true, errorMessage = "Entry not added." };

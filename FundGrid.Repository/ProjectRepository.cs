@@ -35,9 +35,12 @@ namespace FundGrid.Repository
 
         public List<Project> GetSpecificProjects()
         {
-            var loggedInUserId = UserSession.LoggedInUser.BaseId;
-            var projectsDb = _db.Select<ProjectData>().Where(x => x.Owner_Id == loggedInUserId.ToString()).ToList();
-            return GetFullDomainProjects(projectsDb);
+            using (var transaction = _db.OpenTransaction())
+            {
+                var loggedInUserId = UserSession.LoggedInUser.BaseId;
+                var projectsDb = _db.Select<ProjectData>().Where(x => x.Owner_Id == loggedInUserId).ToList();
+                return GetFullDomainProjects(projectsDb);
+            }
         }
 
         public Project GetProjectByGridId(int gridId)
@@ -56,13 +59,17 @@ namespace FundGrid.Repository
 
         public void EditProject(int id, string name, string description)
         {
-            _db.UpdateOnly<ProjectData>(new ProjectData() { Id = id, Name = name, Description = description }, x => x.Insert(y => new { y.Name, y.Description }));
+            var newProjectData = new ProjectData() { Id = id, Name = name, Description = description, Owner_Id = UserSession.LoggedInUser.BaseId };
+            _db.Update<ProjectData>(newProjectData);
         }
 
         public void CreateNewProject(Project project)
         {
-            var loggedInUserId = UserSession.LoggedInUser.BaseId;
-            _db.Insert<ProjectData>(new ProjectData() { Image = project.Image, Description = project.Description, Owner_Id = project.Owner_Id, Name = project.Name });
+            using (var transaction = _db.OpenTransaction())
+            {
+                _db.InsertOnly<ProjectData>(new ProjectData() { Image = project.Image, Description = project.Description, Owner_Id = int.Parse(project.Owner_Id), Name = project.Name }, x => x.Insert(y => new { y.Image, y.Description, y.Owner_Id, y.Name }));
+                transaction.Commit();
+            }
         }
 
         public void RemoveProject(int projectId)

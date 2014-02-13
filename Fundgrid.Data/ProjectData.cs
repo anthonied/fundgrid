@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserAuthentication.Domain;
 
 namespace Fundgrid.Data
 {
@@ -15,10 +16,11 @@ namespace Fundgrid.Data
         public string Name { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
-        public string Owner_Id { get; set; }
+        [ForeignKey(typeof(User), OnDelete = "CASCADE", OnUpdate = "CASCADE")]
+        public int Owner_Id { get; set; }
         public Project ToDomain()
         {
-            return new Project() { Id = Id, Description = Description, Image = Image, Name = Name, Owner_Id = Owner_Id };
+            return new Project() { Id = Id, Description = Description, Image = Image, Name = Name, Owner_Id = Owner_Id.ToString() };
         }
     }
 }
