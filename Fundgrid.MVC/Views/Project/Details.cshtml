@@ -101,7 +101,6 @@
 <script>
 
     var viewModel = @(Html.Raw(Json.Encode(Model)))
-
     projectName = ko.observable(viewModel.Project.Name);
     projectDescription = ko.observable(viewModel.Project.Description);
     gridtName = ko.observable();
@@ -150,10 +149,9 @@
                         btnType = "btn btn-success";
                     else
                         btnType = "btn";
-
                     gridItemColumns.push({ price: viewModel.Project.Grid.FullGridItems[i][j].Amount, count: viewModel.Project.Grid.FullGridItems[i][j].Number, owner: viewModel.Project.Grid.FullGridItems[i][j].Owner, isdisabled: viewModel.Project.Grid.FullGridItems[i][j].IsAvailible, type: btnType });
                 }
-                self.gridItemsRows.push({ gridItemColumns: gridItemColumns });
+                self.gridItemsRows.push({ gridItemColumns: gridItemColumns() });
             }
         }
 
